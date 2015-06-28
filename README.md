@@ -31,3 +31,4 @@ Sandbox
 - reports 
 - préférences (logo , organisme ...)
 - lexique
+- edit

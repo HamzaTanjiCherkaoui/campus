@@ -3,77 +3,220 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <base href="/">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(client) app/vendor.css -->
-      <!-- bower:css -->
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-    <link rel="stylesheet" href="app/app.css">
-      <!-- injector:css -->
-      <!-- endinjector -->
-    <!-- endbuild -->
-  </head>
-  <body ng-app="campusApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>membership</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <base href="/">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css assets/styles/vendor.css -->
+        <!-- bower:css -->
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css assets/styles/main.css -->
 
-    <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <link href="assets/css/bootstrap/css/bootstrap.css" rel="stylesheet" /> <!-- Loading Bootstrap -->
+    <link href="assets/css/flat-ui.css" rel="stylesheet" /> <!-- Loading Flat UI -->
+    <link href="assets/css/main.css" rel="stylesheet" /> <!-- Loading my css -->
+    <link href="assets/css/spinner.css" rel="stylesheet" /> 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <!-- endbuild -->
+    </head>
+    <body ng-app="membershipApp" class="theme1">
+        <!--[if lt IE 10]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header id="adminbar" class="header hidden-print navbar">
+            <a href="#" id="logo"><img src="assets/images/logo.png" alt="logo"
+                class="img-small" /> <span>WebCurious</span></a>
 
-      ga('create', 'UA-XXXXX-X');
-      ga('send', 'pageview');
-    </script>
+            <div class="dropdown pull-right user-profile">
+                <a href="#" id="drop3" role="button" class="dropdown-toggle"
+                    data-toggle="dropdown"> <img class="img-small"
+                    src="assets/images/logo.png" alt="username" /> <span
+                    class="fullname">fullName</span> <span
+                    class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="navbar-content">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <img src="assets/images/logo.png" alt="avatar"
+                                        class="img-responsive" />
+                                    <div class="clearfix"></div>
+                                    <p></p>
+                                </div>
+                                <div class="col-xs-7">
+                                    <span>username</span>
+                                    <p class="text-muted small">email</p>
+                                    <div class="divider"></div>
+                                    <a href="#" class="btn btn-primary btn-sm">profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar-footer">
+                            <div class="navbar-footer-content">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="#" class="btn btn-default btn-sm">settings</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a ui-sref="logout" class="btn btn-default btn-sm pull-right">logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- build:js({client,node_modules}) app/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <!-- endbower -->
-    <!-- endbuild -->
+        <div ui-view="navbar" ng-cloak=""></div>
+        <section class="wrap">
+            <div class="container">
+                <!-- include flashes -->
+                <div ui-view="content"></div>
+            </div>
+        </section>
 
-        <!-- build:js({.tmp,client}) app/app.js -->
-        <script src="app/app.js"></script>
-          <!-- injector:js -->
-          <script src="app/account/account.js"></script>
-          <script src="app/account/login/login.controller.js"></script>
-          <script src="app/account/settings/settings.controller.js"></script>
-          <script src="app/account/signup/signup.controller.js"></script>
-          <script src="app/admin/admin.controller.js"></script>
-          <script src="app/admin/admin.js"></script>
-          <script src="app/main/main.controller.js"></script>
-          <script src="app/main/main.js"></script>
-          <script src="components/auth/auth.service.js"></script>
-          <script src="components/auth/user.service.js"></script>
-          <script src="components/modal/modal.service.js"></script>
-          <script src="components/mongoose-error/mongoose-error.directive.js"></script>
-          <script src="components/navbar/navbar.controller.js"></script>
-          <!-- endinjector -->
+
+        <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>-->
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+        <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+        <script src="bower_components/json3/lib/json3.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+        <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+        <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+        <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+        <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+        <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+        <script src="bower_components/flat-ui/bootstrap-select.js"></script>
+        <!-- <script src="bower_components/flat-ui/bootstrap-switch.js"></script> -->
+        <!-- <script src="bower_components/flat-ui/flatui-checkbox.js"></script> -->
+        <!-- <script src="bower_components/flat-ui/flatui-radio.js"></script> -->
+        <script src="//cdn.jsdelivr.net/momentjs/2.5.1/moment.min.js"></script>
+        <script src="//cdn.jsdelivr.net/angular.moment/0.6.2/angular-moment.js"></script>
+        <script src="bower_components/webmodules-jquery-barcode/jquery-barcode.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+
+        <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
+        <script src="scripts/app/app.js"></script>
+        <script src="scripts/app/app.constants.js"></script>
+
+        <script src="scripts/components/auth/auth.service.js"></script>
+        <script src="scripts/components/auth/principal.service.js"></script>
+        <script src="scripts/components/auth/authority.directive.js"></script>
+        <script src="scripts/components/auth/services/account.service.js"></script>
+        <script src="scripts/components/auth/services/activate.service.js"></script>
+        <script src="scripts/components/auth/services/password.service.js"></script>
+        <script src="scripts/components/auth/services/register.service.js"></script>
+
+        <script src="scripts/components/form/form.directive.js"></script>
+        <script src="scripts/components/form/pager.directive.js"></script>
+        <script src="scripts/components/form/pagination.directive.js"></script>
+
+        <script src="scripts/components/language/language.service.js"></script>
+        <script src="scripts/components/language/language.controller.js"></script>
+        <script src="scripts/components/admin/audits.service.js"></script>
+        <script src="scripts/components/admin/logs.service.js"></script>
+        <script src="scripts/components/admin/configuration.service.js"></script>
+        <script src="scripts/components/admin/monitoring.service.js"></script>
+        <script src="scripts/components/navbar/navbar.directive.js"></script>
+        <script src="scripts/components/navbar/navbar.controller.js"></script>
+        <script src="scripts/components/entities/user/user.service.js"></script>
+        
+        <script src="scripts/components/util/truncate.filter.js"></script>
+        <script src="scripts/components/util/base64.service.js"></script>
+        <script src="scripts/components/util/parse-links.service.js"></script>
+
+        <script src="scripts/app/account/account.js"></script>
+        <script src="scripts/app/account/activate/activate.js"></script>
+        <script src="scripts/app/account/activate/activate.controller.js"></script>
+        <script src="scripts/app/account/login/login.js"></script>
+        <script src="scripts/app/account/login/login.controller.js"></script>
+        <script src="scripts/app/account/logout/logout.js"></script>
+        <script src="scripts/app/account/logout/logout.controller.js"></script>
+        <script src="scripts/app/account/password/password.js"></script>
+        <script src="scripts/app/account/password/password.controller.js"></script>
+        <script src="scripts/app/account/password/password.directive.js"></script>
+        <script src="scripts/app/account/register/register.js"></script>
+        <script src="scripts/app/account/register/register.controller.js"></script>
+
+        <script src="scripts/app/account/settings/settings.js"></script>
+        <script src="scripts/app/account/settings/settings.controller.js"></script>
+        <script src="scripts/app/admin/admin.js"></script>
+        <script src="scripts/app/admin/audits/audits.js"></script>
+        <script src="scripts/app/admin/audits/audits.controller.js"></script>
+        <script src="scripts/app/admin/configuration/configuration.js"></script>
+        <script src="scripts/app/admin/configuration/configuration.controller.js"></script>
+        <script src="scripts/app/admin/docs/docs.js"></script>
+        <script src="scripts/app/admin/health/health.js"></script>
+        <script src="scripts/app/admin/health/health.controller.js"></script>
+        <script src="scripts/app/admin/logs/logs.js"></script>
+        <script src="scripts/app/admin/logs/logs.controller.js"></script>
+        <script src="scripts/app/admin/metrics/metrics.js"></script>
+        <script src="scripts/app/admin/metrics/metrics.controller.js"></script>
+        <script src="scripts/app/entities/entity.js"></script>
+        <script src="scripts/app/error/error.js"></script>
+        
+        <script src="scripts/app/main/main.js"></script>
+        <script src="scripts/app/main/main.controller.js"></script>
+        <script src="scripts/components/auth/services/sessions.service.js"></script>
+        <script src="scripts/components/auth/provider/auth.session.service.js"></script>
+        <script src="scripts/app/account/sessions/sessions.js"></script>
+        <script src="scripts/app/account/sessions/sessions.controller.js"></script>
+        
+        <!-- users -->
+        <script src="scripts/app/entities/user/user.js"></script>
+        <script src="scripts/app/entities/user/user.controller.js"></script>
+        <script src="scripts/app/entities/user/user-detail.controller.js"></script>
+        <script src="scripts/app/entities/user/user-save.controller.js"></script>
+    
+        <!-- persons -->
+        <script src="scripts/app/entities/person/person.js"></script>
+        <script src="scripts/app/entities/person/person.controller.js"></script>
+        <script src="scripts/app/entities/person/person-detail.controller.js"></script>
+        <script src="scripts/app/entities/person/person-save.controller.js"></script>
+        <script src="scripts/components/entities/person/person.service.js"></script>
+
+        <script src="scripts/app/entities/event/event.js"></script>
+        <script src="scripts/app/entities/event/event.controller.js"></script>
+        <script src="scripts/app/entities/event/event-detail.controller.js"></script>
+        <script src="scripts/components/entities/event/event.service.js"></script>
+
+        <script src="scripts/app/entities/config/config.js"></script>
+        <script src="scripts/app/entities/config/config.controller.js"></script>
+        <script src="scripts/app/entities/config/config-detail.controller.js"></script>
+        <script src="scripts/components/entities/config/config.service.js"></script>
+        
+        <script src="scripts/components/util/util.service.js"></script>
+        <script src="scripts/components/util/util.directive.js"></script>
+        <script src="scripts/components/util/helpers.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

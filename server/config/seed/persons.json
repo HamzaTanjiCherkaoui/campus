@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "5590be3585a2e84c1114e551",
+    "family_name": "benaich",
+    "first_name": "med",
+    "country": "maroc",
+    "niveau_etude": "licence",
+    "description": "description",
+    "address": "lot charaf n42 salé",
+    "city": "rabat",
+    "is_archived": false,
+    "is_banned": false,
+    "__v": 0,
+    "researvations": [],
+    "allocations": [],
+    "updated": "2015-06-29T03:40:37.137Z"
+  },
+  {
+    "_id": "5590be6d85a2e84c1114e552",
+    "family_name": "adami",
+    "first_name": "manal",
+    "country": "maroc",
+    "niveau_etude": "master",
+    "description": "description",
+    "address": "avenue de france rabat agdal",
+    "city": "rabat",
+    "is_archived": false,
+    "is_banned": false,
+    "__v": 0,
+    "researvations": [],
+    "allocations": [],
+    "updated": "2015-06-29T03:41:33.289Z"
+  }
+]

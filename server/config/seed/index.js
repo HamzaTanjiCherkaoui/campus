@@ -53,9 +53,6 @@ User.remove().exec()
 
 // Seed
 .then(function() { 
-    console.log("seed");
-    console.log(require('./users.json'));
-    console.log("seed");
     return User.seed(require('./users.json'));
 })
 .then(function() { 

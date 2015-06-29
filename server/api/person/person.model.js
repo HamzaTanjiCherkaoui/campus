@@ -18,7 +18,9 @@ var PersonSchema = new Schema({
 	status: String,
 	is_archived: Boolean,
 	is_banned: Boolean,
-	updated: { type: Date, default: Date.now }
+	updated: { type: Date, default: Date.now },
+	researvations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Researvation'}],
+	allocations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Allocation'}]
 });
 
 module.exports = mongoose.model('Person', PersonSchema);

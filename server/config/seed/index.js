@@ -15,9 +15,10 @@ var Reservation = require('../../api/reservation/reservation.model');
 var Room = require('../../api/room/room.model');
 var User = require('../../api/user/user.model');
 
+
 var mongoose = require('mongoose'); 
 mongoose.Model.seed = function(entities) {  
-    var promise = new mongoose.Promise;
+    var promise = new mongoose.Promise();
     this.create(entities, function(err) {
         if(err) { promise.reject(err); }
         else    { promise.resolve(); }
@@ -82,7 +83,7 @@ User.remove().exec()
 
 // Done!
 .then(function() { 
-    done(); 
+    console.log("Done seeding!")
 }, function(err) { 
-    return done(err); 
+    throw err;
 });

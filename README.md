@@ -37,6 +37,7 @@ Sandbox
 
 -roles
 
+-ngProgress 
 -gestion des personnes : (Hamza)
 				crud
 

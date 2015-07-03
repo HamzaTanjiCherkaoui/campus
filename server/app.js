@@ -21,6 +21,8 @@ if(config.seedDB) { require('./config/seed'); }
 var app = express();
 var server = require('http').createServer(app);
 require('./config/express')(app);
+
+//ctrl
 require('./routes')(app);
 
 // Start server

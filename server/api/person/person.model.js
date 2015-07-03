@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var PersonSchema = new Schema({
-	code: String,
+	code: {type:String,visible:true},
 	codeType: String,
-	family_name: String,
+	familyName: String,
 	first_name: String,
 	country: String,
 	niveau_etude: String,

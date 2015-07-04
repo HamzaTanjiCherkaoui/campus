@@ -5,18 +5,23 @@ angular.module('membershipApp')
         $stateProvider
             .state('category', {
                 parent: 'entity',
-                url: '/categories',
+                url: '/category',
                 data: {
                     roles: [],
                     pageTitle: 'membershipApp.category.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/category/categories.html',
+                        templateUrl: 'scripts/app/entities/category/categorys.html',
                         controller: 'CategoryController'
                     }
                 },
-               
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('category');
+                        return $translate.refresh();
+                    }]
+                }
             })
             .state('categoryDetail', {
                 parent: 'entity',
@@ -31,21 +36,11 @@ angular.module('membershipApp')
                         controller: 'CategoryDetailController'
                     }
                 },
-               
-            })
-            .state('categorySave', {
-                parent: 'entity',
-                url: '/category/save/:id',
-                data: {
-                    roles: [],
-                    pageTitle: 'membershipApp.category.home.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/category/category-save.html',
-                        controller: 'CategorySaveController'
-                    }
-                },
-               
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('category');
+                        return $translate.refresh();
+                    }]
+                }
             });
     });

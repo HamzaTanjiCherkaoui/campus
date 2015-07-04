@@ -5,7 +5,7 @@ angular.module('membershipApp')
         $stateProvider
             .state('product', {
                 parent: 'entity',
-                url: '/products',
+                url: '/product',
                 data: {
                     roles: [],
                     pageTitle: 'membershipApp.product.home.title'
@@ -16,7 +16,12 @@ angular.module('membershipApp')
                         controller: 'ProductController'
                     }
                 },
-               
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('product');
+                        return $translate.refresh();
+                    }]
+                }
             })
             .state('productDetail', {
                 parent: 'entity',
@@ -31,7 +36,12 @@ angular.module('membershipApp')
                         controller: 'ProductDetailController'
                     }
                 },
-               
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('product');
+                        return $translate.refresh();
+                    }]
+                }
             })
             .state('productSave', {
                 parent: 'entity',
@@ -48,4 +58,5 @@ angular.module('membershipApp')
                 },
                
             });
+            
     });

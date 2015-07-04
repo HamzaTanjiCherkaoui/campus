@@ -3,7 +3,7 @@
 
 angular
     .module('membershipApp')
-    .controller('ProductSaveController', function ($scope, Product, ParseLinks, $stateParams, $timeout, $state) {
+    .controller('ProductSaveController', function ($scope, Product,Category ,ParseLinks, $stateParams, $timeout, $state) {
 
         $scope.isUpdate = !!($stateParams.id);
 
@@ -15,6 +15,7 @@ angular
             Product.get({id: id}, function(result) {
               $scope.entity = result;
             });
+            
         };
 
         $scope.save = function () {

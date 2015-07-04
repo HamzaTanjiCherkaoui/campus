@@ -1,0 +1,19 @@
+{
+    "jhipsterApp": {
+        "allocation" : {
+            "home": {
+                "title": "Allocations",
+                "createLabel": "Create a new Allocation",
+                "createOrEditLabel": "Create or edit a Allocation"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Allocation {{ id }}?"
+            },
+            "detail": {
+                "title": "Allocation"
+            },
+            "type": "Type",
+            "status": "Status"
+        }
+    }
+}

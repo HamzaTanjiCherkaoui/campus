@@ -2,10 +2,10 @@
 
 angular.module('membershipApp')
     .controller('ProductDetailController', function ($scope, $stateParams, Product) {
-        $scope.product = {};
+        $scope.entity = {};
         $scope.load = function (id) {
             Product.get({id: id}, function(result) {
-              $scope.product = result;
+              $scope.entity = result;
             });
         };
         $scope.load($stateParams.id);

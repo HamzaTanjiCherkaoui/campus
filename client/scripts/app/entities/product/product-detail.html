@@ -1,54 +1,39 @@
-
-<div>
-    <h2><span translate="membershipApp.product.detail.title">Product</span> {{product.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th translate="entity.detail.field">Field</th>
-                    <th translate="entity.detail.value">Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.product.name">Name</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{product.name}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.product.type">Type</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{product.type}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.product.quantity">Quantity</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{product.quantity}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.product.available">Available</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{product.available}}" readonly>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="row">
+    <div class="col-xs-6 hidden-print">
+        <h2><span ></span> {{ entity.name }} </h2>
     </div>
+    <div class="col-xs-6">
+      <div class="btn-group pull-right hidden-print">              
+        <button class="btn btn-primary "><span class="fa fa-gear"></span> Select an action</button>
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-inverse">
+          <li><a ui-sref="productSave({id:entity._id})"><span class="fa fa-edit"> Edit</a></li>
+          <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
+          <li class="divider"></li>
+          <li><a href="#" ng-click="delete(entity._id)" ><span class="glyphicon glyphicon-remove-circle"></span> Delete</a></li>
+        </ul>
+      </div>
+    </div>
+</div>
+  <h2 class="visible-print text-center">Product's detail</h2>
 
-    <button type="submit"
-            ui-sref="product"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-    </button>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="box">
+      <header>
+          <h3><span class="fa fa-user"></span> Product</h3>
+      </header>
+      <ul class="list-group">
+          <li class="list-group-item"><strong>name:</strong> {{ entity.name }}</li>
+          <li class="list-group-item"><strong>type:</strong>  {{ entity.type }}</li>
+          
+      </ul>
+    </div>
+  </div> 
+
+   
+
 </div>

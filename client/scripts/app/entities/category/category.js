@@ -5,23 +5,18 @@ angular.module('membershipApp')
         $stateProvider
             .state('category', {
                 parent: 'entity',
-                url: '/category',
+                url: '/categories',
                 data: {
                     roles: [],
                     pageTitle: 'membershipApp.category.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/category/categorys.html',
+                        templateUrl: 'scripts/app/entities/category/categories.html',
                         controller: 'CategoryController'
                     }
                 },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('category');
-                        return $translate.refresh();
-                    }]
-                }
+               
             })
             .state('categoryDetail', {
                 parent: 'entity',
@@ -36,11 +31,21 @@ angular.module('membershipApp')
                         controller: 'CategoryDetailController'
                     }
                 },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('category');
-                        return $translate.refresh();
-                    }]
-                }
+               
+            })
+            .state('categorySave', {
+                parent: 'entity',
+                url: '/category/save/:id',
+                data: {
+                    roles: [],
+                    pageTitle: 'membershipApp.category.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/category/category-save.html',
+                        controller: 'CategorySaveController'
+                    }
+                },
+               
             });
     });

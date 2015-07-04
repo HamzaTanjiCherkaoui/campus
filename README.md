@@ -23,8 +23,33 @@ Sandbox
 - API 
 - model (résident -> réclamation )
   
+#todos 1 :
 
-# todos
+-pagination server side 
+
+-sort and filter srv side 
+
+-useful directives 
+
+-crud boilerplate
+
+-authentification 
+
+-roles
+
+-ngProgress 
+-gestion des personnes : (Hamza)
+				crud
+
+-gestion des produits : (benaich)
+				crud
+
+-gestion des chambres : (benaich)
+				crud
+
+
+
+# todos 2:
 - configuration de l'application 
 - importation fichier csv 
 - backup BD

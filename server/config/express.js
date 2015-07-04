@@ -22,12 +22,24 @@ module.exports = function(app) {
   app.set('views', config.root + '/server/views');
   app.engine('html', require('ejs').renderFile);
   app.set('view engine', 'html');
+  
   app.use(compression());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
+  app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,POST,PUT,DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    if ('OPTIONS' == req.method){
+        return res.send(200);
+    }
+    next();
+});
+  
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));

@@ -1,0 +1,20 @@
+{
+    "jhipsterApp": {
+        "block" : {
+            "home": {
+                "title": "Blocks",
+                "createLabel": "Create a new Block",
+                "createOrEditLabel": "Create or edit a Block"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Block {{ id }}?"
+            },
+            "detail": {
+                "title": "Block"
+            },
+            "name": "Name",
+            "type": "Type",
+            "floors": "Floors"
+        }
+    }
+}

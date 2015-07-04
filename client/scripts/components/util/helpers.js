@@ -1,92 +1,125 @@
-(function($) { 
+// Some general UI pack related JS
+// Extend JS String with repeat method
+String.prototype.repeat = function (num) {
+  return new Array(num + 1).join(this);
+};
 
-    // Custom Selects
-/*    $("select.info").selectpicker({style: 'btn-info'});
-    $("select.primary").selectpicker({style: 'btn-primary', menuStyle: 'dropdown-inverse', noneSelectedText : 'Tous'});
-    $("select.huge.primary").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
-    $("select.large").selectpicker({style: 'btn-lg btn-danger'});
-    $("select.info").selectpicker({style: 'btn-info'});
-    $("select.small").selectpicker({style: 'btn-sm btn-primary'});*/
+(function ($) {
 
-    // Tabs
-    $(".nav-tabs a").on('click', function (e) {
-      e.preventDefault();
-      $(this).tab("show");
-    })
-
-    // Tooltips
-    $("[data-toggle=tooltip]").tooltip();
-
-    // Add style class name to a tooltips
-    $(".tooltip").addClass(function() {
-      if ($(this).prev().attr("data-tooltip-style")) {
-        return "tooltip-" + $(this).prev().attr("data-tooltip-style");
+  // Add segments to a slider
+  $.fn.addSliderSegments = function (amount, orientation) {
+    return this.each(function () {
+      if (orientation === 'vertical') {
+        var output = '';
+        var i;
+        for (i = 1; i <= amount - 2; i++) {
+          output += '<div class="ui-slider-segment" style="top:' + 100 / (amount - 1) * i + '%;"></div>';
+        }
+        $(this).prepend(output);
+      } else {
+        var segmentGap = 100 / (amount - 1) + '%';
+        var segment = '<div class="ui-slider-segment" style="margin-left: ' + segmentGap + ';"></div>';
+        $(this).prepend(segment.repeat(amount - 2));
       }
     });
+  };
 
+  $(function () {
+
+    // Todo list
+    $('.todo').on('click', 'li', function () {
+      $(this).toggleClass('todo-done');
+    });
+
+    // Custom Selects
+    if ($('[data-toggle="select"]').length) {
+      $('[data-toggle="select"]').select2();
+    }
+
+    // Checkboxes and Radio buttons
+    $('[data-toggle="checkbox"]').radiocheck();
+    $('[data-toggle="radio"]').radiocheck();
+
+    // Tooltips
+    $('[data-toggle=tooltip]').tooltip('show');
+
+    // jQuery UI Sliders
+    var $slider = $('#slider');
+    if ($slider.length > 0) {
+      $slider.slider({
+        min: 1,
+        max: 5,
+        value: 3,
+        orientation: 'horizontal',
+        range: 'min'
+      }).addSliderSegments($slider.slider('option').max);
+    }
+
+    var $verticalSlider = $('#vertical-slider');
+    if ($verticalSlider.length) {
+      $verticalSlider.slider({
+        min: 1,
+        max: 5,
+        value: 3,
+        orientation: 'vertical',
+        range: 'min'
+      }).addSliderSegments($verticalSlider.slider('option').max, 'vertical');
+    }
 
     // Focus state for append/prepend inputs
     $('.input-group').on('focus', '.form-control', function () {
-      $(this).closest('.form-group, .navbar-search').addClass('focus');
+      $(this).closest('.input-group, .form-group').addClass('focus');
     }).on('blur', '.form-control', function () {
-      $(this).closest('.form-group, .navbar-search').removeClass('focus');
+      $(this).closest('.input-group, .form-group').removeClass('focus');
     });
 
-    // // Table: Toggle all checkboxes
-    // $('.table .toggle-all').on('click', function() {
-    //   var ch = $(this).find(':checkbox').prop('checked');
-    //   $(this).closest('.table').find('tbody :checkbox').checkbox(!ch ? 'check' : 'uncheck');
-    // });
-    $("[data-toggle=checkbox]").on('toggle', function(){
-      console.log($this)
-    });
-    // Table: Add class row selected
-    $('.table tbody').on('check uncheck toggle', ':checkbox', function (e) {
-      var $this = $(this)
-        , check = $this.prop('checked')
-        , toggle = e.type == 'toggle'
-        , checkboxes = $('.table tbody :checkbox')
-        , checkAll = checkboxes.length == checkboxes.filter(':checked').length
-
-      $this.closest('tr')[check ? 'addClass' : 'removeClass']('selected-row');
-      if (toggle) $this.closest('.table').find('.toggle-all :checkbox').checkbox(checkAll ? 'check' : 'uncheck');
+    // Make pagination demo work
+    $('.pagination').on('click', 'a', function () {
+      $(this).parent().siblings('li').removeClass('active').end().addClass('active');
     });
 
-    // jQuery UI Datepicker
-/*    var datepickerSelector = '.has-datepicker';
-    $(datepickerSelector).datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      dateFormat: "yy-mm-dd",
-    }).prev('.btn').on('click', function (e) {
-      e && e.preventDefault();
-      $(datepickerSelector).focus();
-    });
-    $.extend($.datepicker, {_checkOffset:function(inst,offset,isFixed){return offset}});
-    // Now let's align datepicker with the prepend button
-    $(datepickerSelector).datepicker('widget').css({'margin-left': -$(datepickerSelector).prev('.input-group-btn').find('.btn').outerWidth()});
-
-*/   
-    // Switch
-    // $("[data-toggle='switch']").wrap('<div class="switch" />').parent().bootstrapSwitch();
-
-    /* close an alert */
-    $('.js-close').on('click', function () {
-      $(this).parent().hide();
+    $('.btn-group').on('click', 'a', function () {
+      $(this).siblings().removeClass('active').end().addClass('active');
     });
 
-    /* print button */
-    $('#btnPrint').on('click', function () {
-      window.print();
+    // Disable link clicks to prevent page scrolling
+    $(document).on('click', 'a[href="#fakelink"]', function (e) {
+      e.preventDefault();
     });
 
-    /* form-wide */
-    $('.form-wide').find('.form-control').parent().addClass('col-md-8');
-    $('.special-form').find('.col-md-4').removeClass('col-md-4');
+    // Switches
+    if ($('[data-toggle="switch"]').length) {
+      $('[data-toggle="switch"]').bootstrapSwitch();
+    }
 
-    //barecode
-    $(".js-barcode").each(function(){
-        $(this).barcode($(this).data('id'), 'codabar');   
-    });
+    // Typeahead
+    if ($('#typeahead-demo-01').length) {
+      var states = new Bloodhound({
+        datumTokenizer: function (d) { return Bloodhound.tokenizers.whitespace(d.word); },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        limit: 4,
+        local: [
+          { word: 'Alabama' },
+          { word: 'Alaska' },
+          { word: 'Arizona' },
+          { word: 'Arkansas' },
+          { word: 'California' },
+          { word: 'Colorado' }
+        ]
+      });
+
+      states.initialize();
+
+      $('#typeahead-demo-01').typeahead(null, {
+        name: 'states',
+        displayKey: 'word',
+        source: states.ttAdapter()
+      });
+    }
+
+    // make code pretty
+    window.prettyPrint && prettyPrint();
+
+  });
 
 })(jQuery);

@@ -1,20 +1,19 @@
 <div class="row">
     <div class="col-xs-6 hidden-print">
-        <h2><span class="fui-user"></span> {{ entity.firstName }} {{ entity.lastName }} </h2>
+        <h2><span class="fa fa-user"></span> {{ entity.firstName }} {{ entity.lastName }} </h2>
     </div>
     <div class="col-xs-6">
       <div class="btn-group pull-right hidden-print">              
-        <button class="btn btn-primary "><span class="fui-gear"></span> Select an action</button>
+        <button class="btn btn-primary "><span class="fa fa-gear"></span> Select an action</button>
         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           <span class="caret"></span>
         </button>
-        <span class="dropdown-arrow dropdown-arrow-inverse"></span>
-        <ul class="dropdown-menu dropdown-inverse">
-          <li><a ui-sref="userSave({id:entity.id})"><span class="fui-new"> Edit</a></li>
+        <ul class="dropdown-menu dropdown-menu-inverse">
+          <li><a ui-sref="userSave({id:entity.id})"><span class="fa fa-new"> Edit</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-plus"></span> new carrer</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-plus"></span> new contribution</a></li>
-          <li><a href="#"><span class="fui-credit-card"> print card</a></li>
-          <li><a href="#"><span class="fui-tag"></span> print tiquet</a></li>
+          <li><a href="#"><span class="fa fa-credit-card"> print card</a></li>
+          <li><a href="#"><span class="fa fa-tag"></span> print tiquet</a></li>
           <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
           <li class="divider"></li>
           <li><a href="#" ng-click="delete(entity.id)" ><span class="glyphicon glyphicon-remove-circle"></span> Delete</a></li>
@@ -70,7 +69,7 @@
   <div class="col-md-4">
     <div class="box">
       <header>
-          <h3><span class="fui-user"></span> Membership</h3>
+          <h3><span class="fa fa-user"></span> Membership</h3>
       </header>
       <ul class="list-group">
           <li class="list-group-item"><strong>family name:</strong> {{ entity.lastName }}</li>
@@ -90,7 +89,7 @@
    <div class="col-md-4">
        <div class="box">
            <header>
-               <h3><span class="fui-book"></span> Contact</h3>
+               <h3><span class="fa fa-book"></span> Contact</h3>
            </header>
            <ul class="list-group">
               <li class="list-group-item"><strong>tel :</strong> {{ entity.tel }}</li>

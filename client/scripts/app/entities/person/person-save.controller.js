@@ -18,11 +18,12 @@ angular
         };
 
         $scope.save = function () {
-            Person.update($scope.entity,
-                function (data, responseHeaders) {
-                    var person_id = ($scope.isUpdate) ? $stateParams.id : responseHeaders("Location").split('/').pop();
-                    $state.go('personDetail', {id: person_id});
-                });
+            var cb = function (data, responseHeaders) {
+                $state.go('personDetail', {id: data._id});
+            };
+
+            if($scope.isUpdate) Person.update({id: $scope.entity._id}, $scope.entity, cb);
+            else Person.save($scope.entity, cb);
         };
 
 

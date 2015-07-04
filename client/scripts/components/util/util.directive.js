@@ -10,9 +10,25 @@ angular.module('membershipApp')
 })
 .directive('mySelect', function () {
 	return function (scope, element, attr) {
-	    attr.$observe('mySelect', function(value) {
-	      element.selectpicker({style: 'btn-' + value, menuStyle: 'dropdown-inverse', noneSelectedText : 'Tous'});
-	    })
+	    element.select2();
+ 	}
+})
+.directive('myCheckbox', function () {
+	return function (scope, element, attr) {
+	    element.radiocheck();
+ 	}
+})
+.directive('myTooltip', function () {
+	return function (scope, element, attr) {
+	    element.tooltip('show');
+ 	}
+})
+.directive('myShelf', function () {
+	return function (scope, element, attr) {
+		element.bind('click', function() {
+			$(document.body).toggleClass('shelf');
+			element.find('.fa').toggleClass('fa-arrow-right');
+      });
  	}
 })
 .directive('myDatePicker', function () {

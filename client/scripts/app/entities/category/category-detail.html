@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-xs-6 hidden-print">
+        <h2><span ></span> {{ entity.name }} </h2>
+    </div>
+    <div class="col-xs-6">
+      <div class="btn-group pull-right hidden-print">              
+        <button class="btn btn-primary "><span class="fa fa-gear"></span> Select an action</button>
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-inverse">
+          <li><a ui-sref="categorySave({id:entity._id})"><span class="fa fa-edit"> Edit</a></li>
+          <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
+          <li class="divider"></li>
+          <li><a href="#" ng-click="delete(entity._id)" ><span class="glyphicon glyphicon-remove-circle"></span> Delete</a></li>
+        </ul>
+      </div>
+    </div>
+</div>
+  <h2 class="visible-print text-center">Category's detail</h2>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="box">
+      <header>
+          <h3><span class="fa fa-user"></span> Category</h3>
+      </header>
+      <ul class="list-group">
+          <li class="list-group-item"><strong>name:</strong> {{ entity.name }}</li>
+          
+          
+      </ul>
+    </div>
+  </div> 
+
+   
+
+</div>

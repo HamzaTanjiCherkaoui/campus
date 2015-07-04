@@ -1,0 +1,23 @@
+{
+    "membershipApp": {
+        "room" : {
+            "home": {
+                "title": "Rooms",
+                "createLabel": "Créer un nouveau Room",
+                "createOrEditLabel": "Créer ou éditer un Room"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Room {{ id }} ?"
+            },
+            "detail": {
+                "title": "Room"
+            },
+            "name": "Name",
+            "floor": "Floor",
+            "capacity": "Capacity",
+            "free": "Free",
+            "gener": "Gener"
+        }
+    }
+}
+

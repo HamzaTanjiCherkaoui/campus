@@ -1,18 +1,17 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('PersonController', function ($scope, Person, ParseLinks) {
+    .controller('PersonController', function ($scope, Person) {
         $scope.persons = [];
         $scope.searchData = {
             page: 1,
-            per_page: 10,
+            perPage: 4,
             keyword : '',
             orderBy : 'lastName',
             orderDir : 'ASC'
         };
         $scope.loadAll = function() {
-            Person.query({page: $scope.searchData.page, per_page: $scope.searchData.per_page}, function(result, headers) {
-                //$scope.links = ParseLinks.parse(headers('link'));
+            Person.query({page: $scope.searchData.page, perPage: $scope.searchData.perPage}, function(result) {
                 $scope.persons = result;
             });
         };
@@ -62,7 +61,7 @@ angular.module('membershipApp')
 
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
-        }
+        };
 
         $scope.clear = function () {
             $scope.person = {name: null, type: null, id: null};

@@ -1,0 +1,23 @@
+{
+    "membershipApp": {
+        "reservation" : {
+            "home": {
+                "title": "Reservations",
+                "createLabel": "Créer un nouveau Reservation",
+                "createOrEditLabel": "Créer ou éditer un Reservation"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Reservation {{ id }} ?"
+            },
+            "detail": {
+                "title": "Reservation"
+            },
+            "datePayement": "DatePayement",
+            "dateFrom": "DateFrom",
+            "dateTo": "DateTo",
+            "status": "Status",
+            "price": "Price"
+        }
+    }
+}
+

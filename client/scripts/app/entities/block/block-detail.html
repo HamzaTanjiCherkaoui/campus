@@ -1,0 +1,46 @@
+
+<div>
+    <h2><span translate="membershipApp.block.detail.title">Block</span> {{block.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th translate="entity.detail.field">Field</th>
+                    <th translate="entity.detail.value">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.block.name">Name</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{block.name}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.block.type">Type</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{block.type}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.block.floors">Floors</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{block.floors}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="block"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

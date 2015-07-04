@@ -1,0 +1,21 @@
+{
+    "membershipApp": {
+        "block" : {
+            "home": {
+                "title": "Blocks",
+                "createLabel": "Créer un nouveau Block",
+                "createOrEditLabel": "Créer ou éditer un Block"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Block {{ id }} ?"
+            },
+            "detail": {
+                "title": "Block"
+            },
+            "name": "Name",
+            "type": "Type",
+            "floors": "Floors"
+        }
+    }
+}
+

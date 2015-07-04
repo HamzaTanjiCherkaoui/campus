@@ -11,5 +11,5 @@ angular.module('membershipApp')
         $scope.load($stateParams.id);
         $scope.barecode = function(code, $event){
         	$event.target.barcode(code, 'codabar');   
-        }
+        };
     }]);

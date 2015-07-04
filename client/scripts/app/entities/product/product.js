@@ -16,6 +16,12 @@ angular.module('membershipApp')
                         controller: 'ProductController'
                     }
                 },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('product');
+                        return $translate.refresh();
+                    }]
+                }
                
             })
             .state('productDetail', {
@@ -31,6 +37,12 @@ angular.module('membershipApp')
                         controller: 'ProductDetailController'
                     }
                 },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('product');
+                        return $translate.refresh();
+                    }]
+                }
                
             })
             .state('productSave', {
@@ -46,6 +58,12 @@ angular.module('membershipApp')
                         controller: 'ProductSaveController'
                     }
                 },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('product');
+                        return $translate.refresh();
+                    }]
+                }
                
             });
     });

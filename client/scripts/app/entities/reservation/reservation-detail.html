@@ -1,0 +1,62 @@
+
+<div>
+    <h2><span translate="membershipApp.reservation.detail.title">Reservation</span> {{reservation.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th translate="entity.detail.field">Field</th>
+                    <th translate="entity.detail.value">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.reservation.datePayement">DatePayement</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{reservation.datePayement}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.reservation.dateFrom">DateFrom</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{reservation.dateFrom}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.reservation.dateTo">DateTo</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{reservation.dateTo}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.reservation.status">Status</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{reservation.status}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="membershipApp.reservation.price">Price</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{reservation.price}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="reservation"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

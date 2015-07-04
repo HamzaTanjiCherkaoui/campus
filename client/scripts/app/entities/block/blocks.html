@@ -1,0 +1,128 @@
+<div>
+
+    <h2 translate="membershipApp.block.home.title">Block</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveBlockModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="membershipApp.block.home.createLabel">Create a new Block</span>
+    </button>
+    <div class="modal fade" id="saveBlockModal" tabindex="-1" role="dialog" aria-labelledby="myBlockLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myBlockLabel" translate="membershipApp.block.home.createOrEditLabel">Create or edit a Block</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" name="id"
+                                   ng-model="block.id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="membershipApp.block.name">Name</label>
+                            <input type="text" class="form-control" name="name"
+                                   ng-model="block.name">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="membershipApp.block.type">Type</label>
+                            <input type="checkbox" class="form-control" name="type"
+                                   ng-model="block.type">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="membershipApp.block.floors">Floors</label>
+                            <input type="number" class="form-control" name="floors"
+                                   ng-model="block.floors">
+
+                            <div ng-show="editForm.floors.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.floors.$error.number" translate="entity.validation.number">
+                                    This field should be a number.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteBlockConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(block.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="membershipApp.block.delete.question" translate-values="{id: '{{block.id}}'}">Are you sure you want to delete this Block?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th translate="membershipApp.block.name">Name</th>
+                    <th translate="membershipApp.block.type">Type</th>
+                    <th translate="membershipApp.block.floors">Floors</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="block in blocks">
+                    <td><a ui-sref="blockDetail({id:block.id})">{{block.id}}</a></td>
+                    <td>{{block.name}}</td>
+                    <td>{{block.type}}</td>
+                    <td>{{block.floors}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="blockDetail({id:block.id})"
+                                class="btn btn-info">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="update(block.id)"
+                                class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(block.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

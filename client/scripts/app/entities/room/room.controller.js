@@ -1,16 +1,29 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('RoomController', function ($scope, Room) {
+    .controller('RoomController', function ($scope, Room, Block) {
         $scope.rooms = [];
-        $scope.page = 1;
+        $scope.pagination = {};
+        $scope.searchData = {
+            page: 1,
+            perPage: 4,
+            keyword : '',
+            orderBy : 'name',
+            orderDir : 'asc'
+        };
+        $scope.blocks = Block.query();
         $scope.loadAll = function() {
-            Room.query({page: $scope.page, perPage: 20}, function(result) {
+            Room.query($scope.searchData, function(result, headers) {
                 $scope.rooms = result;
+                var pages = headers('pages');
+                $scope.pagination.first = 1;
+                $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
+                $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
+                $scope.pagination.last = pages;
             });
         };
         $scope.loadPage = function(page) {
-            $scope.page = page;
+            $scope.searchData.page = page;
             $scope.loadAll();
         };
         $scope.loadAll();
@@ -54,8 +67,13 @@ angular.module('membershipApp')
                 });
         };
 
+        $scope.changeOrder = function (column) {
+            $scope.searchData.orderBy = column;
+            $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
+        }
+
         $scope.clear = function () {
-            $scope.room = {name: null, floor: null, capacity: null, free: null, gener: null, id: null};
+            $scope.room = {_id: null, name: null, floor: null, capacity: null, free: null, block: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

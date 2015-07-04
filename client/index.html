@@ -13,23 +13,17 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(client) app/vendor.css -->
           <!-- bower:css -->
-          <link rel="stylesheet" href="bower_components/videojs/dist/video-js/video-js.css" />
+          <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
           <link rel="stylesheet" href="bower_components/flat-ui/dist/css/flat-ui.css" />
+          <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
           <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css({.tmp,client}) app/app.css -->
         <link href="assets/css/main.css" rel="stylesheet" />
+        <link href="assets/css/flat.css" rel="stylesheet" />
           <!-- injector:css -->
           <!-- endinjector -->
         <!-- endbuild -->
-
-
-<!--         <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="bower_components/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet" />
-        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-
-        <link href="assets/css/main.css" rel="stylesheet" />
-        <link href="assets/css/flat-ui-custom.css" rel="stylesheet" /> -->
 
     </head>
     <body ng-app="membershipApp" class="theme1">
@@ -109,7 +103,6 @@
           <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
           <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
           <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-          <script src="bower_components/videojs/dist/video-js/video.js"></script>
           <script src="bower_components/flat-ui/dist/js/flat-ui.js"></script>
           <script src="bower_components/moment/moment.js"></script>
           <script src="bower_components/angular-moment/angular-moment.js"></script>
@@ -159,6 +152,7 @@
           <script src="scripts/app/entities/block/block.controller.js"></script>
           <script src="scripts/app/entities/block/block.js"></script>
           <script src="scripts/app/entities/category/category-detail.controller.js"></script>
+          <script src="scripts/app/entities/category/category-save.controller.js"></script>
           <script src="scripts/app/entities/category/category.controller.js"></script>
           <script src="scripts/app/entities/category/category.js"></script>
           <script src="scripts/app/entities/config/config-detail.controller.js"></script>
@@ -170,6 +164,7 @@
           <script src="scripts/app/entities/person/person.controller.js"></script>
           <script src="scripts/app/entities/person/person.js"></script>
           <script src="scripts/app/entities/product/product-detail.controller.js"></script>
+          <script src="scripts/app/entities/product/product-save.controller.js"></script>
           <script src="scripts/app/entities/product/product.controller.js"></script>
           <script src="scripts/app/entities/product/product.js"></script>
           <script src="scripts/app/entities/reservation/reservation-detail.controller.js"></script>

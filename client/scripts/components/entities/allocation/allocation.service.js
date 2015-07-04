@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jhipsterApp')
+angular.module('membershipApp')
     .factory('Allocation', function ($resource) {
         return $resource('api/allocations/:id', {}, {
             'query': { method: 'GET', isArray: true},

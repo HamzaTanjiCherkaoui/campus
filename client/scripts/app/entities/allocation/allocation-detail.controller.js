@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jhipsterApp')
+angular.module('membershipApp')
     .controller('AllocationDetailController', function ($scope, $stateParams, Allocation) {
         $scope.allocation = {};
         $scope.load = function (id) {

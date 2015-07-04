@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('jhipsterApp')
-    .controller('RoomController', function ($scope, Room, ParseLinks) {
+angular.module('membershipApp')
+    .controller('RoomController', function ($scope, Room) {
         $scope.rooms = [];
         $scope.page = 1;
         $scope.loadAll = function() {
-            Room.query({page: $scope.page, perPage: 20}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
+            Room.query({page: $scope.page, perPage: 20}, function(result) {
                 $scope.rooms = result;
             });
         };
@@ -17,12 +16,13 @@ angular.module('jhipsterApp')
         $scope.loadAll();
 
         $scope.create = function () {
-            Room.update($scope.room,
-                function () {
-                    $scope.loadAll();
-                    $('#saveRoomModal').modal('hide');
-                    $scope.clear();
-                });
+            if($scope.room._id) {
+                console.log('edit');
+                Room.update({id: $scope.room._id}, $scope.room, $scope.saveCalback);
+            }
+            else {
+                Room.save($scope.room, $scope.saveCalback);
+            }
         };
 
         $scope.update = function (id) {
@@ -30,6 +30,12 @@ angular.module('jhipsterApp')
                 $scope.room = result;
                 $('#saveRoomModal').modal('show');
             });
+        };
+
+        $scope.saveCalback = function () {
+            $scope.loadAll();
+            $('#saveRoomModal').modal('hide');
+            $scope.clear();
         };
 
         $scope.delete = function (id) {

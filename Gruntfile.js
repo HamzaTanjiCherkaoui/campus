@@ -95,7 +95,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         files: [
-          '{.tmp,<%= yeoman.client %>}/assets/**/*.css',
+          '{.tmp,<%= yeoman.client %>}/assets/*.css',
           '{.tmp,<%= yeoman.client %>}/**/*.html',
           '{.tmp,<%= yeoman.client %>}/scripts/**/*.js',
           '!{.tmp,<%= yeoman.client %>}/scripts/**/*.spec.js',
@@ -223,7 +223,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/ ]
+        exclude: ['/json3/', '/es5-shim/', '/videojs/' , 'bootstrap.js']
       }
     },
 
@@ -375,7 +375,7 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.client %>',
         dest: '.tmp/',
-        src: ['css/**/*.css']
+        src: ['css/*.css']
       }
     },
 
@@ -560,7 +560,7 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-            '<%= yeoman.client %>/css/**/*.css'
+            '<%= yeoman.client %>/css/*.css'
           ]
         }
       }

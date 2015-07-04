@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jhipsterApp')
+angular.module('membershipApp')
     .controller('AllocationController', function ($scope, Allocation, ParseLinks) {
         $scope.allocations = [];
         $scope.page = 1;

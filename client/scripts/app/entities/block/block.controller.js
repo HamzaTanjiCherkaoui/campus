@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jhipsterApp')
+angular.module('membershipApp')
     .controller('BlockController', function ($scope, Block) {
         $scope.blocks = [];
         $scope.loadAll = function() {

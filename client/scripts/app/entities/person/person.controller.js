@@ -5,11 +5,7 @@ angular.module('membershipApp')
         $scope.persons = [];
         $scope.searchData = {
             page: 1,
-<<<<<<< HEAD
             perPage: 4,
-=======
-            per_page: 10,
->>>>>>> 607218600da378bbde6078f8fbae51bf6f74d73e
             keyword : '',
             orderBy : 'lastName',
             orderDir : 'ASC'

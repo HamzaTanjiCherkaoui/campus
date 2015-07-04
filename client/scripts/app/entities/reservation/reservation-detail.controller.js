@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jhipsterApp')
+angular.module('membershipApp')
     .controller('ReservationDetailController', function ($scope, $stateParams, Reservation) {
         $scope.reservation = {};
         $scope.load = function (id) {

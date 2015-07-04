@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "reservation" : {
+            "home": {
+                "title": "Reservations",
+                "createLabel": "Create a new Reservation",
+                "createOrEditLabel": "Create or edit a Reservation"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Reservation {{ id }}?"
+            },
+            "detail": {
+                "title": "Reservation"
+            },
+            "datePayement": "DatePayement",
+            "dateFrom": "DateFrom",
+            "dateTo": "DateTo",
+            "status": "Status",
+            "price": "Price"
+        }
+    }
+}

@@ -34,11 +34,12 @@ module.exports = function(app) {
     res.header("Access-Control-Allow-Credentials", "true");
     res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,POST,PUT,DELETE');
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
-    if ('OPTIONS' == req.method){
+    
+    if ('OPTIONS' === req.method){
         return res.send(200);
     }
     next();
-});
+  });
   
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));

@@ -8,7 +8,7 @@ exports.index = function(req, res) {
 
   Room.find(function (err, rooms) {
     if(err) { return handleError(res, err); }
-    return res.json(200, {rooms);
+    return res.json(200, rooms);
   });
 };
 

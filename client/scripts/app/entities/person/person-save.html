@@ -1,0 +1,90 @@
+<h2 ng-show="!isUpdate"><span class="fui-user"></span>  Ajout d'un nouveau étudiant</h2>
+<h2 ng-show="isUpdate"><span class="fui-user"></span>  Mise à jour d'un étudiant</h2>
+<form name="personFrom" role="form" class="form-horizontal" novalidate ng-submit="save()" show-validation>
+	<input type="hidden" name="id" ng-model="entity._id" />
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.family_name">Last Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="family_name" ng-model="entity.family_name" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.first_name">First Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="first_name" ng-model="entity.first_name" />
+		</div>
+	</div>
+	<div class="form-group" ng-class="{true: 'has-error'}[personFrom.code.$invalid]">
+		<label class="col-md-4 control-label" for="entity.code">Cin</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="code" ng-model="entity.code" />
+		</div>
+		<div class="help-block col-md-4" ng-show="personFrom.code.$invalid">
+			<p class="help-block" ng-show="personFrom.code.$error.required" translate="entity.validation.required"> This field is required. </p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.gender">gender</label>
+		<div class="col-md-4">
+		    <select my-select="primary" name="gender" ng-model="entity.gender" ng-options="item.value as item.label for item in genderArray">
+		    	<option value="" ng-if="entity.gender">Select gender</option>
+		    </select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.birthDay">BirthDay</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="birthDay" ng-model="entity.birthDay" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.niveau_etude">niveau_etude</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="niveau_etude" ng-model="entity.niveau_etude" />
+		</div>
+	</div>
+	<!-- Contact -->
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.address">address</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="address" ng-model="entity.address" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.zipCode">zipCode</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="zipCode" ng-model="entity.zipCode" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.city">city</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="city" ng-model="entity.city" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.country">country</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="country" ng-model="entity.country" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.tel">tel</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="tel" ng-model="entity.tel" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.description">description</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="description" ng-model="entity.description" />
+		</div>
+	</div>    
+	<div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        <button type="submit" name="subvalider" ng-disabled="personFrom.$invalid" class="btn btn-primary btn-embossed">
+        	<span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </div>
+</form>

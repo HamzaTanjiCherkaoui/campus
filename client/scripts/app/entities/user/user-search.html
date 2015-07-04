@@ -1,0 +1,104 @@
+    <div class="modal fade" id="advancedSearchModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clear()">&times;</button>
+                    <h4 class="modal-title">Advanced search</h4>
+                </div>
+                <div class="modal-body">
+
+                  <div class="row">
+                      <div class="col-md-6">
+                        <label class="control-label">Cin</label>
+                        <div class="form-group">
+                          <input type="text" name="search.cin" ng-model="search.cin" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="control-label">gender</label>
+                        <div class="form-group">
+                            <select class="select-block primary" name="search.gender" ng-model="search.gender" ng-options="item.value as item.label for item in genderArray">
+                              <option value="" ng-if="entity.gender">Select gender</option>
+                            </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <label class="control-label">birthday from</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="search.birthday.from" ng-model="search.birthday.from" />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="control-label">birthday to</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="search.birthday.to" ng-model="search.birthday.to" />
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <label class="control-label">city</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="search.city" ng-model="search.city" />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="control-label">barcode</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="search.barcode" ng-model="search.barcode" />
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <label class="control-label">status</label>
+                        <div class="form-group">
+                            <select class="select-block primary" name="search.status" ng-model="search.status" ng-options="item.value as item.label for item in genderArray">
+                              <option value="">Select status</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="control-label">group</label>
+                        <div class="form-group">
+                            <select class="select-block primary" name="search.group" ng-model="search.group" ng-options="item.value as item.label for item in genderArray">
+                              <option value="">Select group</option>
+                            </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <label class="control-label">cotisation</label>
+                        <div class="form-group">
+                            <select class="select-block primary" name="search.cotisation" ng-model="search.cotisation">
+                              <option value="0">Tout</option>
+                              <option value="1">Payé</option>
+                              <option value="2">Non payé</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="control-label">perpage</label>
+                        <div class="form-group">
+                            <select class="select-block primary" name="search.perpage" ng-model="search.perpage">
+                              <option value="10">10</option>
+                              <option value="20">20</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                            </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>  
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

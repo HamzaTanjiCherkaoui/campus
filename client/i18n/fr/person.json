@@ -1,0 +1,36 @@
+{
+    "membershipApp": {
+        "person" : {
+            "home": {
+                "title": "Persons",
+                "createLabel": "Créer un nouveau Person",
+                "createOrEditLabel": "Créer ou éditer un Person"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Person {{ id }} ?"
+            },
+            "detail": {
+                "title": "Person"
+            },
+            "lastname": "Lastname",
+            "firstName": "FirstName",
+            "barcode": "Barcode",
+            "cin": "Cin",
+            "birthDay": "BirthDay",
+            "gender": "Gender",
+            "address": "Address",
+            "zipCode": "ZipCode",
+            "city": "City",
+            "country": "Country",
+            "job": "Job",
+            "tel": "Tel",
+            "gsm": "Gsm",
+            "certificat": "Certificat",
+            "expertise": "Expertise",
+            "description": "Description",
+            "archived": "Archived",
+            "archivedCause": "ArchivedCause"
+        }
+    }
+}
+

@@ -1,0 +1,39 @@
+<h2 ng-show="!isUpdate"><span class="fui-user"></span>  Ajout d'un nouveau produit</h2>
+<h2 ng-show="isUpdate"><span class="fui-user"></span>  Mise à jour d'un produit</h2>
+<form name="productFrom" role="form" class="form-horizontal" novalidate ng-submit="save()" show-validation>
+	<input type="hidden" name="id" ng-model="entity._id" />
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.name">Name</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="name" ng-model="entity.name" />
+		</div>					
+		<div class="help-block col-md-4" ng-show="productFrom.name.$invalid">
+			<p class="help-block" ng-show="productFrom.name.$error.required" translate="global.messages.validate.name.required"> the name of the is required. </p>
+			<p class="help-block" ng-show="productFrom.name.$error.minlength" translate="global.messages.validate.name.minlength"> the name of the is required to be at least 5 characters </p>
+            <p class="help-block" ng-show="productFrom.name.$error.maxlength" translate="global.messages.validate.name.maxlength"> the name of the cannot be longer than 100 characters </p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.type">Type</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="type" ng-model="entity.type" />
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="entity.gender">Category</label>
+		<div class="col-md-4">
+		    <select class="form-control select select-primary" my-select="primary" name="gender" ng-model="entity.gender" ng-options="item.value as item.label for item in genderArray">
+		    	<option value="" ng-if="entity.gender">Select categorie</option>
+		    </select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        <button type="submit" name="subvalider" ng-disabled="productFrom.$invalid" class="btn btn-primary btn-embossed">
+        	<span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </div>
+</form>

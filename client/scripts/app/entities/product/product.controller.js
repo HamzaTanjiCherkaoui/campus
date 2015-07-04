@@ -1,22 +1,19 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('PersonController', function ($scope, Person) {
-        $scope.persons = [];
+    .controller('ProductController', function ($scope, Product, ParseLinks) {
+        $scope.products = [];
         $scope.searchData = {
             page: 1,
-<<<<<<< HEAD
-            perPage: 4,
-=======
             per_page: 10,
->>>>>>> 607218600da378bbde6078f8fbae51bf6f74d73e
             keyword : '',
-            orderBy : 'lastName',
+            orderBy : 'name',
             orderDir : 'ASC'
         };
         $scope.loadAll = function() {
-            Person.query({page: $scope.searchData.page, perPage: $scope.searchData.perPage}, function(result) {
-                $scope.persons = result;
+            Product.query({page: $scope.searchData.page, per_page: $scope.searchData.per_page}, function(result, headers) {
+                //$scope.links = ParseLinks.parse(headers('link'));
+                $scope.products = result;
             });
         };
         $scope.loadPage = function(page) {
@@ -26,49 +23,49 @@ angular.module('membershipApp')
         $scope.loadAll();
 
         $scope.create = function () {
-            Person.update($scope.person,
+            Product.update($scope.product,
                 function () {
                     $scope.loadAll();
-                    $('#savePersonModal').modal('hide');
+                    $('#saveProductModal').modal('hide');
                     $scope.clear();
                 });
         };
 
         $scope.update = function (id) {
-            Person.get({id: id}, function(result) {
-                $scope.person = result;
-                $('#savePersonModal').modal('show');
+            Product.get({id: id}, function(result) {
+                $scope.product = result;
+                $('#saveProductModal').modal('show');
             });
         };
 
         $scope.delete = function (id) {
-            Person.get({id: id}, function(result) {
-                $scope.person = result;
-                $('#deletePersonConfirmation').modal('show');
+            Product.get({id: id}, function(result) {
+                $scope.product = result;
+                $('#deleteProductConfirmation').modal('show');
             });
         };
 
         $scope.confirmDelete = function (id) {
-            Person.delete({id: id},
+            Product.delete({id: id},
                 function () {
                     $scope.loadAll();
-                    $('#deletePersonConfirmation').modal('hide');
+                    $('#deleteProductConfirmation').modal('hide');
                     $scope.clear();
                 });
         };        
 
         $scope.markAll = function (checked) {
-            $scope.persons.forEach(function (entity) {
+            $scope.products.forEach(function (entity) {
                 entity.checked = checked;
             });
         };
 
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
-        };
+        }
 
         $scope.clear = function () {
-            $scope.person = {name: null, type: null, id: null};
+            $scope.product = {name: null, type: null, id: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };

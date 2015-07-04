@@ -8,7 +8,7 @@ angular.module('membershipApp')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.birthDay = $filter("amDateFormat")(data.birthDay, 'YYYY-MM-D');
+                    data.birthDay = $filter('amDateFormat')(data.birthDay, 'YYYY-MM-D');
                     return data;
                 }
             },

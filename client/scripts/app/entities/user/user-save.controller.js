@@ -21,8 +21,8 @@ angular
             $scope.entity.password = Math.random().toString(36);
             User.update($scope.entity,
                 function (data, responseHeaders) {
-                    var user_id = ($scope.isUpdate) ? $stateParams.id : responseHeaders("Location").split('/').pop();
-                    $state.go('userDetail', {id: user_id});
+                    var userId = ($scope.isUpdate) ? $stateParams.id : responseHeaders('Location').split('/').pop();
+                    $state.go('userDetail', {id: userId});
                 });
         };
 
@@ -50,8 +50,9 @@ angular
             $scope.changePasswordForm.$setPristine();
             $scope.changePasswordForm.$setUntouched();
 
-            if($scope.isUpdate)
+            if($scope.isUpdate){
                 $scope.load($stateParams.id);
+            }
         };
 
         $timeout($scope.clear);

@@ -41,12 +41,12 @@ angular.module('membershipApp')
     .directive('resizeMenu', ['$window', function ($window) {
         return {
             restrict: 'A',
-            link : function (scope, element) {
+            link : function (scope) {
                 var w = angular.element($window);
                 scope.getWindowDimensions = function () {
                     return { 'h': w.height(), 'w': w.width() };
                 };
-                scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+                scope.$watch(scope.getWindowDimensions, function (newValue) {
                     scope.windowHeight = newValue.h;
                     scope.windowWidth = newValue.w;
 
@@ -62,5 +62,5 @@ angular.module('membershipApp')
                     scope.$apply();
                 });
             }
-        }
+        };
     }]);

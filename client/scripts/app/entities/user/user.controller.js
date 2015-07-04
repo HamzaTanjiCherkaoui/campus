@@ -7,7 +7,7 @@ angular
         $scope.users = [];
         $scope.searchData = {
             page: 1,
-            per_page: 5,
+            perPage: 5,
             keyword : '',
             orderBy : 'username',
             order : 'ASC'
@@ -19,7 +19,7 @@ angular
                 $scope.users = result;//.filter(function(item){return ['anonymousUser', 'system'].indexOf(item.login) == -1 ; });
                 $scope.users.forEach(function(entity){
                     entity.checked = false;
-                })
+                });
             });
         };
         $scope.loadPage = function(page) {
@@ -46,7 +46,7 @@ angular
         $scope.activate = function (state) {
             var ids = [];
             $scope.users.filter(function (entity) { return entity.checked;})
-                .forEach(function (entity) { ids.push(entity.id) });
+                .forEach(function (entity) { ids.push(entity.id); });
             UserActivate.get({activated: state, ids: ids.join(',')});
         };
 
@@ -56,8 +56,8 @@ angular
             });
         };
     })
-    .filter("genderConversion", function(){
+    .filter('genderConversion', function(){
         return function(gender){
-            return (gender) ? "femme" : "homme";
-        }
+            return (gender) ? 'femme' : 'homme';
+        };
     });

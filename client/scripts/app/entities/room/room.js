@@ -19,6 +19,7 @@ angular.module('membershipApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('room');
+                        $translatePartialLoader.addPart('block');
                         return $translate.refresh();
                     }]
                 }
@@ -39,6 +40,7 @@ angular.module('membershipApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('room');
+                        $translatePartialLoader.addPart('block');
                         return $translate.refresh();
                     }]
                 }

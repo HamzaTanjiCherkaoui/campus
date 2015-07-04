@@ -5,11 +5,17 @@ var Room = require('./room.model');
 
 // Get list of rooms
 exports.index = function(req, res) {
-
-  Room.find(function (err, rooms) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, rooms);
-  });
+  Room.find({})
+    .skip(req.query.perPage * (req.query.page - 1))
+    .limit(req.query.perPage)
+    .sort({name: req.query.orderDir})
+    .populate('block')
+    .exec(function(err, rooms) {
+        Room.count().exec(function(err, count) {
+          res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.json(200, rooms);
+        })
+    });
 };
 
 // Get a single room

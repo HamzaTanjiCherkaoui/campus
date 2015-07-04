@@ -1,92 +1,178 @@
-<div>
+<h2><i class="fa fa-window"></i> List of rooms</h2>
+    <form ng-submit="loadPage(pagination.first)" role="from">
+        <div class="row hidden-print">
+          <div class="col-md-5 col-xs-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" ng-model="searchData.keyword">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-7 col-xs-6">
+            <div class="btn-group pull-right">             
+              <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
+                Select an action
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-inverse">
+                <li><a data-toggle="modal" data-target="#saveRoomModal" ng-click="clear()"><i class="fa fa-user-plus"></i> add</a></li>
+                <li><a ui-sref="roomSave"><i class="fa fa-user-plus"></i> add multiple</a></li>
+                <li class="divider"></li>
+                <li><a id="js-badge"><i class="fa fa-credit-card"></i> free</a></li>
+                <li class="divider"></li>
+                <li><a data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-trash"></i> delete</a></li>
+              </ul>
+            </div>
+          </div><!-- /.col-lg-2 -->
+        </div><!-- /.row -->
+  </form>
 
-    <h2 translate="membershipApp.room.home.title">Room</h2>
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        <label class="checkbox" for="checkbox0">
+                            <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
+                        </label>
+                    </td>
+                    <th class="sortable"><a ng-click="changeOrder('name')">Name <i class="fa fa-sort pull-right"></i></a></th>
+                    <th class="sortable"><a ng-click="changeOrder('block')">Block <i class="fa fa-sort pull-right"></i></a></th>
+                    <th translate="membershipApp.room.floor">Floor</th>
+                    <th translate="membershipApp.room.capacity">Capacity</th>
+                    <th translate="membershipApp.room.free">Free</th>
+                    <th translate="membershipApp.room.gender">Gender</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entity in rooms | filter:searchData.keyword | orderBy:searchData.orderBy:searchData.orderDir==='asc'">
+                    <td>
+                        <label class="checkbox" for="checkbox{{entity._id}}">
+                            <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
+                        </label>
+                    </td>
+                    <td><a ui-sref="roomsDetail({id:entity._id})">{{entity.name}}</a></td>
+                    <td>{{entity.block.name}}</td>
+                    <td>{{entity.floor}}</td>
+                    <td>{{entity.capacity}}</td>
+                    <td>{{entity.free}}</td>
+                    <td>{{entity.block.gender | genderConversion}}</td>
+                    <td>
+                        <button ui-sref="roomDetail({id:entity._id})"
+                                class="btn btn-info  btn-embossed btn-xs">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                        </button>
+                        <button ng-click="update(entity._id)"
+                                class="btn btn-primary  btn-embossed btn-xs">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button ng-click="delete(entity._id)"
+                                class="btn btn-danger  btn-embossed btn-xs">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveRoomModal" ng-click="clear()">
-        <span class="glyphicon glyphicon-flash"></span> <span translate="membershipApp.room.home.createLabel">Create a new Room</span>
-    </button>
-    <div class="modal fade" id="saveRoomModal" tabindex="-1" role="dialog" aria-labelledby="myRoomLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
+
+            <div class="caption">
+              <em><strong>Total :</strong> {{ rooms.length }}</em>
+            </div>
+
+        <nav>
+            <ul class="pager" >
+                <li ng-show="pagination.first" ng-click="loadPage(pagination.first)"><a>&lt;&lt;</a></li>
+                <li ng-show="pagination.prev" ng-click="loadPage(pagination.prev)"><a>&lt;</a></li>
+                <li ng-show="pagination.next" ng-click="loadPage(pagination.next)"><a>&gt;</a></li>
+                <li ng-show="pagination.last" ng-click="loadPage(pagination.last)"><a>&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- save modal -->
+    <div class="modal fade" id="saveRoomModal">
+        <div class="modal-dialog modal-large">
             <div class="modal-content">
-                <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
-
+                <form name="roomForm" role="form" novalidate ng-submit="create()">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"ng-click="clear()">&times;</button>
                         <h4 class="modal-title" id="myRoomLabel" translate="membershipApp.room.home.createOrEditLabel">Create or edit a Room</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>ID</label>
-                            <input type="text" class="form-control" name="id"
-                                   ng-model="room._id" readonly>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="control-label">ID</label>
+                          <div class="form-group">
+                              <input type="text" class="form-control" name="id" ng-model="room._id" readonly>
+                          </div>
                         </div>
-
-                        <div class="form-group">
-                            <label translate="membershipApp.room.name">Name</label>
-                            <input type="text" class="form-control" name="name"
-                                   ng-model="room.name">
-
+                        <div class="col-md-6">
+                          <label translate="membershipApp.block.detail.title">block</label>
+                          <div class="form-group">
+                              <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="block" ng-model="room.block" ng-options="block._id as block.name for block in blocks">
+                                <option value="">Select a block</option>
+                              </select>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="membershipApp.room.floor">Floor</label>
-                            <input type="number" class="form-control" name="floor"
-                                   ng-model="room.floor">
-
-                            <div ng-show="editForm.floor.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.floor.$error.number" translate="entity.validation.number">
-                                    This field should be a number.
-                                </p>
-                            </div>
+                        <div class="col-md-6">
+                          <label translate="membershipApp.room.name">Name</label>
+                          <div class="form-group">
+                              <input type="text" class="form-control" name="name" ng-model="room.name">
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="membershipApp.room.capacity">Capacity</label>
-                            <input type="number" class="form-control" name="capacity"
-                                   ng-model="room.capacity" min="0">
-
-                            <div ng-show="editForm.capacity.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.capacity.$error.min" translate="entity.validation.min" translate-value-min="0">
-                                    This field should be more than 0.
-                                </p>
-                                <p class="help-block"
-                                   ng-show="editForm.capacity.$error.number" translate="entity.validation.number">
-                                    This field should be a number.
-                                </p>
-                            </div>
+                        <div class="col-md-6">
+                          <label translate="membershipApp.room.floor">Floor</label>
+                          <div class="form-group">
+                              <input type="number" class="form-control" name="floor" ng-model="room.floor">
+                              <div ng-show="editForm.floor.$invalid">
+                                    <p class="help-block" ng-show="editForm.floor.$error.number" translate="entity.validation.number"> 
+                                        This field should be a number.
+                                    </p>
+                              </div>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="membershipApp.room.free">Free</label>
-                            <input type="number" class="form-control" name="free"
-                                   ng-model="room.free" min="0">
+                        <div class="col-md-6">
+                          <label translate="membershipApp.room.capacity">Capacity</label>
+                          <div class="form-group">
+                                <input type="number" class="form-control" name="capacity" ng-model="room.capacity" min="0">
 
-                            <div ng-show="editForm.free.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.free.$error.min" translate="entity.validation.min" translate-value-min="0">
-                                    This field should be more than 0.
-                                </p>
-                                <p class="help-block"
-                                   ng-show="editForm.free.$error.number" translate="entity.validation.number">
-                                    This field should be a number.
-                                </p>
-                            </div>
+                                <div ng-show="editForm.capacity.$invalid">
+                                    <p class="help-block" ng-show="editForm.capacity.$error.min" translate="entity.validation.min" translate-value-min="0">
+                                        This field should be more than 0.
+                                    </p>
+                                    <p class="help-block" ng-show="editForm.capacity.$error.number" translate="entity.validation.number">
+                                        This field should be a number.
+                                    </p>
+                                </div>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="membershipApp.room.gener">Gener</label>
-                            <input type="text" class="form-control" name="gener"
-                                   ng-model="room.gener">
-
+                        <div class="col-md-6">
+                          <label translate="membershipApp.room.free">Free</label>
+                          <div class="form-group">
+                                <input type="number" class="form-control" name="free" ng-model="room.free" min="0">
+                                <div ng-show="editForm.free.$invalid">
+                                    <p class="help-block" ng-show="editForm.free.$error.min" translate="entity.validation.min" translate-value-min="0">
+                                        This field should be more than 0.
+                                    </p>
+                                    <p class="help-block" ng-show="editForm.free.$error.number" translate="entity.validation.number">
+                                        This field should be a number.
+                                    </p>
+                                </div>
+                          </div>
                         </div>
-
+                <div class="clearfix"></div>
+                      </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                            <i class="fa fa-ban"></i>&nbsp;<span translate="entity.action.cancel">Cancel</span>
                         </button>
-                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-primary">
+                            <i class="fa fa-save"></i>&nbsp;<span translate="entity.action.save">save</span>
                         </button>
                     </div>
                 </form>
@@ -94,6 +180,7 @@
         </div>
     </div>
 
+    <!-- delete confirmation modal -->
     <div class="modal fade" id="deleteRoomConfirmation">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -104,12 +191,9 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="membershipApp.room.delete.question" translate-values="{id: '{{room._id}}'}">Are you sure you want to delete this Room?</p>
+                        <p translate="membershipApp.room.delete.question" translate-values="{id: '{{room.name}}'}">Are you sure you want to delete this Profile?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-                        </button>
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
                         </button>
@@ -118,60 +202,3 @@
             </div>
         </div>
     </div>
-
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th translate="membershipApp.room.name">Name</th>
-                    <th translate="membershipApp.room.floor">Floor</th>
-                    <th translate="membershipApp.room.capacity">Capacity</th>
-                    <th translate="membershipApp.room.free">Free</th>
-                    <th translate="membershipApp.room.gener">Gener</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="room in rooms">
-                    <td><a ui-sref="roomDetail({id:room._id})">{{room._id}}</a></td>
-                    <td>{{room.name}}</td>
-                    <td>{{room.floor}}</td>
-                    <td>{{room.capacity}}</td>
-                    <td>{{room.free}}</td>
-                    <td>{{room.gener}}</td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="roomDetail({id:room._id})"
-                                class="btn btn-info">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="update(room._id)"
-                                class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="delete(room._id)"
-                                class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <nav>
-            <ul class="pagination">
-                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
-                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
-                <li ng-show="page > 2" ng-click="loadPage(page - 2)"><a>{{page - 2}}</a></li>
-                <li ng-show="page > 1" ng-click="loadPage(page - 1)"><a>{{page - 1}}</a></li>
-                <li class="active"><a>{{page}}</a></li>
-                <li ng-show="page < links['last']" ng-click="loadPage(page + 1)"><a>{{page + 1}}</a></li>
-                <li ng-show="page < links['last'] - 1" ng-click="loadPage(page + 2)"><a>{{page + 2}}</a></li>
-                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
-                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>

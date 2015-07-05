@@ -1,62 +1,42 @@
+<h2><span translate="membershipApp.room.detail.title">Room</span> {{room.id}}</h2>
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td><span translate="membershipApp.room.name">name</span></td>
+            <td>{{room.name}}</td>
+        </tr>
+        <tr>
+            <td><span translate="membershipApp.room.floor">floor</span></td>
+            <td>{{room.floor}}</td>
+        </tr>
+        <tr>
+            <td><span translate="membershipApp.room.capacity">capacity</span></td>
+            <td>{{room.capacity}}</td>
+        </tr>
+        <tr>
+            <td><span translate="membershipApp.room.free">free</span></td>
+            <td>{{room.free}}</td>
+        </tr>
+        <tr>
+            <td><span translate="membershipApp.block.type">type</span></td>
+            <td>{{room.block.type | genderConversion}}</td>
+        </tr>
+        <tr>
+            <td><span translate="membershipApp.block.detail.title">block</span></td>
+            <td>{{room.block.name}}</td>
+        </tr>
+        <tr ng-show="room.reservations">
+            <td><span translate="membershipApp.person.home.title">persons</span></td>
+            <td>
+                <ul>
+                    <li ng-repeat="reservation in room.reservations">{{ reservation.person.firstName }} </li>
+                    <li ng-show="!room.reservations.length">No persons</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-<div>
-    <h2><span translate="membershipApp.room.detail.title">Room</span> {{room.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th translate="entity.detail.field">Field</th>
-                    <th translate="entity.detail.value">Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.room.name">Name</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{room.name}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.room.floor">Floor</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{room.floor}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.room.capacity">Capacity</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{room.capacity}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.room.free">Free</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{room.free}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="membershipApp.room.gener">Gener</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{room.gener}}" readonly>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <button type="submit"
-            ui-sref="room"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-    </button>
-</div>
+<button type="submit" ui-sref="room" class="btn btn-info">
+    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+</button>

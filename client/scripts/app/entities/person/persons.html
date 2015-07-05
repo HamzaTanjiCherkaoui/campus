@@ -1,5 +1,5 @@
 <h2><i class="fa fa-user"></i> List des etudiants</h2>
-    <form ng-submit="loadPage(links['first'])" role="from">
+    <form ng-submit="loadPage(pagination.first)" role="from">
         <div class="row hidden-print">
           <div class="col-md-5 col-xs-6">
               <div class="form-group">
@@ -75,7 +75,7 @@
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
                         </label>
                     </td>
-                    <td><a ui-sref="personDetail({id:entity._id})">{{entity.firstName}} {{entity.lastName}}</a></td>
+                    <td><a ui-sref="personDetail({id:entity._id})">{{entity.fullName}}</a></td>
                     <td><em>{{entity.codeType}}</em> : {{entity.code}}</td>
                     <td>{{entity.city}}</td>
                     <td>{{entity.gender | genderConversion }}</td>
@@ -104,10 +104,10 @@
 
         <nav>
             <ul class="pager" >
-                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a>&lt;&lt;</a></li>
-                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a>&lt;</a></li>
-                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a>&gt;</a></li>
-                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a>&gt;&gt;</a></li>
+                <li ng-show="pagination.first" ng-click="loadPage(pagination.first)"><a>&lt;&lt;</a></li>
+                <li ng-show="pagination.prev" ng-click="loadPage(pagination.prev)"><a>&lt;</a></li>
+                <li ng-show="pagination.next" ng-click="loadPage(pagination.next)"><a>&gt;</a></li>
+                <li ng-show="pagination.last" ng-click="loadPage(pagination.last)"><a>&gt;&gt;</a></li>
             </ul>
         </nav>
     </div>

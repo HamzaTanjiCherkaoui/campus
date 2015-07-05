@@ -12,4 +12,16 @@ var RoomSchema = new Schema({
   reservations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reservation'}]
 });
 
+RoomSchema.set('toJSON', { getters: true, virtuals: true });
+
+/**
+ * Virtuals
+ */
+RoomSchema
+	.virtual('isFree')
+	.get( function () {
+		return (this.free > 0);
+	});
+
+
 module.exports = mongoose.model('Room', RoomSchema);

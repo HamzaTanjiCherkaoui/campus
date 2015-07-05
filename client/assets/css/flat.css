@@ -224,7 +224,7 @@ p{font-size: inherit;line-height: inherit;}
 .table .checkbox{
   padding-left: 10px;
 }
-.table thead .checkbox .icons{
+.table .checkbox .icons{
   top: -10px;
 }
 

@@ -41,6 +41,7 @@ angular.module('membershipApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('room');
                         $translatePartialLoader.addPart('block');
+                        $translatePartialLoader.addPart('person');
                         return $translate.refresh();
                     }]
                 }

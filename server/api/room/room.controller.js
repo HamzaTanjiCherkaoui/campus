@@ -5,7 +5,8 @@ var Room = require('./room.model');
 
 // Get list of rooms
 exports.index = function(req, res) {
-  Room.find({})
+  var keyword = new RegExp(req.query.keyword,'i');
+  Room.find({name: {$regex:keyword}})
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
     .sort({name: req.query.orderDir})
@@ -20,11 +21,15 @@ exports.index = function(req, res) {
 
 // Get a single room
 exports.show = function(req, res) {
-  Room.findById(req.params.id, function (err, room) {
-    if(err) { return handleError(res, err); }
-    if(!room) { return res.send(404); }
-    return res.json(room);
-  });
+  Room.findById(req.params.id)
+    .populate('block')
+    .populate('reservations')
+    .populate('person')
+    .exec(function (err, room) {
+      if(err) { return handleError(res, err); }
+      if(!room) { return res.send(404); }
+      return res.json(room);
+    });
 };
 
 // Creates a new room in the DB.

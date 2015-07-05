@@ -3,16 +3,22 @@
 angular.module('membershipApp')
     .controller('PersonController', function ($scope, Person) {
         $scope.persons = [];
+        $scope.pagination = {};
         $scope.searchData = {
             page: 1,
             perPage: 4,
             keyword : '',
             orderBy : 'lastName',
-            orderDir : 'ASC'
+            orderDir : 'asc'
         };
         $scope.loadAll = function() {
-            Person.query({page: $scope.searchData.page, perPage: $scope.searchData.perPage}, function(result) {
+            Person.query($scope.searchData, function(result, headers) {
                 $scope.persons = result;
+                var pages = headers('pages');
+                $scope.pagination.first = 1;
+                $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
+                $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
+                $scope.pagination.last = pages;
             });
         };
         $scope.loadPage = function(page) {
@@ -65,7 +71,5 @@ angular.module('membershipApp')
 
         $scope.clear = function () {
             $scope.person = {name: null, type: null, id: null};
-            $scope.editForm.$setPristine();
-            $scope.editForm.$setUntouched();
         };
     });

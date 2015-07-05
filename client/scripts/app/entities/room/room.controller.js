@@ -30,7 +30,6 @@ angular.module('membershipApp')
 
         $scope.create = function () {
             if($scope.room._id) {
-                console.log('edit');
                 Room.update({id: $scope.room._id}, $scope.room, $scope.saveCalback);
             }
             else {

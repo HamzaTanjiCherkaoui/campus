@@ -1,20 +1,40 @@
 'use strict';
 
 var _ = require('lodash');
+var mongoose = require('mongoose');
 var Product = require('./product.model');
 
 // Get list of products
 
+
 exports.index = function(req, res) {
-  Product.find({})
+
+  if(req.query.category!=='')
+  {
+    var catquery = 
+        {
+          category :
+                     {
+                     _id:mongoose.Types.ObjectId(req.query.category)
+                     }
+        };
+
+  }
+  else
+  catquery={};
+
+  Product.find(catquery)
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
-    .sort({name: req.query.orderDir})
+    .sort({
+      type: req.query.orderDir
+    })
     .populate('category')
-    .exec(function(err, rooms) {
+    .exec(function(err, products) {
         Product.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
-          res.json(200, rooms);
+          res.json(200, products);
+
         })
     });
 };

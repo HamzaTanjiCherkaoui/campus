@@ -4,16 +4,21 @@ angular.module('membershipApp')
     .controller('ProductController', function ($scope, Product ,Category) {
        $scope.products = [];
         $scope.pagination = {};
+        
         $scope.searchData = {
             page: 1,
             perPage: 4,
             keyword : '',
+            category:'',
             orderBy : 'name',
             orderDir : 'asc'
         };
         
         $scope.categories = Category.query();
+
         $scope.loadAll = function() {
+        if($scope.searchData.category==null)    
+            $scope.searchData.category='';
             Product.query($scope.searchData, function(result, headers) {
                 $scope.products = result;
                 var pages = headers('pages');
@@ -21,8 +26,9 @@ angular.module('membershipApp')
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
-                console.log( $scope.products);
+                
             });
+            console.log( $scope.searchData.category);
         };
         $scope.loadPage = function(page) {
             $scope.searchData.page = page;

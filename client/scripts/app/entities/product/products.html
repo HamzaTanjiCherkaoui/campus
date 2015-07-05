@@ -13,6 +13,11 @@
               </div>
           </div>
           <div class="col-md-7 col-xs-6">
+            <div class="col-md-3 form-group">
+                              <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="category" ng-model="searchData.category"  ng-change="loadAll()" ng-options="category._id as category.name for category in categories">
+                                <option value="">Select a category ( all )</option>
+                              </select>
+                            </div>
             <div class="btn-group pull-right">             
               <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
                 Select an action
@@ -191,7 +196,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="entity in products | filter:searchData.keyword | orderBy:searchData.orderBy">
+                <tr ng-repeat="entity in products | filter:searchData.keyword | orderBy:searchData.orderBy ">
                     <td>
                         <label class="checkbox" for="checkbox{{entity._id}}">
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
@@ -199,7 +204,7 @@
                     </td>
                     <td><a ui-sref="productDetail({id:entity._id})">{{entity.name}}</a></td>
                     <td>{{entity.type}}</td>
-                    <td>{{entity.category}}</td>
+                    <td>{{entity.category.name}}</td>
                     
                     <td>
                         <button ui-sref="productDetail({id:entity._id})"

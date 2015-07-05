@@ -1,19 +1,27 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('ProductController', function ($scope, Product, ParseLinks) {
-        $scope.products = [];
+    .controller('ProductController', function ($scope, Product ,Category) {
+       $scope.products = [];
+        $scope.pagination = {};
         $scope.searchData = {
             page: 1,
-            per_page: 10,
+            perPage: 4,
             keyword : '',
             orderBy : 'name',
-            orderDir : 'ASC'
+            orderDir : 'asc'
         };
+        
+        $scope.categories = Category.query();
         $scope.loadAll = function() {
-            Product.query({page: $scope.searchData.page, per_page: $scope.searchData.per_page}, function(result, headers) {
-                //$scope.links = ParseLinks.parse(headers('link'));
+            Product.query($scope.searchData, function(result, headers) {
                 $scope.products = result;
+                var pages = headers('pages');
+                $scope.pagination.first = 1;
+                $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
+                $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
+                $scope.pagination.last = pages;
+                console.log( $scope.products);
             });
         };
         $scope.loadPage = function(page) {
@@ -22,13 +30,14 @@ angular.module('membershipApp')
         };
         $scope.loadAll();
 
-        $scope.create = function () {
-            Product.update($scope.product,
-                function () {
-                    $scope.loadAll();
-                    $('#saveProductModal').modal('hide');
-                    $scope.clear();
-                });
+         $scope.create = function () {
+            if($scope.product._id) {
+                console.log('edit');
+                Product.update({id: $scope.product._id}, $scope.product, $scope.saveCalback);
+            }
+            else {
+                Product.save($scope.product, $scope.saveCalback);
+            }
         };
 
         $scope.update = function (id) {
@@ -36,6 +45,21 @@ angular.module('membershipApp')
                 $scope.product = result;
                 $('#saveProductModal').modal('show');
             });
+        };
+
+        $scope.saveCalback = function () {
+            $scope.loadAll();
+            $('#saveProductModal').modal('hide');
+              $('#saveCategoryModal').modal('hide');
+            $scope.clear();
+        };
+
+
+        $scope.createCategory = function () {
+           
+            
+                Category.save($scope.category, $scope.saveCalback);
+          
         };
 
         $scope.delete = function (id) {
@@ -62,7 +86,8 @@ angular.module('membershipApp')
 
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
-        }
+            $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
+        };
 
         $scope.clear = function () {
             $scope.product = {name: null, type: null, id: null};

@@ -14,7 +14,9 @@
             },
             
             "name": "Name",
-            "type": "Type"
+            "type": "Type",
+            "quantity":"quantity",
+            "available":"available"
         }
     }
 }

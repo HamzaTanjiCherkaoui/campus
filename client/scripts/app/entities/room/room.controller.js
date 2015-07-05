@@ -20,6 +20,7 @@ angular.module('membershipApp')
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
+                console.log($scope.rooms);
             });
         };
         $scope.loadPage = function(page) {
@@ -69,7 +70,7 @@ angular.module('membershipApp')
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
             $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
-        }
+        };
 
         $scope.clear = function () {
             $scope.room = {_id: null, name: null, floor: null, capacity: null, free: null, block: null};

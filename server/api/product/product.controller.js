@@ -4,12 +4,21 @@ var _ = require('lodash');
 var Product = require('./product.model');
 
 // Get list of products
+
 exports.index = function(req, res) {
-  Product.find(function (err, products) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, products);
-  });
+  Product.find({})
+    .skip(req.query.perPage * (req.query.page - 1))
+    .limit(req.query.perPage)
+    .sort({name: req.query.orderDir})
+    .populate('category')
+    .exec(function(err, rooms) {
+        Product.count().exec(function(err, count) {
+          res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.json(200, rooms);
+        })
+    });
 };
+
 
 // Get a single product
 exports.show = function(req, res) {

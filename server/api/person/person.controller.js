@@ -5,14 +5,16 @@ var Person = require('./person.model');
 
 // Get list of persons
 exports.index = function(req, res) {
-  var keyword = new RegExp(req.query.keyword,'i');
-  Person.find({lastName: {$regex:keyword}})
+  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
+  var where = {$or: [{lastName: keyword}, {firstName: keyword}, {code: keyword}, {city: keyword}]};
+  Person.find(where)
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
     .sort({lastName: req.query.orderDir})
     .exec(function(err, persons) {
         Person.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.setHeader('count', count);
           res.json(200, persons);
         })
     });

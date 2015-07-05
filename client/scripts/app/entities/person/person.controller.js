@@ -11,6 +11,7 @@ angular.module('membershipApp')
             orderBy : 'lastName',
             orderDir : 'asc'
         };
+        
         $scope.loadAll = function() {
             Person.query($scope.searchData, function(result, headers) {
                 $scope.persons = result;
@@ -19,6 +20,7 @@ angular.module('membershipApp')
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
+                console.log($scope.pagination);
             });
         };
         $scope.loadPage = function(page) {
@@ -67,6 +69,7 @@ angular.module('membershipApp')
 
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
+            $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
         };
 
         $scope.clear = function () {

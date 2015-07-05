@@ -69,7 +69,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="entity in persons | filter:searchData.keyword | orderBy:searchData.orderBy">
+                <tr ng-repeat="entity in persons | filter:searchData.keyword | orderBy:searchData.orderBy:searchData.orderDir==='asc'">
                     <td>
                         <label class="checkbox" for="checkbox{{entity._id}}">
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">

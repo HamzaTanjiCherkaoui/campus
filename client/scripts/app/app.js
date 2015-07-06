@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
-    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'angularMoment', 'ngAnimate'])
+    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'angularMoment', 'ngAnimate', 'angular-loading-bar'])
 
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
         $rootScope.ENV = ENV;
@@ -52,6 +52,9 @@ angular.module('membershipApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
         
         $rootScope.genderArray = [{'label':'Man', 'value':false}, {'label':'Woman', 'value':true}];
     })
+    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.latencyThreshold = 5000;
+    }])
     
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
 

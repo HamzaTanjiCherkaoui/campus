@@ -7,6 +7,7 @@ var ProductSchema = new Schema({
   name: String,
   type: String,
   category: {type : Schema.Types.ObjectId, ref : 'Category'},
+  quantity: { type: Number, min: 0},
   allocation: {type : Schema.Types.ObjectId, ref : 'Allocation'}
 });
 

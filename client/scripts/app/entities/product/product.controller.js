@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('ProductController', function ($scope, Product ,Category) {
+    .controller('ProductController', function ($scope, Product ,Category , cfpLoadingBar) {
        $scope.products = [];
+       $scope.products =[ {
+        checked:false
+       }];
         $scope.pagination = {};
         
         $scope.searchData = {
@@ -13,10 +16,16 @@ angular.module('membershipApp')
             orderBy : 'name',
             orderDir : 'asc'
         };
+         $scope.toggleclmName=true;
+         $scope.toggleclmType=true;
+         $scope.toggleclmCategory=true;
+         $scope.toggleclmQuantity=true;
+         // $scope.toggleclmAvailable=true;
         
         $scope.categories = Category.query();
 
         $scope.loadAll = function() {
+
         if($scope.searchData.category==null)    
             $scope.searchData.category='';
             Product.query($scope.searchData, function(result, headers) {
@@ -28,7 +37,7 @@ angular.module('membershipApp')
                 $scope.pagination.last = pages;
                 
             });
-            console.log( $scope.searchData.category);
+            console.log( $scope.products);
         };
         $scope.loadPage = function(page) {
             $scope.searchData.page = page;
@@ -88,6 +97,7 @@ angular.module('membershipApp')
             $scope.products.forEach(function (entity) {
                 entity.checked = checked;
             });
+
         };
 
         $scope.changeOrder = function (column) {
@@ -100,4 +110,14 @@ angular.module('membershipApp')
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };
+
+    
+
+         $scope.start = function() {
+      cfpLoadingBar.start();
+    };
+
+    $scope.complete = function () {
+      cfpLoadingBar.complete();
+    }
     });

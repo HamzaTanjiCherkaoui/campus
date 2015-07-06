@@ -15,11 +15,11 @@
           <div class="col-md-7 col-xs-6">
             <div class="col-md-3 form-group">
                               <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="category" ng-model="searchData.category"  ng-change="loadAll()" ng-options="category._id as category.name for category in categories">
-                                <option value="">Select a category ( all )</option>
+                                <option value="" >Select a category ( all )</option>
                               </select>
                             </div>
             <div class="btn-group pull-right">             
-              <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
+              <button type="button" class="btn  btn-primary dropdown-toggle" ng-click="start()" data-toggle="dropdown">
                 Select an action
                 <span class="caret"></span>
               </button>
@@ -38,7 +38,7 @@
   <!-- create modal -->
   <div class="modal fade" id="saveProductModal" tabindex="-1" role="dialog" aria-labelledby="myProductLabel"
          aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-large">
             <div class="modal-content">
                 <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
 
@@ -48,6 +48,9 @@
                         <h4 class="modal-title" id="myProductLabel" translate="membershipApp.product.home.createOrEditLabel">Create or edit a Product</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                        
                         <div class="form-group">
                             <label>ID</label>
                             <input type="text" class="form-control" name="id"
@@ -66,7 +69,9 @@
                                    ng-model="product.type">
 
                         </div>
-                        <label translate="membershipApp.category.detail.title">category</label>
+                            </div>
+                        <div class="col-md-6">
+                        <label translate="membershipApp.product.category">category</label>
                           <div class="form-group">
                               <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="category" ng-model="product.category" ng-options="category._id as category.name for category in categories">
                                 <option value="">Select a category</option>
@@ -106,6 +111,7 @@
                         </div>
 
                     </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
                             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
@@ -113,6 +119,7 @@
                         <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
                             <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
                         </button>
+                    </div>
                     </div>
                 </form>
             </div>
@@ -180,7 +187,62 @@
             </div>
         </div>
     </div>
+    <!-- temporary styling -->
+    <style type="text/css">.label-drp{display: block; padding: 8px;color: white;text-align: center;}</style>
 
+            <div class="btn-group pull-right">             
+              <button type="button" class="btn  btn-primary dropdown-toggle"  data-toggle="dropdown">
+                <i class="glyphicon glyphicon-th icon-th"></i>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-inverse">
+                <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmName">
+                <span>Name</span>
+                </label>
+               
+               </li>
+               <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmType" >
+                <span>Type</span>
+                </label>
+               
+               </li>
+               
+               <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmCategory" >
+                <span>Category</span>
+                </label>
+               
+               </li>
+
+               <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmQuantity" >
+                <span>Quantity</span>
+                </label>
+               
+               </li>
+               <!-- <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmAvailable" >
+                <span>Available</span>
+                </label>
+               
+               </li>
+                --> 
+              </ul>
+            </div>
+
+        
         <table class="table table-hover table-bordered table-striped">
             <thead>
                 <tr>
@@ -189,22 +251,26 @@
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
                     </td>
-                    <th class="sortable"><a ng-click="changeOrder('name')">Name<i class="fa fa-sort pull-right"></i></a></th>
-                    <th class="sortable"><a ng-click="changeOrder('type')">Type<i class="fa fa-sort pull-right"></i></a></th>
-                    <th class="sortable"><a ng-click="changeOrder('category')">Category<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmName" class="sortable"><a ng-click="changeOrder('name')">Name<i class=" fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmType" class="sortable"><a ng-click="changeOrder('type')">Type<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmCategory" class="sortable"><a ng-click="changeOrder('category')">Category<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmQuantity" class="sortable"><a ng-click="changeOrder('quantity')">Quantity<i class="fa fa-sort pull-right"></i></a></th>
+                    <!-- <th ng-show="toggleclmAvailable" class="sortable"><a ng-click="changeOrder('available')">Availabe<i class="fa fa-sort pull-right"></i></a></th> -->
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="entity in products | filter:searchData.keyword | orderBy:searchData.orderBy ">
+                <tr ng-repeat="entity in products | filter:searchData.keyword | orderBy:searchData.orderBy:searchData.orderDir==='asc' ">
                     <td>
                         <label class="checkbox" for="checkbox{{entity._id}}">
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
                         </label>
                     </td>
-                    <td><a ui-sref="productDetail({id:entity._id})">{{entity.name}}</a></td>
-                    <td>{{entity.type}}</td>
-                    <td>{{entity.category.name}}</td>
+                    <td  ng-show="toggleclmName"><a ui-sref="productDetail({id:entity._id})" >{{entity.name}}</a></td>
+                    <td ng-show="toggleclmType" >{{entity.type}}</td>
+                    <td ng-show="toggleclmCategory">{{entity.category.name}}</td>
+                    <td ng-show="toggleclmQuantity">{{entity.quantity}}</td>
+                    <!-- <td ng-show="toggleclmAvailable">{{entity.available}}</td> -->
                     
                     <td>
                         <button ui-sref="productDetail({id:entity._id})"
@@ -229,7 +295,7 @@
             <div class="caption">
               <em><strong>Total :</strong> {{ products.length }}</em>
             </div>
-
+<center>
        <nav>
             <ul class="pager" >
                 <li ng-show="pagination.first" ng-click="loadPage(pagination.first)"><a>&lt;&lt;</a></li>
@@ -238,4 +304,5 @@
                 <li ng-show="pagination.last" ng-click="loadPage(pagination.last)"><a>&gt;&gt;</a></li>
             </ul>
         </nav>
+    </center>
     </div>

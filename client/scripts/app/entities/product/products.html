@@ -199,7 +199,7 @@
                 <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" name="name" checked="checked" ng-model="toggleclmName">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmName">
                 <span>Name</span>
                 </label>
                
@@ -207,7 +207,7 @@
                <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" name="name" checked="checked" ng-model="toggleclmType" >
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmType" >
                 <span>Type</span>
                 </label>
                
@@ -216,12 +216,29 @@
                <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" name="name" checked="checked" ng-model="toggleclmCategory" >
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmCategory" >
                 <span>Category</span>
                 </label>
                
                </li>
-                
+
+               <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmQuantity" >
+                <span>Quantity</span>
+                </label>
+               
+               </li>
+               <!-- <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmAvailable" >
+                <span>Available</span>
+                </label>
+               
+               </li>
+                --> 
               </ul>
             </div>
 
@@ -237,6 +254,8 @@
                     <th ng-show="toggleclmName" class="sortable"><a ng-click="changeOrder('name')">Name<i class=" fa fa-sort pull-right"></i></a></th>
                     <th ng-show="toggleclmType" class="sortable"><a ng-click="changeOrder('type')">Type<i class="fa fa-sort pull-right"></i></a></th>
                     <th ng-show="toggleclmCategory" class="sortable"><a ng-click="changeOrder('category')">Category<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmQuantity" class="sortable"><a ng-click="changeOrder('quantity')">Quantity<i class="fa fa-sort pull-right"></i></a></th>
+                    <!-- <th ng-show="toggleclmAvailable" class="sortable"><a ng-click="changeOrder('available')">Availabe<i class="fa fa-sort pull-right"></i></a></th> -->
                     <th>Action</th>
                 </tr>
             </thead>
@@ -250,6 +269,8 @@
                     <td  ng-show="toggleclmName"><a ui-sref="productDetail({id:entity._id})" >{{entity.name}}</a></td>
                     <td ng-show="toggleclmType" >{{entity.type}}</td>
                     <td ng-show="toggleclmCategory">{{entity.category.name}}</td>
+                    <td ng-show="toggleclmQuantity">{{entity.quantity}}</td>
+                    <!-- <td ng-show="toggleclmAvailable">{{entity.available}}</td> -->
                     
                     <td>
                         <button ui-sref="productDetail({id:entity._id})"
@@ -274,7 +295,7 @@
             <div class="caption">
               <em><strong>Total :</strong> {{ products.length }}</em>
             </div>
-
+<center>
        <nav>
             <ul class="pager" >
                 <li ng-show="pagination.first" ng-click="loadPage(pagination.first)"><a>&lt;&lt;</a></li>
@@ -283,4 +304,5 @@
                 <li ng-show="pagination.last" ng-click="loadPage(pagination.last)"><a>&gt;&gt;</a></li>
             </ul>
         </nav>
+    </center>
     </div>

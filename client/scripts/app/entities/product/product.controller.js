@@ -3,6 +3,9 @@
 angular.module('membershipApp')
     .controller('ProductController', function ($scope, Product ,Category , cfpLoadingBar) {
        $scope.products = [];
+       $scope.products =[ {
+        checked:false
+       }];
         $scope.pagination = {};
         
         $scope.searchData = {
@@ -16,6 +19,8 @@ angular.module('membershipApp')
          $scope.toggleclmName=true;
          $scope.toggleclmType=true;
          $scope.toggleclmCategory=true;
+         $scope.toggleclmQuantity=true;
+         // $scope.toggleclmAvailable=true;
         
         $scope.categories = Category.query();
 
@@ -32,7 +37,7 @@ angular.module('membershipApp')
                 $scope.pagination.last = pages;
                 
             });
-            console.log( $scope.searchData.category);
+            console.log( $scope.products);
         };
         $scope.loadPage = function(page) {
             $scope.searchData.page = page;
@@ -92,6 +97,7 @@ angular.module('membershipApp')
             $scope.products.forEach(function (entity) {
                 entity.checked = checked;
             });
+
         };
 
         $scope.changeOrder = function (column) {

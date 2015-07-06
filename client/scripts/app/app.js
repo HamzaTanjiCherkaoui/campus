@@ -8,18 +8,14 @@ angular.module('membershipApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
         $rootScope.VERSION = VERSION;
         $rootScope.account = {};
 
-
         $rootScope.isAuthenticated = Principal.isAuthenticated;
         Principal.identity().then(function(account) {
             $rootScope.account = account;
         });
-
-
         
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             $rootScope.toState = toState;
             $rootScope.toStateParams = toStateParams;
-            console.log('$stateChangeStart');
             if (Principal.isIdentityResolved()) {
                 Auth.authorize();
             }

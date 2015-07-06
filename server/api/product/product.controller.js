@@ -83,6 +83,20 @@ exports.destroy = function(req, res) {
   });
 };
 
+//delete multiple products from the DB
+
+exports.deletemultiple = function(req, res) {
+  req.body.forEach(function(item) 
+  {
+     Product.findById(mongoose.Types.ObjectId(item), function (err, product) 
+     {
+    product.remove() 
+      
+      });
+
+  });
+ res.send(200, "products deleted !"); 
+};
 function handleError(res, err) {
   return res.send(500, err);
 }

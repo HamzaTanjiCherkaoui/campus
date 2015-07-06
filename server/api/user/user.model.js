@@ -5,20 +5,21 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var UserSchema = new Schema({
-  name: String,
-  email: { type: String, lowercase: true },
-  role: {
-    type: String,
-    default: 'user'
-  },
-  hashedPassword: String,
-  provider: String,
-  salt: String
+    firstName: String,
+    lastName: String,
+    username: { type: String, lowercase: true },
+    email: { type: String, lowercase: true },
+    roles: [{type: String, default: 'ROLE_USER'}],
+    hashedPassword: String,
+    provider: String,
+    salt: String,
+    langKey: {type: String, default: 'fr'}
 });
 
 /**
  * Virtuals
  */
+    
 UserSchema
   .virtual('password')
   .set(function(password) {
@@ -104,6 +105,11 @@ UserSchema
  * Methods
  */
 UserSchema.methods = {
+    toJSON: function() {
+      var obj = this.toObject();
+      obj.fullName = this.firstName + ' ' + this.lastName;
+      return obj
+    },
   /**
    * Authenticate - check if the passwords are the same
    *

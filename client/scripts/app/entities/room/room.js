@@ -7,7 +7,7 @@ angular.module('membershipApp')
                 parent: 'entity',
                 url: '/room',
                 data: {
-                    roles: [],
+                    roles: ['ROLE_USER'],
                     pageTitle: 'membershipApp.room.home.title'
                 },
                 views: {
@@ -28,7 +28,7 @@ angular.module('membershipApp')
                 parent: 'entity',
                 url: '/room/:id',
                 data: {
-                    roles: [],
+                    roles: ['ROLE_USER'],
                     pageTitle: 'membershipApp.room.detail.title'
                 },
                 views: {

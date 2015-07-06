@@ -6,10 +6,20 @@ angular.module('membershipApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
+        $rootScope.account = {};
+
+
+        $rootScope.isAuthenticated = Principal.isAuthenticated;
+        Principal.identity().then(function(account) {
+            $rootScope.account = account;
+        });
+
+
+        
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             $rootScope.toState = toState;
             $rootScope.toStateParams = toStateParams;
-
+            console.log('$stateChangeStart');
             if (Principal.isIdentityResolved()) {
                 Auth.authorize();
             }
@@ -52,18 +62,18 @@ angular.module('membershipApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
         
         $rootScope.genderArray = [{'label':'Man', 'value':false}, {'label':'Woman', 'value':true}];
     })
-    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.latencyThreshold = 5000;
-    }])
-    
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
 
-        //enable html5mode for the url
-        //$locationProvider.html5Mode(true);
+    .config(function (cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.latencyThreshold = 5000;
+    })
+
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
 
         //enable CSRF
         $httpProvider.defaults.xsrfCookieName = 'CSRF-TOKEN';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
+
+        $httpProvider.interceptors.push('authInterceptor');
 
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);

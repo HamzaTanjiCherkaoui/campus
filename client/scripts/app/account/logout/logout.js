@@ -11,7 +11,6 @@ angular.module('membershipApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/main/main.html',
                         controller: 'LogoutController'
                     }
                 }

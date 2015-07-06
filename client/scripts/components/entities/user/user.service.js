@@ -8,17 +8,21 @@ angular.module('membershipApp')
                     method: 'GET',
                     transformResponse: function (data) {
                         data = angular.fromJson(data);
-                        // var birthDayFrom = data.birthDay.split("-");
-                        // data.birthDay = new Date(new Date(birthDayFrom[0], birthDayFrom[1] - 1, birthDayFrom[2]));
                         return data;
                     }
                 },
                 'update': { method:'PUT' }
             });
         })
-    .factory('UserPassword', function ($resource) {
+   .factory('Password', function ($resource) {
         return $resource('api/users/change_password', {}, {});
     })
-    .factory('UserActivate', function ($resource) {
-        return $resource('api/users/activate/:activated/:ids', {}, {});
+    .factory('Activate', function ($resource) {
+        return $resource('api/users/activate/:activated', {}, {});
+    })
+    .factory('Account', function ($resource) {
+        return $resource('api/users/me', {}, {});
+    })
+    .factory('Register', function ($resource) {
+        return $resource('api/users/register', {}, {});
     });

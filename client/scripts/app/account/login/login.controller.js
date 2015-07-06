@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth) {
-        $scope.user = {};
+    .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth, Principal) {
         $scope.errors = {};
 
-        $scope.rememberMe = true;
         $timeout(function (){angular.element('[ng-model="username"]').focus();});
         $scope.login = function () {
             Auth.login({
                 username: $scope.username,
-                password: $scope.password,
-                rememberMe: $scope.rememberMe
+                password: $scope.password
             }).then(function () {
                 $scope.authenticationError = false;
-                if ($rootScope.previousStateName === 'register') {
+                Principal.identity().then(function(account) {
+                    $rootScope.account = account;
+                });
+                if (['register', 'logout'].indexOf($rootScope.previousStateName) != -1) {
                     $state.go('home');
                 } else {
                     $rootScope.back();

@@ -33,10 +33,8 @@ angular.module('membershipApp')
             authorize: function(force) {
                 return Principal.identity(force)
                     .then(function() {
-                        var isAuthenticated = Principal.isAuthenticated();
-
                         if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !Principal.isInAnyRole($rootScope.toState.data.roles)) {
-                            if (isAuthenticated) {
+                            if (Principal.isAuthenticated()) {
                                 // user is signed in but not authorized for desired state
                                 $state.go('accessdenied');
                             }
@@ -56,7 +54,8 @@ angular.module('membershipApp')
                 var cb = callback || angular.noop;
 
                 return Register.save(account,
-                    function () {
+                    function (data) {
+                        $cookieStore.put('token', data.token);
                         return cb(account);
                     },
                     function (err) {
@@ -88,7 +87,7 @@ angular.module('membershipApp')
                         return cb(err);
                     }.bind(this)).$promise;
             },
-
+            //oldPassword newPassword callback
             changePassword: function (newPassword, callback) {
                 var cb = callback || angular.noop;
 

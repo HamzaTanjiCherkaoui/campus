@@ -63,15 +63,15 @@
                     <td>
                         <button ui-sref="roomDetail({id:entity._id})"
                                 class="btn btn-info  btn-embossed btn-xs">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                            <i class="fa fa-eye"></i>&nbsp;<span translate="entity.action.view"> View</span>
                         </button>
                         <button ng-click="update(entity._id)"
                                 class="btn btn-primary  btn-embossed btn-xs">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                            <i class="fa fa-edit"></i>&nbsp;<span translate="entity.action.edit"> Edit</span>
                         </button>
                         <button ng-click="delete(entity._id)"
                                 class="btn btn-danger  btn-embossed btn-xs">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                            <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete"> Delete</span>
                         </button>
                     </td>
                 </tr>
@@ -194,7 +194,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                            <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </form>

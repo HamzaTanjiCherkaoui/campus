@@ -16,7 +16,7 @@
           <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
           <link rel="stylesheet" href="bower_components/flat-ui/dist/css/flat-ui.css" />
           <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-          <link rel="stylesheet" href="bower_components/angular-loading-bar/src/loading-bar.css">
+          <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
           <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css({.tmp,client}) app/app.css -->
@@ -27,11 +27,11 @@
         <!-- endbuild -->
 
     </head>
-    <body ng-app="membershipApp" class="theme1">
+    <body ng-app="membershipApp" ng-class="{'theme1': isAuthenticated() , 'login-screen': !isAuthenticated()}">
         <!--[if lt IE 10]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <header id="adminbar" class="header hidden-print navbar">
+        <header id="adminbar" class="header hidden-print navbar" ng-show="isAuthenticated()" ng-cloak="">
             <a href="#" id="logo"><img src="assets/images/logo.png" alt="logo"
                 class="img-small" /> <span>WebCurious</span></a>
 
@@ -39,8 +39,7 @@
                 <a href="#" id="drop3" role="button" class="dropdown-toggle"
                     data-toggle="dropdown"> <img class="img-small"
                     src="assets/images/logo.png" alt="username" /> <span
-                    class="fullname">fullName</span> <span
-                    class="glyphicon glyphicon-chevron-down"></span>
+                    class="fullname">{{ account.fullName }}</span> <span class="fui-triangle-down-small"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
@@ -53,10 +52,10 @@
                                     <p></p>
                                 </div>
                                 <div class="col-xs-7">
-                                    <span>username</span>
-                                    <p class="text-muted small">email</p>
+                                    <span>{{ account.username }}</span>
+                                    <p class="text-muted small">{{ account.email }}</p>
                                     <div class="divider"></div>
-                                    <a href="#" class="btn btn-primary btn-sm">profile</a>
+                                    <span>{{ account.roles | role }}</span>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +63,7 @@
                             <div class="navbar-footer-content">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <a href="#" class="btn btn-default btn-sm">settings</a>
+                                        <a ui-sref="settings" class="btn btn-default btn-sm">settings</a>
                                     </div>
                                     <div class="col-xs-6">
                                         <a ui-sref="logout" class="btn btn-default btn-sm pull-right">logout</a>
@@ -77,11 +76,10 @@
             </div>
         </header>
 
-        <div ui-view="navbar" ng-cloak=""></div>
+        <div ui-view="navbar"  ng-show="isAuthenticated()" ng-cloak=""></div>
         <section class="wrap">
-            <div class="container">
-                <!-- include flashes -->
-                <div ui-view="content"></div>
+            <div class="container"  ng-cloak="">
+                <div class="slide-right" ui-view="content"></div>
             </div>
         </section>
 
@@ -109,7 +107,7 @@
           <script src="bower_components/angular-moment/angular-moment.js"></script>
           <script src="bower_components/checklist-model/checklist-model.js"></script>
           <script src="bower_components/angular-animate/angular-animate.js"></script>
-            <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+          <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
           <!-- endbower -->
         <!-- endbuild -->
 
@@ -130,22 +128,8 @@
           <script src="scripts/app/account/password/password.js"></script>
           <script src="scripts/app/account/register/register.controller.js"></script>
           <script src="scripts/app/account/register/register.js"></script>
-          <script src="scripts/app/account/sessions/sessions.controller.js"></script>
-          <script src="scripts/app/account/sessions/sessions.js"></script>
           <script src="scripts/app/account/settings/settings.controller.js"></script>
           <script src="scripts/app/account/settings/settings.js"></script>
-          <script src="scripts/app/admin/admin.js"></script>
-          <script src="scripts/app/admin/audits/audits.controller.js"></script>
-          <script src="scripts/app/admin/audits/audits.js"></script>
-          <script src="scripts/app/admin/configuration/configuration.controller.js"></script>
-          <script src="scripts/app/admin/configuration/configuration.js"></script>
-          <script src="scripts/app/admin/docs/docs.js"></script>
-          <script src="scripts/app/admin/health/health.controller.js"></script>
-          <script src="scripts/app/admin/health/health.js"></script>
-          <script src="scripts/app/admin/logs/logs.controller.js"></script>
-          <script src="scripts/app/admin/logs/logs.js"></script>
-          <script src="scripts/app/admin/metrics/metrics.controller.js"></script>
-          <script src="scripts/app/admin/metrics/metrics.js"></script>
           <script src="scripts/app/app.constants.js"></script>
           <script src="scripts/app/entities/allocation/allocation-detail.controller.js"></script>
           <script src="scripts/app/entities/allocation/allocation.controller.js"></script>
@@ -180,19 +164,11 @@
           <script src="scripts/app/error/error.js"></script>
           <script src="scripts/app/main/main.controller.js"></script>
           <script src="scripts/app/main/main.js"></script>
-          <script src="scripts/components/admin/audits.service.js"></script>
-          <script src="scripts/components/admin/configuration.service.js"></script>
-          <script src="scripts/components/admin/logs.service.js"></script>
-          <script src="scripts/components/admin/monitoring.service.js"></script>
           <script src="scripts/components/auth/auth.service.js"></script>
+          <script src="scripts/components/auth/authInterceptor.service.js"></script>
           <script src="scripts/components/auth/authority.directive.js"></script>
           <script src="scripts/components/auth/principal.service.js"></script>
           <script src="scripts/components/auth/provider/auth.session.service.js"></script>
-          <script src="scripts/components/auth/services/account.service.js"></script>
-          <script src="scripts/components/auth/services/activate.service.js"></script>
-          <script src="scripts/components/auth/services/password.service.js"></script>
-          <script src="scripts/components/auth/services/register.service.js"></script>
-          <script src="scripts/components/auth/services/sessions.service.js"></script>
           <script src="scripts/components/entities/allocation/allocation.service.js"></script>
           <script src="scripts/components/entities/block/block.service.js"></script>
           <script src="scripts/components/entities/category/category.service.js"></script>
@@ -213,6 +189,7 @@
           <script src="scripts/components/util/parse-links.service.js"></script>
           <script src="scripts/components/util/truncate.filter.js"></script>
           <script src="scripts/components/util/util.directive.js"></script>
+          <script src="scripts/components/util/util.filter.js"></script>
           <script src="scripts/components/util/util.service.js"></script>
           <!-- endinjector -->
 

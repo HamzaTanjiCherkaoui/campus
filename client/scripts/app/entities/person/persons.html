@@ -23,7 +23,7 @@
                 <li><a id="js-badge"><i class="fa fa-credit-card"></i> imprimer les cartes</a></li>
                 <li><a id="js-tiquet"><i class="fa fa-ticket"></i> imprimer les tiquets</a></li>
                 <li class="divider"></li>
-                <li><a data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-trash"></i> delete</a></li>
+                <li><a data-toggle="modal" data-target="#confirmationModal"><i class="fa fa-times-circle"></i> delete</a></li>
               </ul>
             </div>
           </div><!-- /.col-lg-2 -->
@@ -45,7 +45,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>&nbsp;<span translate="entity.action.delete">Delete</span>
+                            <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </form>
@@ -90,7 +90,7 @@
                         </button>
                         <button ng-click="delete(entity._id)"
                                 class="btn btn-danger  btn-embossed btn-xs">
-                            <i class="fa fa-trash"></i>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                            <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete"> Delete</span>
                         </button>
                     </td>
                 </tr>

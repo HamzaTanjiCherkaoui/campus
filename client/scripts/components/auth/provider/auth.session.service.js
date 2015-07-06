@@ -5,7 +5,7 @@ angular.module('membershipApp')
         return {
             login: function(credentials) {
                 return $http.post('/auth/local', {
-                  email: credentials.email,
+                  username: credentials.username,
                   password: credentials.password
                 }).
                 success(function(data) {

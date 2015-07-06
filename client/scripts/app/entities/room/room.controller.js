@@ -20,7 +20,6 @@ angular.module('membershipApp')
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
-                console.log($scope.rooms);
             });
         };
         $scope.loadPage = function(page) {

@@ -55,9 +55,4 @@ angular
                 entity.checked = checked;
             });
         };
-    })
-    .filter('genderConversion', function(){
-        return function(gender){
-            return (gender) ? 'femme' : 'homme';
-        };
     });

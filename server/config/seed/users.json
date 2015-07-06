@@ -1,14 +1,21 @@
 [
 	{
 	    "provider": "local",
-	    "name": "Test User",
-	    "email": "test@test.com",
-	    "password": "test"
-	},{
-	    "provider": "local",
 	    "role": "admin",
-	    "name": "Admin",
+	    "firstName": "adam",
+	    "lastName": "allaoui",
+	    "username": "admin",
 	    "email": "admin@admin.com",
-	    "password": "admin"
+	    "password": "admin",
+	    "roles": ["ROLE_USER", "ROLE_ADMIN"]
+	},
+	{
+	    "provider": "local",
+	    "firstName": "test",
+	    "lastName": "user",
+	    "username": "user",
+	    "email": "user@user.com",
+	    "password": "user",
+	    "roles": ["ROLE_USER"]
 	}
 ]

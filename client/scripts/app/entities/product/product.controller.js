@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('ProductController', function ($scope, Product ,Category , cfpLoadingBar) {
+    .controller('ProductController', function ($http,$scope, Product ,Category , cfpLoadingBar) {
        $scope.products = [];
        $scope.products =[ {
         checked:false
@@ -36,12 +36,15 @@ angular.module('membershipApp')
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
                 
+                
             });
-            console.log( $scope.products);
+            
+            
         };
         $scope.loadPage = function(page) {
             $scope.searchData.page = page;
             $scope.loadAll();
+                
         };
         $scope.loadAll();
 
@@ -92,7 +95,17 @@ angular.module('membershipApp')
                     $scope.clear();
                 });
         };        
+         $scope.multipleDelete=function  () {
 
+                $scope.deleteProducts=getCheckedProductsIDs();
+                $http.post('/api/products/deletemultiple',$scope.deleteProducts,function  (result) {
+                    
+                }); 
+                $('#deleteMultipleProductConfirmation').modal('hide');            
+                $scope.loadAll();
+         }
+
+        
         $scope.markAll = function (checked) {
             $scope.products.forEach(function (entity) {
                 entity.checked = checked;
@@ -113,11 +126,26 @@ angular.module('membershipApp')
 
     
 
-         $scope.start = function() {
-      cfpLoadingBar.start();
-    };
 
-    $scope.complete = function () {
-      cfpLoadingBar.complete();
-    }
+
+        function getCheckedProductsIDs () {
+            return $scope.products.filter(function (entity) { return entity.checked;}).map(function(entity){return entity._id});
+        };
+
+        $scope.showMultipleActions= function () {
+            
+            return $scope.products.filter(function (entity) { return entity.checked;}).length==0?false:true;
+        };
+
+
+        $scope.start = function() {
+         cfpLoadingBar.start();
+        };
+
+
+
+
+        $scope.complete = function () {
+          cfpLoadingBar.complete();
+        }
     });

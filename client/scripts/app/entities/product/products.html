@@ -187,7 +187,45 @@
             </div>
         </div>
     </div>
+    <!-- temporary styling -->
+    <style type="text/css">.label-drp{display: block; padding: 8px;color: white;text-align: center;}</style>
 
+            <div class="btn-group pull-right">             
+              <button type="button" class="btn  btn-primary dropdown-toggle"  data-toggle="dropdown">
+                <i class="glyphicon glyphicon-th icon-th"></i>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-inverse">
+                <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" name="name" checked="checked" ng-model="toggleclmName">
+                <span>Name</span>
+                </label>
+               
+               </li>
+               <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" name="name" checked="checked" ng-model="toggleclmType" >
+                <span>Type</span>
+                </label>
+               
+               </li>
+               
+               <li>
+               
+                 <label class="label-drp">
+                    <input type="checkbox" value="1" name="name" checked="checked" ng-model="toggleclmCategory" >
+                <span>Category</span>
+                </label>
+               
+               </li>
+                
+              </ul>
+            </div>
+
+        
         <table class="table table-hover table-bordered table-striped">
             <thead>
                 <tr>
@@ -196,22 +234,22 @@
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
                     </td>
-                    <th class="sortable"><a ng-click="changeOrder('name')">Name<i class="fa fa-sort pull-right"></i></a></th>
-                    <th class="sortable"><a ng-click="changeOrder('type')">Type<i class="fa fa-sort pull-right"></i></a></th>
-                    <th class="sortable"><a ng-click="changeOrder('category')">Category<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmName" class="sortable"><a ng-click="changeOrder('name')">Name<i class=" fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmType" class="sortable"><a ng-click="changeOrder('type')">Type<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmCategory" class="sortable"><a ng-click="changeOrder('category')">Category<i class="fa fa-sort pull-right"></i></a></th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="entity in products | filter:searchData.keyword | orderBy:searchData.orderBy ">
+                <tr ng-repeat="entity in products | filter:searchData.keyword | orderBy:searchData.orderBy:searchData.orderDir==='asc' ">
                     <td>
                         <label class="checkbox" for="checkbox{{entity._id}}">
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
                         </label>
                     </td>
-                    <td><a ui-sref="productDetail({id:entity._id})">{{entity.name}}</a></td>
-                    <td>{{entity.type}}</td>
-                    <td>{{entity.category.name}}</td>
+                    <td  ng-show="toggleclmName"><a ui-sref="productDetail({id:entity._id})" >{{entity.name}}</a></td>
+                    <td ng-show="toggleclmType" >{{entity.type}}</td>
+                    <td ng-show="toggleclmCategory">{{entity.category.name}}</td>
                     
                     <td>
                         <button ui-sref="productDetail({id:entity._id})"

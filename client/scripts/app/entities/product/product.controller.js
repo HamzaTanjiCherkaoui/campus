@@ -13,6 +13,9 @@ angular.module('membershipApp')
             orderBy : 'name',
             orderDir : 'asc'
         };
+         $scope.toggleclmName=true;
+         $scope.toggleclmType=true;
+         $scope.toggleclmCategory=true;
         
         $scope.categories = Category.query();
 
@@ -101,6 +104,8 @@ angular.module('membershipApp')
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };
+
+    
 
          $scope.start = function() {
       cfpLoadingBar.start();

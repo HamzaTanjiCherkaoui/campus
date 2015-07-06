@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('ProductController', function ($scope, Product ,Category) {
+    .controller('ProductController', function ($scope, Product ,Category , cfpLoadingBar) {
        $scope.products = [];
         $scope.pagination = {};
         
@@ -17,6 +17,7 @@ angular.module('membershipApp')
         $scope.categories = Category.query();
 
         $scope.loadAll = function() {
+
         if($scope.searchData.category==null)    
             $scope.searchData.category='';
             Product.query($scope.searchData, function(result, headers) {
@@ -100,4 +101,12 @@ angular.module('membershipApp')
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
         };
+
+         $scope.start = function() {
+      cfpLoadingBar.start();
+    };
+
+    $scope.complete = function () {
+      cfpLoadingBar.complete();
+    }
     });

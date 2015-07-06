@@ -15,11 +15,11 @@
           <div class="col-md-7 col-xs-6">
             <div class="col-md-3 form-group">
                               <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="category" ng-model="searchData.category"  ng-change="loadAll()" ng-options="category._id as category.name for category in categories">
-                                <option value="">Select a category ( all )</option>
+                                <option value="" >Select a category ( all )</option>
                               </select>
                             </div>
             <div class="btn-group pull-right">             
-              <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
+              <button type="button" class="btn  btn-primary dropdown-toggle" ng-click="start()" data-toggle="dropdown">
                 Select an action
                 <span class="caret"></span>
               </button>
@@ -38,7 +38,7 @@
   <!-- create modal -->
   <div class="modal fade" id="saveProductModal" tabindex="-1" role="dialog" aria-labelledby="myProductLabel"
          aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-large">
             <div class="modal-content">
                 <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
 
@@ -48,6 +48,9 @@
                         <h4 class="modal-title" id="myProductLabel" translate="membershipApp.product.home.createOrEditLabel">Create or edit a Product</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                        
                         <div class="form-group">
                             <label>ID</label>
                             <input type="text" class="form-control" name="id"
@@ -66,7 +69,9 @@
                                    ng-model="product.type">
 
                         </div>
-                        <label translate="membershipApp.category.detail.title">category</label>
+                            </div>
+                        <div class="col-md-6">
+                        <label translate="membershipApp.product.category">category</label>
                           <div class="form-group">
                               <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="category" ng-model="product.category" ng-options="category._id as category.name for category in categories">
                                 <option value="">Select a category</option>
@@ -106,6 +111,7 @@
                         </div>
 
                     </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
                             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
@@ -113,6 +119,7 @@
                         <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
                             <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
                         </button>
+                    </div>
                     </div>
                 </form>
             </div>

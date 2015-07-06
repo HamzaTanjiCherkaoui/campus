@@ -16,6 +16,7 @@
             "name": "Name",
             "type": "Type",
             "quantity":"quantity",
+            "category":"category",
             "available":"available"
         }
     }

@@ -1,4 +1,4 @@
-<h2 translate="membershipApp.product.home.title"><i class="fa fa-user"></i> List des produits</h2>
+<h2 translate="membershipApp.product.home.title"><i class="fa fa-user"></i> List des produits {{toggleclmName}}</h2>
     <form ng-submit="loadPage(pagination.first)" role="from">
         <div class="row hidden-print">
             
@@ -222,7 +222,7 @@
                 <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmName" translate="membershipApp.product.name">
+                    <input type="checkbox" checked="checked" ng-model="toggleclmName" translate="membershipApp.product.name">
                 <span>Name</span>
                 </label>
                

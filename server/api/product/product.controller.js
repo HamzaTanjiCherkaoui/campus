@@ -22,12 +22,12 @@ exports.index = function(req, res) {
   }
   else
   catquery={};
-
+  var order=req.query.orderBy;
   Product.find(catquery)
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
     .sort({
-      type: req.query.orderDir
+      order : req.query.orderDir
     })
     .populate('category')
     .exec(function(err, products) {

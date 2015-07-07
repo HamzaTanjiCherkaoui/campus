@@ -22,7 +22,9 @@
                 <li class="divider"></li>
                 <li><a id="js-badge"><i class="fa fa-credit-card"></i> imprimer les cartes</a></li>
                 <li><a id="js-tiquet"><i class="fa fa-ticket"></i> imprimer les tiquets</a></li>
+                <li><a ng-show="showSwitchAction()"><i class="fa fa-exchange"></i> Switch rooms</a></li>
                 <li class="divider"></li>
+                <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-ticket"></i> custom fields</a></li>
                 <li><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
               </ul>
             </div>
@@ -76,6 +78,30 @@
         </div>
     </div>
 
+
+    <!-- custom fields modal -->
+    <div class="modal fade" id="customFieldsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">customize fields</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" >
+                                <div class="form-group col-md-6" ng-repeat="field in fields">
+                                    <label class="checkbox" for="checkbox{{field.label}}">
+                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}">{{field.label}}
+                                    </label>
+                                </div>
+                                <div class="clerfix"></div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
         <table class="table table-hover table-bordered table-striped">
             <thead>
                 <tr>
@@ -84,10 +110,8 @@
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
                     </td>
-                    <th class="sortable"><a ng-click="changeOrder('firstName')">Name<i class="fa fa-sort pull-right"></i></a></th>
-                    <th>Code</th>
-                    <th>City</th>
-                    <th>Gender</th>
+                    <th class="sortable"><a ng-click="changeOrder('firstName')">Name<i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a></th>
+                    <td ng-repeat="field in fields" ng-show="field.visible">{{ field.label }}</td>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -99,9 +123,7 @@
                         </label>
                     </td>
                     <td><a ui-sref="personDetail({id:entity._id})">{{entity.fullName}}</a></td>
-                    <td><em>{{entity.codeType}}</em> : {{entity.code}}</td>
-                    <td>{{entity.city}}</td>
-                    <td>{{entity.gender | genderConversion }}</td>
+                    <td ng-repeat="field in fields" ng-show="field.visible">{{ getFieldValue(entity, field)}}</td>
                     <td>
                         <button ui-sref="personDetail({id:entity._id})"
                                 class="btn btn-info  btn-embossed btn-xs">

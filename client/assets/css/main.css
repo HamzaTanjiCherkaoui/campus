@@ -698,10 +698,10 @@ th.sortable a, th.sorted a {
 	overflow: hidden;
 	color: #526476;
 }
-th.sortable .glyphicon-sort{
+th.sortable i{
 	opacity: 0;
 }
-th.sortable:hover .glyphicon-sort, th.sorted .glyphicon-sort{
+th.sortable:hover i, th.sorted i{
 	opacity: 1;
 }
 .fc-content{background-color: white;}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('PersonController', function ($scope, $http, Person) {
+    .controller('PersonController', function ($scope, $http, Person, Fields) {
         $scope.persons = [];
         $scope.pagination = {};
         $scope.searchData = {
@@ -11,6 +11,8 @@ angular.module('membershipApp')
             orderBy : 'lastName',
             orderDir : 'asc'
         };
+        $scope.fields = Fields.get('person');
+        $scope.getFieldValue = Fields.getValue;
         
         $scope.loadAll = function() {
             Person.query($scope.searchData, function(result, headers) {
@@ -59,10 +61,6 @@ angular.module('membershipApp')
                 });
         };
 
-        $scope.showMultipleActions= function () {
-            return $scope.persons.filter(function (entity) { return entity.checked;}).length === 0 ? false : true;
-        };
-
         $scope.confirmDelete = function (id) {
             Person.delete({id: id},
                 function () {
@@ -87,7 +85,19 @@ angular.module('membershipApp')
             $scope.person = {name: null, type: null, id: null};
         };
 
-        function getCheckedUsersIDs () {
-            return $scope.persons.filter(function (entity) { return entity.checked;}).map(function(entity){return entity.id});
+        function getCheckedUsers () {
+            return $scope.persons.filter(function (entity) { return entity.checked;});
         }
+        function getCheckedUsersIDs () {
+            return getCheckedUsers().map(function(entity){return entity.id});
+        }
+
+        $scope.showMultipleActions = function () {
+            return getCheckedUsers().length === 0 ? false : true;
+        };
+        
+        $scope.showSwitchAction = function () {
+            return getCheckedUsers().length === 2 ? true : false;
+        };
+
     });

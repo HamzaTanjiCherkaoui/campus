@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('PersonController', function ($scope, Person) {
+    .controller('PersonController', function ($scope, $http, Person) {
         $scope.persons = [];
         $scope.pagination = {};
         $scope.searchData = {
@@ -51,6 +51,18 @@ angular.module('membershipApp')
             });
         };
 
+        $scope.multipleDelete = function () {
+            $http.post('/api/persons/deletemultiple', {ids: getCheckedUsersIDs()})
+                .success(function () {
+                    $('#deleteMultipleConfirmation').modal('hide');
+                    $scope.loadAll();
+                });
+        };
+
+        $scope.showMultipleActions= function () {
+            return $scope.persons.filter(function (entity) { return entity.checked;}).length === 0 ? false : true;
+        };
+
         $scope.confirmDelete = function (id) {
             Person.delete({id: id},
                 function () {
@@ -74,4 +86,8 @@ angular.module('membershipApp')
         $scope.clear = function () {
             $scope.person = {name: null, type: null, id: null};
         };
+
+        function getCheckedUsersIDs () {
+            return $scope.persons.filter(function (entity) { return entity.checked;}).map(function(entity){return entity.id});
+        }
     });

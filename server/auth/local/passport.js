@@ -7,10 +7,8 @@ exports.setup = function (User, config) {
       User.findOne({
         username: username.toLowerCase()
       }, function(err, user) {
-        console.log("----1");
         if (err) return done(err);
 
-        console.log("----2");
         if (!user) {
           return done(null, false, { message: 'This login is not registered.' });
         }

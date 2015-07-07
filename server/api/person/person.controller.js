@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Person = require('./person.model');
+var mongoose = require('mongoose');
 
 // Get list of persons
 exports.index = function(req, res) {
@@ -60,6 +61,18 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
+  });
+};
+
+//delete multiple products from the DB
+exports.deletemultiple = function(req, res) {
+  var ids = req.body.ids.map(function(id){
+    return mongoose.Types.ObjectId(id);
+  });
+  console.log(ids);
+  Person.remove({ _id: { $in: ids } }, function (err) {
+    if(err) { return handleError(res, err); }
+    res.send(204);
   });
 };
 

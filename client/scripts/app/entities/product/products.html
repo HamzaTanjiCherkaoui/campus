@@ -1,4 +1,4 @@
-<h2><i class="fa fa-user"></i> List des produits</h2>
+<h2 translate="membershipApp.product.home.title"><i class="fa fa-user"></i> List des produits</h2>
     <form ng-submit="loadPage(pagination.first)" role="from">
         <div class="row hidden-print">
             
@@ -93,7 +93,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label translate="membershipApp.product.available">Available</label>
                             <input type="number" class="form-control" name="available"
                                    ng-model="product.available" min="0">
@@ -109,7 +109,7 @@
                                 </p>
                             </div>
                         </div>
-
+ -->
                     </div>
                     </div>
                     <div class="modal-footer">
@@ -222,7 +222,7 @@
                 <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmName">
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmName" translate="membershipApp.product.name">
                 <span>Name</span>
                 </label>
                
@@ -230,7 +230,7 @@
                <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmType" >
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmType" translate="membershipApp.product.type">
                 <span>Type</span>
                 </label>
                
@@ -239,7 +239,7 @@
                <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmCategory" >
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmCategory" translate="membershipApp.product.categorie" >
                 <span>Category</span>
                 </label>
                
@@ -248,7 +248,7 @@
                <li>
                
                  <label class="label-drp">
-                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmQuantity" >
+                    <input type="checkbox" value="1" checked="checked" ng-model="toggleclmQuantity" translate="membershipApp.product.quantity">
                 <span>Quantity</span>
                 </label>
                
@@ -274,10 +274,10 @@
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
                     </td>
-                    <th ng-show="toggleclmName" class="sortable"><a ng-click="changeOrder('name')">Name<i class=" fa fa-sort pull-right"></i></a></th>
-                    <th ng-show="toggleclmType" class="sortable"><a ng-click="changeOrder('type')">Type<i class="fa fa-sort pull-right"></i></a></th>
-                    <th ng-show="toggleclmCategory" class="sortable"><a ng-click="changeOrder('category')">Category<i class="fa fa-sort pull-right"></i></a></th>
-                    <th ng-show="toggleclmQuantity" class="sortable"><a ng-click="changeOrder('quantity')">Quantity<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmName" class="sortable"><a ng-click="changeOrder('name')" translate="membershipApp.product.name">Name<i class=" fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmType" class="sortable"><a ng-click="changeOrder('type')" translate="membershipApp.product.type">Type<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmCategory" class="sortable"><a ng-click="changeOrder('category')" translate="membershipApp.product.category">Category<i class="fa fa-sort pull-right"></i></a></th>
+                    <th ng-show="toggleclmQuantity" class="sortable"><a ng-click="changeOrder('quantity')" translate="membershipApp.product.quantity">Quantity<i class="fa fa-sort pull-right"></i></a></th>
                     <!-- <th ng-show="toggleclmAvailable" class="sortable"><a ng-click="changeOrder('available')">Availabe<i class="fa fa-sort pull-right"></i></a></th> -->
                     <th>Action</th>
                 </tr>

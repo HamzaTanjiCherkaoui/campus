@@ -7,7 +7,7 @@ angular.module('membershipApp')
                 parent: 'entity',
                 url: '/products',
                 data: {
-                    roles: [],
+                    roles: ['ROLE_USER'],
                     pageTitle: 'membershipApp.product.home.title'
                 },
                 views: {
@@ -28,7 +28,7 @@ angular.module('membershipApp')
                 parent: 'entity',
                 url: '/product/:id',
                 data: {
-                    roles: [],
+                    roles: ['ROLE_USER'],
                     pageTitle: 'membershipApp.product.detail.title'
                 },
                 views: {
@@ -45,25 +45,5 @@ angular.module('membershipApp')
                 }
                
             })
-            .state('productSave', {
-                parent: 'entity',
-                url: '/product/save/:id',
-                data: {
-                    roles: [],
-                    pageTitle: 'membershipApp.product.home.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/product/product-save.html',
-                        controller: 'ProductSaveController'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('product');
-                        return $translate.refresh();
-                    }]
-                }
-               
-            });
+            
     });

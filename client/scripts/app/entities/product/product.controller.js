@@ -36,6 +36,7 @@ angular.module('membershipApp')
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
                 
+                console.log($scope.toggleclmName);
                 
             });
             
@@ -138,14 +139,5 @@ angular.module('membershipApp')
         };
 
 
-        $scope.start = function() {
-         cfpLoadingBar.start();
-        };
-
-
-
-
-        $scope.complete = function () {
-          cfpLoadingBar.complete();
-        }
+       
     });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('ProductController', function ($http,$scope, Product ,Category , cfpLoadingBar) {
+    .controller('ProductController', function ($http,$scope, Product ,Category ,Fields) {
        $scope.products = [];
        $scope.products =[ {
         checked:false
@@ -16,11 +16,7 @@ angular.module('membershipApp')
             orderBy : 'name',
             orderDir : 'asc'
         };
-         $scope.toggleclmName=true;
-         $scope.toggleclmType=true;
-         $scope.toggleclmCategory=true;
-         $scope.toggleclmQuantity=true;
-         // $scope.toggleclmAvailable=true;
+         
         
         $scope.categories = Category.query();
 
@@ -36,8 +32,9 @@ angular.module('membershipApp')
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
                 
-                console.log($scope.toggleclmName);
-                
+                $scope.fields = Fields.get('product');
+                $scope.getFieldValue = Fields.getValue;
+   
             });
             
             
@@ -45,6 +42,7 @@ angular.module('membershipApp')
         $scope.loadPage = function(page) {
             $scope.searchData.page = page;
             $scope.loadAll();
+            $scope.allChecked=false;
                 
         };
         $scope.loadAll();

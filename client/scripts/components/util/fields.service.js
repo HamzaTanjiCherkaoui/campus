@@ -29,9 +29,12 @@ angular.module('membershipApp')
                     reservations: {label: "reservations", visible: false}
                 },
                 product: {
-
+                    type: {label: "type", visible: true},
+                    category: {label: "category", visible: true,callback: function(a){return a.name;}},
+                    
                 },
                 category:{
+
 
                 }
         }

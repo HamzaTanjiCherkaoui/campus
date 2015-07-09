@@ -5,25 +5,16 @@ var mongoose = require('mongoose');
 var Product = require('./product.model');
 
 // Get list of products
-
-
 exports.index = function(req, res) {
-
+  var catQuery = {};  
   if(req.query.category!=='')
   {
-    var catquery = 
-        {
-          category :
-                     {
-                     _id:mongoose.Types.ObjectId(req.query.category)
-                     }
-        };
-
+    catQuery = {
+      category :{_id:mongoose.Types.ObjectId(req.query.category)}
+    };
   }
-  else
-  catquery={};
   var order=req.query.orderBy;
-  Product.find(catquery)
+  Product.find(catQuery)
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
     .sort({

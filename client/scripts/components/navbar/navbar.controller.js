@@ -1,5 +1,5 @@
 'use strict';
 
 angular.module('membershipApp')
-    .controller('NavbarController', function ($scope) {
+    .controller('NavbarController', function () {
     });

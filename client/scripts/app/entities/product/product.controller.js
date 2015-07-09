@@ -22,20 +22,21 @@ angular.module('membershipApp')
 
         $scope.loadAll = function() {
 
-        if($scope.searchData.category==null)    
-            $scope.searchData.category='';
-            Product.query($scope.searchData, function(result, headers) {
-                $scope.products = result;
-                var pages = headers('pages');
-                $scope.pagination.first = 1;
-                $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
-                $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
-                $scope.pagination.last = pages;
-                
-                $scope.fields = Fields.get('product');
-                $scope.getFieldValue = Fields.getValue;
-   
-            });
+        if($scope.searchData.category === null)    {
+            $scope.searchData.category = '';
+        }
+            
+        Product.query($scope.searchData, function(result, headers) {
+            $scope.products = result;
+            var pages = headers('pages');
+            $scope.pagination.first = 1;
+            $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
+            $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
+            $scope.pagination.last = pages;
+            
+            $scope.fields = Fields.get('product');
+            $scope.getFieldValue = Fields.getValue;
+        });
             
             
         };
@@ -95,14 +96,13 @@ angular.module('membershipApp')
                 });
         };        
          $scope.multipleDelete=function  () {
-
-                $scope.deleteProducts=getCheckedProductsIDs();
-                $http.post('/api/products/deletemultiple',$scope.deleteProducts,function  (result) {
-                    
-                }); 
-                $('#deleteMultipleProductConfirmation').modal('hide');            
-                $scope.loadAll();
-         }
+            $scope.deleteProducts=getCheckedProductsIDs();
+            $http.post('/api/products/deletemultiple',$scope.deleteProducts, function  () {
+                
+            }); 
+            $('#deleteMultipleProductConfirmation').modal('hide');            
+            $scope.loadAll();
+         };
 
         
         $scope.markAll = function (checked) {
@@ -123,17 +123,13 @@ angular.module('membershipApp')
             $scope.editForm.$setUntouched();
         };
 
-    
-
-
-
         function getCheckedProductsIDs () {
-            return $scope.products.filter(function (entity) { return entity.checked;}).map(function(entity){return entity._id});
-        };
+            return $scope.products.filter(function (entity) { return entity.checked;}).map(function(entity){return entity._id;});
+        }
 
         $scope.showMultipleActions= function () {
             
-            return $scope.products.filter(function (entity) { return entity.checked;}).length==0?false:true;
+            return $scope.products.filter(function (entity) { return entity.checked;}).length === 0 ? false : true;
         };
 
 

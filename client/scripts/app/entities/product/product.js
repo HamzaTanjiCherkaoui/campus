@@ -44,6 +44,6 @@ angular.module('membershipApp')
                     }]
                 }
                
-            })
+            });
             
     });

@@ -14,7 +14,7 @@ angular.module('membershipApp')
                 Principal.identity().then(function(account) {
                     $rootScope.account = account;
                 });
-                if (['register', 'logout'].indexOf($rootScope.previousStateName) != -1) {
+                if (['register', 'logout'].indexOf($rootScope.previousStateName) !== -1) {
                     $state.go('home');
                 } else {
                     $rootScope.back();

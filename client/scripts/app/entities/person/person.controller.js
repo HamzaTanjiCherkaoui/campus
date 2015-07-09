@@ -89,7 +89,7 @@ angular.module('membershipApp')
             return $scope.persons.filter(function (entity) { return entity.checked;});
         }
         function getCheckedUsersIDs () {
-            return getCheckedUsers().map(function(entity){return entity.id});
+            return getCheckedUsers().map(function(entity){return entity.id;});
         }
 
         $scope.showMultipleActions = function () {

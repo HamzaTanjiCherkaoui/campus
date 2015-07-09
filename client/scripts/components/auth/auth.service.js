@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('membershipApp')
-    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password) {
+    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, $cookieStore) {
         return {
             login: function (credentials, callback) {
                 var cb = callback || angular.noop;

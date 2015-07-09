@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .factory('Fields', function($filter) {
         var data = {
                 person: {

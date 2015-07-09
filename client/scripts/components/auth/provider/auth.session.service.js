@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .factory('AuthServerProvider', function loginService($http, $cookieStore) {
         return {
             login: function(credentials) {

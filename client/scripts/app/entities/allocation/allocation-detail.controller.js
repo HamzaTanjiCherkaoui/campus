@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('AllocationDetailController', function ($scope, $stateParams, Allocation) {
         $scope.allocation = {};
         $scope.load = function (id) {

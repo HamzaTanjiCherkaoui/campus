@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('RoomController', function ($scope, Room, Block) {
         $scope.rooms = [];
         $scope.pagination = {};

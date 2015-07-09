@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('AllocationController', function ($scope, Allocation, ParseLinks) {
         $scope.allocations = [];
         $scope.page = 1;

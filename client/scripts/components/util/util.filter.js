@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
 .filter('genderConversion', function(){
     return function(gender){
         return (gender) ? 'femme' : 'homme';

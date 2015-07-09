@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .factory('Reservation', function ($resource) {
         return $resource('api/reservations/:id', {}, {
             'query': { method: 'GET', isArray: true},

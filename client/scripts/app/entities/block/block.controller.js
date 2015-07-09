@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('BlockController', function ($scope, Block) {
         $scope.blocks = [];
         $scope.loadAll = function() {

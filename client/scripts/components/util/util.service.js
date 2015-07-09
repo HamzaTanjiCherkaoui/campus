@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .factory('Printer', ['$window', function($window) {
         return {
             print: function() {

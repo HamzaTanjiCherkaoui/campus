@@ -2,7 +2,7 @@
 
 
 angular
-    .module('membershipApp')
+    .module('campusApp')
     .controller('PersonSaveController', function ($scope, Person, ParseLinks, $stateParams, $timeout, $state) {
 
         $scope.isUpdate = !!($stateParams.id);

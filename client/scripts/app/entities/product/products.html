@@ -1,4 +1,4 @@
-<h2 translate="membershipApp.product.home.title"><i class="fa fa-user"></i> List des produits </h2>
+<h2 translate="campusApp.product.home.title"><i class="fa fa-user"></i> List des produits </h2>
     <form ng-submit="loadPage(pagination.first)" role="from">
         <div class="row hidden-print">
             
@@ -45,7 +45,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myProductLabel" translate="membershipApp.product.home.createOrEditLabel">Create or edit a Product</h4>
+                        <h4 class="modal-title" id="myProductLabel" translate="campusApp.product.home.createOrEditLabel">Create or edit a Product</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -58,27 +58,27 @@
                         </div>
 
                         <div class="form-group">
-                            <label translate="membershipApp.product.name">Name</label>
+                            <label translate="campusApp.product.name">Name</label>
                             <input type="text" class="form-control" name="name"
                                    ng-model="product.name">
 
                         </div>
                         <div class="form-group">
-                            <label translate="membershipApp.product.type">Type</label>
+                            <label translate="campusApp.product.type">Type</label>
                             <input type="text" class="form-control" name="type"
                                    ng-model="product.type">
 
                         </div>
                             </div>
                         <div class="col-md-6">
-                        <label translate="membershipApp.product.category">category</label>
+                        <label translate="campusApp.product.category">category</label>
                           <div class="form-group">
                               <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="category" ng-model="product.category" ng-options="category._id as category.name for category in categories">
                                 <option value="">Select a category</option>
                               </select>
                             </div>
                         <div class="form-group">
-                            <label translate="membershipApp.product.quantity">Quantity</label>
+                            <label translate="campusApp.product.quantity">Quantity</label>
                             <input type="number" class="form-control" name="quantity"
                                    ng-model="product.quantity" min="0">
 
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <!-- <div class="form-group">
-                            <label translate="membershipApp.product.available">Available</label>
+                            <label translate="campusApp.product.available">Available</label>
                             <input type="number" class="form-control" name="available"
                                    ng-model="product.available" min="0">
 
@@ -136,13 +136,13 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myCategoryLabel" translate="membershipApp.category.home.createOrEditLabel">Create a Category</h4>
+                        <h4 class="modal-title" id="myCategoryLabel" translate="campusApp.category.home.createOrEditLabel">Create a Category</h4>
                     </div>
                     <div class="modal-body">
                         
 
                         <div class="form-group">
-                            <label translate="membershipApp.product.name">Name</label>
+                            <label translate="campusApp.product.name">Name</label>
                             <input type="text" class="form-control" name="name"
                                    ng-model="category.name">
 
@@ -176,7 +176,7 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="membershipApp.product.delete.question" translate-values="{name: '{{product.name}}'}">Are you sure you want to delete this Product?</p>
+                        <p translate="campusApp.product.delete.question" translate-values="{name: '{{product.name}}'}">Are you sure you want to delete this Product?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
@@ -199,7 +199,7 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="membershipApp.product.delete.multiplequestion" >Are you sure you want to delete all these  Products?</p>
+                        <p translate="campusApp.product.delete.multiplequestion" >Are you sure you want to delete all these  Products?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">

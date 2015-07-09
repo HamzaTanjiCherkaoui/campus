@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .factory('Product', function ($resource) {
         return $resource('api/products/:id', {}, {
             'query': { method: 'GET', isArray: true},

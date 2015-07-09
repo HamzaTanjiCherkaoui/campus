@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('ReservationController', function ($scope, Reservation, ParseLinks) {
         $scope.reservations = [];
         $scope.page = 1;

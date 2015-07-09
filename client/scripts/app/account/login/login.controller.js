@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth, Principal) {
         $scope.errors = {};
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('BlockDetailController', function ($scope, $stateParams, Block) {
         $scope.block = {};
         $scope.load = function (id) {

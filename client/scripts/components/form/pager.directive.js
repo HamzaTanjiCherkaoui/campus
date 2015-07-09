@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('membershipApp')
-    .directive('membershipAppPager', function() {
+angular.module('campusApp')
+    .directive('campusAppPager', function() {
         return {
             templateUrl: 'scripts/components/form/pager.html'
         };

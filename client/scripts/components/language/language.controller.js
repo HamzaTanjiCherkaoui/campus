@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('LanguageController', function ($scope, $translate, Language) {
         $scope.changeLanguage = function (languageKey) {
             $translate.use(languageKey);

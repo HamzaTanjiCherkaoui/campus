@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .directive('hasAnyRole', ['Principal', function (Principal) {
         return {
             restrict: 'A',

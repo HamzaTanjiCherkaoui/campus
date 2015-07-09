@@ -1,32 +1,32 @@
-<h2><span translate="membershipApp.room.detail.title">Room</span> {{room.name}}</h2>
+<h2><span translate="campusApp.room.detail.title">Room</span> {{room.name}}</h2>
 <table class="table table-striped">
     <tbody>
         <tr>
-            <td><span translate="membershipApp.room.name">name</span></td>
+            <td><span translate="campusApp.room.name">name</span></td>
             <td>{{room.name}}</td>
         </tr>
         <tr>
-            <td><span translate="membershipApp.room.floor">floor</span></td>
+            <td><span translate="campusApp.room.floor">floor</span></td>
             <td>{{room.floor}}</td>
         </tr>
         <tr>
-            <td><span translate="membershipApp.room.capacity">capacity</span></td>
+            <td><span translate="campusApp.room.capacity">capacity</span></td>
             <td>{{room.capacity}}</td>
         </tr>
         <tr>
-            <td><span translate="membershipApp.room.free">free</span></td>
+            <td><span translate="campusApp.room.free">free</span></td>
             <td>{{room.free}}</td>
         </tr>
         <tr>
-            <td><span translate="membershipApp.block.type">type</span></td>
+            <td><span translate="campusApp.block.type">type</span></td>
             <td>{{room.block.type | genderConversion}}</td>
         </tr>
         <tr>
-            <td><span translate="membershipApp.block.detail.title">block</span></td>
+            <td><span translate="campusApp.block.detail.title">block</span></td>
             <td>{{room.block.name}}</td>
         </tr>
         <tr ng-show="room.reservations">
-            <td><span translate="membershipApp.person.home.title">persons</span></td>
+            <td><span translate="campusApp.person.home.title">persons</span></td>
             <td>
                 <ul>
                     <li ng-repeat="reservation in room.reservations">{{ reservation.person.firstName }} </li>

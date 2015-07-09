@@ -40,10 +40,10 @@
                     </td>
                     <th class="sortable"><a ng-click="changeOrder('name')">Name <i class="fa fa-sort pull-right"></i></a></th>
                     <th class="sortable"><a ng-click="changeOrder('block')">Block <i class="fa fa-sort pull-right"></i></a></th>
-                    <th translate="membershipApp.room.floor">Floor</th>
-                    <th translate="membershipApp.room.capacity">Capacity</th>
-                    <th translate="membershipApp.room.free">Free</th>
-                    <th translate="membershipApp.room.gender">Gender</th>
+                    <th translate="campusApp.room.floor">Floor</th>
+                    <th translate="campusApp.room.capacity">Capacity</th>
+                    <th translate="campusApp.room.free">Free</th>
+                    <th translate="campusApp.room.gender">Gender</th>
                     <th></th>
                 </tr>
             </thead>
@@ -99,7 +99,7 @@
                 <form name="roomForm" role="form" novalidate ng-submit="create()">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myRoomLabel" translate="membershipApp.room.home.createOrEditLabel">Create or edit a Room</h4>
+                        <h4 class="modal-title" id="myRoomLabel" translate="campusApp.room.home.createOrEditLabel">Create or edit a Room</h4>
                     </div>
                     <div class="modal-body">
                       <div class="row">
@@ -110,7 +110,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <label translate="membershipApp.block.detail.title">block</label>
+                          <label translate="campusApp.block.detail.title">block</label>
                           <div class="form-group">
                               <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="block" ng-model="room.block" ng-options="block._id as block.name for block in blocks">
                                 <option value="">Select a block</option>
@@ -118,13 +118,13 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <label translate="membershipApp.room.name">Name</label>
+                          <label translate="campusApp.room.name">Name</label>
                           <div class="form-group">
                               <input type="text" class="form-control" name="name" ng-model="room.name">
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <label translate="membershipApp.room.floor">Floor</label>
+                          <label translate="campusApp.room.floor">Floor</label>
                           <div class="form-group">
                               <input type="number" class="form-control" name="floor" ng-model="room.floor">
                               <div ng-show="editForm.floor.$invalid">
@@ -135,7 +135,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <label translate="membershipApp.room.capacity">Capacity</label>
+                          <label translate="campusApp.room.capacity">Capacity</label>
                           <div class="form-group">
                                 <input type="number" class="form-control" name="capacity" ng-model="room.capacity" min="0">
 
@@ -150,7 +150,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <label translate="membershipApp.room.free">Free</label>
+                          <label translate="campusApp.room.free">Free</label>
                           <div class="form-group">
                                 <input type="number" class="form-control" name="free" ng-model="room.free" min="0">
                                 <div ng-show="editForm.free.$invalid">
@@ -190,7 +190,7 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="membershipApp.room.delete.question" translate-values="{id: '{{room.name}}'}">Are you sure you want to delete this Profile?</p>
+                        <p translate="campusApp.room.delete.question" translate-values="{id: '{{room.name}}'}">Are you sure you want to delete this Profile?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">

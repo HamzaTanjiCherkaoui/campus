@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('ConfigController', function ($scope, Config) {
         $scope.configs = [];
         $scope.loadAll = function() {

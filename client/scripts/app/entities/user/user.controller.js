@@ -2,7 +2,7 @@
 
 
 angular
-    .module('membershipApp')
+    .module('campusApp')
     .controller('UserController', function ($scope, User, ParseLinks, UserActivate) {
         $scope.users = [];
         $scope.searchData = {

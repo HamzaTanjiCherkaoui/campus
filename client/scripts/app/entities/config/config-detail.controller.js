@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('ConfigDetailController', function ($scope, $stateParams, Config) {
         $scope.config = {};
         $scope.load = function (id) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .factory('Person', function ($resource, $filter) {
         return $resource('http://127.0.0.1:9000/api/persons/:id', {}, {
             'query': { method: 'GET', isArray: true},

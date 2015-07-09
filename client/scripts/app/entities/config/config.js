@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('config', {
@@ -8,7 +8,7 @@ angular.module('membershipApp')
                 url: '/config',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'membershipApp.config.home.title'
+                    pageTitle: 'campusApp.config.home.title'
                 },
                 views: {
                     'content@': {
@@ -28,7 +28,7 @@ angular.module('membershipApp')
                 url: '/config/:id',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'membershipApp.config.detail.title'
+                    pageTitle: 'campusApp.config.detail.title'
                 },
                 views: {
                     'content@': {

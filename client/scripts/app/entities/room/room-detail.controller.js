@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('RoomDetailController', function ($scope, $stateParams, Room) {
         $scope.room = {};
         $scope.load = function (id) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('PersonController', function ($scope, $http, Person, Fields) {
         $scope.persons = [];
         $scope.pagination = {};

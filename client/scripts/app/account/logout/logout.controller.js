@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('LogoutController', function ($state, Auth) {
         Auth.logout();
         $state.go('login');

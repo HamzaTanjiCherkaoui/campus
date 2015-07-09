@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('NavbarController', function () {
     });

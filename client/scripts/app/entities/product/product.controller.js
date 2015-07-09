@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('ProductController', function ($http,$scope, Product ,Category ,Fields) {
        $scope.products = [];
        $scope.products =[ {

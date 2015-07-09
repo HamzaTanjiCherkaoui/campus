@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('PersonDetailController', function ($scope, $stateParams, Person) {
         $scope.entity = {};
         $scope.load = function (id) {

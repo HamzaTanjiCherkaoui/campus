@@ -1,7 +1,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .directive('passwordStrengthBar', function () {
         return {
             replace: true,

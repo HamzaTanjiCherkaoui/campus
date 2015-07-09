@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .service('ParseLinks', function () {
         this.parse = function (header) {
             if (header.length === 0) {

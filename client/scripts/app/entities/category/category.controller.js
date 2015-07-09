@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('CategoryController', function ($scope, Category) {
         $scope.categorys = [];
         $scope.loadAll = function() {

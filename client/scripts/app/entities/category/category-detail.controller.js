@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
     .controller('CategoryDetailController', function ($scope, $stateParams, Category) {
         $scope.category = {};
         $scope.load = function (id) {

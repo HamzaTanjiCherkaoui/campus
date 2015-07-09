@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('membershipApp')
+angular.module('campusApp')
 .directive('myCodeBar', function () {
 	return function (scope, element, attr) {
     	attr.$observe('myCodeBar', function(value) {

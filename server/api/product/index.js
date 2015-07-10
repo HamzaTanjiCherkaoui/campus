@@ -2,14 +2,15 @@
 
 var express = require('express');
 var controller = require('./product.controller');
+var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
-router.post('/deletemultiple', controller.deletemultiple);
+router.get('/', auth.hasRole('product.show'), controller.index);
+router.get('/:id', auth.hasRole('product.show'), controller.show);
+router.post('/', auth.hasRole('product.create'), controller.create);
+router.put('/:id', auth.hasRole('product.update'), controller.update);
+router.patch('/:id', auth.hasRole('product.update'), controller.update);
+router.delete('/:id', auth.hasRole('product.delete'), controller.destroy);
+router.post('/deletemultiple', auth.hasRole('product.delete'), controller.deletemultiple);
 module.exports = router;

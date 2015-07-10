@@ -3,12 +3,21 @@
 angular.module('campusApp')
     .factory('Fields', function($filter) {
         var data = {
-                person: {
-                    code: {label: 'code', visible: true},
+                user: {
+                    firstName: {label: 'firstName', visible: true},
                     lastName: {label: 'lastName', visible: true},
+                    username: {label: 'username', visible: true},
+                    email: {label: 'email', visible: true},
+                    roles: {label: 'roles', visible: false, callback: function (roles) {return roles.join(', ')}},
+                    activated: {label: 'activated', visible: true, callback: function (activated) {return activated ? 'enabled' : 'disabled'}},
+                    langKey: {label: 'langKey', visible: true}
+                },
+                person: {
+                    code: {label: 'code', visible: true, sortable: true},
+                    lastName: {label: 'lastName', visible: true, sortable: true},
                     firstName: {label: 'firstName', visible: true},
                     gender: {label: 'gender', visible: true, callback: $filter('genderConversion')},
-                    birthDay: {label: 'birthDay', visible: true},
+                    birthDay: {label: 'birthDay', visible: true, callback: $filter('toDate')},
                     city: {label: 'city', visible: false},
                     country: {label: 'country', visible: false},
                     address: {label: 'address', visible: false},

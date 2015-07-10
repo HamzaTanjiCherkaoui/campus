@@ -33,7 +33,7 @@ angular
 
         $scope.clear = function () {
             $scope.entity = {id : null, login : null, email : null, barcode: null, cin: null, birthDay: null, gender: null, address: null, 
-                zipCode: null, city: null, country: null, tel: null, description: null, archived: null, archivedCause: null };
+                zipCode: null, city: null, country: null, tel: null, description: null };
             $scope.personFrom.$setPristine();
             $scope.personFrom.$setUntouched();
 

@@ -18,14 +18,14 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-inverse">
-                <li><a ui-sref="personSave"><i class="fa fa-user-plus"></i> Ajouter</a></li>
+                <li is-granted="person.create"><a ui-sref="personSave"><i class="fa fa-user-plus"></i> Ajouter</a></li>
                 <li class="divider"></li>
                 <li><a id="js-badge"><i class="fa fa-credit-card"></i> imprimer les cartes</a></li>
                 <li><a id="js-tiquet"><i class="fa fa-ticket"></i> imprimer les tiquets</a></li>
-                <li><a ng-show="showSwitchAction()"><i class="fa fa-exchange"></i> Switch rooms</a></li>
+                <li is-granted="person.update"><a ng-show="showSwitchAction()"><i class="fa fa-exchange"></i> Switch rooms</a></li>
                 <li class="divider"></li>
                 <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-ticket"></i> custom fields</a></li>
-                <li><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
+                <li is-granted="person.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
               </ul>
             </div>
           </div><!-- /.col-lg-2 -->
@@ -105,11 +105,11 @@
         <table class="table table-hover table-bordered table-striped">
             <thead>
                 <tr>
-                    <td>
+                    <th>
                         <label class="checkbox" for="checkbox0">
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
-                    </td>
+                    </th>
                     <th class="sortable"><a ng-click="changeOrder('firstName')">Name<i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a></th>
                     <td ng-repeat="field in fields" ng-show="field.visible">{{ field.label }}</td>
                     <th>Action</th>
@@ -130,10 +130,12 @@
                             <i class="fa fa-eye"></i>&nbsp;<span translate="entity.action.view"> View</span>
                         </button>
                         <button ui-sref="personSave({id:entity._id})"
+                                is-granted="person.update"
                                 class="btn btn-primary  btn-embossed btn-xs">
                             <i class="fa fa-edit"></i>&nbsp;<span translate="entity.action.edit"> Edit</span>
                         </button>
                         <button ng-click="delete(entity._id)"
+                                is-granted="person.delete"
                                 class="btn btn-danger  btn-embossed btn-xs">
                             <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete"> Delete</span>
                         </button>

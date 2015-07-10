@@ -20,6 +20,7 @@ angular.module('campusApp')
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
+                $scope.allChecked = false;
             });
         };
         $scope.loadPage = function(page) {

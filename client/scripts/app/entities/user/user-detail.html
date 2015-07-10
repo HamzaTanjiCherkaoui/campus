@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-6 hidden-print">
-        <h2><span class="fa fa-user"></span> {{ entity.firstName }} {{ entity.lastName }} </h2>
+        <h2><span class="fa fa-user"></span> {{ user.firstName }} {{ user.lastName }} </h2>
     </div>
     <div class="col-xs-6">
       <div class="btn-group pull-right hidden-print">              
@@ -9,143 +9,48 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-inverse">
-          <li><a ui-sref="userSave({id:entity.id})"><span class="fa fa-new"> Edit</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-plus"></span> new carrer</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-plus"></span> new contribution</a></li>
+          <li><a ui-sref="userSave({id:user._id})"><span class="fa fa-new"> Edit</a></li>
           <li><a href="#"><span class="fa fa-credit-card"> print card</a></li>
-          <li><a href="#"><span class="fa fa-tag"></span> print tiquet</a></li>
           <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
-          <li class="divider"></li>
-          <li><a href="#" ng-click="delete(entity.id)" ><span class="glyphicon glyphicon-remove-circle"></span> Delete</a></li>
         </ul>
       </div>
     </div>
 </div>
-  <h2 class="visible-print text-center">Fiche adhérant</h2>
+  <h2 class="visible-print text-center">Fiche d'utilisateur</h2>
 
 
 <div class="row">
     <div class="col-md-4">
       <div class="box mybadge hidden-print">
-        <img class="pull-left pic" src="assets/images/logo.png"/>
+        <img class="pull-left pic" src="assets/images/user.jpeg"/>
         <img class="pull-right logo" src="assets/images/logo.png"/>
-        <h2>{{ app_config.org_name }}</h2>
+        <h2>campusApp</h2>
         <ul class="list-unstyled">
-            <li><strong>{{ entity.firstName }} {{ entity.lastName }}</strong></li>
-            <li>{{ entity.email }}</li>
+            <li><strong>{{ user.firstName }} {{ user.lastName }}</strong></li>
+            <li>{{ user.email }}</li>
         </ul>
         <div class="footer label-primary">
-           <span>{{ app_config.org_slogan }}</span>
+           <span>keep calm and relax</span>
             <span class="pull-right">2015</span>
         </div>
       </div>
-      <div class="box hidden-print">
-        <div class="mybadge">
-          <div class="barcode" my-code-bar="{{ entity.barcode }}"></div>
-          <div class="footer label-primary">
-              <span>Date d'inscription: {{ entity.createdDate }}</span>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-      <div class="box">
-          <header>
-            <h3><span class="glyphicon glyphicon-file"></span> General</h3>
-          </header>
-          <ul class="list-group">
-              <li class="list-group-item"><strong>username :</strong> {{ entity.login }}</li>
-              <li class="list-group-item"><strong>email :</strong> <a href="mailto:{{ entity.email }}">{{ entity.email }}</a></li>
-              <li class="list-group-item"><strong>enabled :</strong> {{ entity.activated }}</li>
-              <li class="list-group-item"><strong>created : </strong> <span am-time-ago="entity.createdDate"></span></li>
-              <!-- <li class="list-group-item"><strong>role : </strong> {{ entity.role }}</li> -->
-              <!-- <li class="list-group-item"><strong>groups : </strong> -->
-                <!-- <ul>{% for group in entity.groups %}<li>{{ group}}</li>{% endfor %}</ul> -->
-              <!-- </li> -->
-          </ul>
-      </div>
-  </div>
+    </div>
 
 
-  <div class="col-md-4">
+  <div class="col-md-8">
     <div class="box">
       <header>
-          <h3><span class="fa fa-user"></span> Membership</h3>
+          <h3><span class="fa fa-user"></span> Profile</h3>
       </header>
       <ul class="list-group">
-          <li class="list-group-item"><strong>family name:</strong> {{ entity.lastName }}</li>
-          <li class="list-group-item"><strong>first name:</strong>  {{ entity.firstName }}</li>
-          <li class="list-group-item"><strong>cin:</strong> {{ entity.cin }}</li>
-          <!-- <li class="list-group-item"><strong>status </strong> {{ entity.status }}</li> -->
-          <li class="list-group-item"><strong>gender:</strong> {{ entity.gender }}</li>
-          <li class="list-group-item"><strong>birthday:</strong> {{ entity.birthDay | amDateFormat:'DD-MM-YYYY' }}</li>
-          <li class="list-group-item"><strong>postal code:</strong> {{ entity.zipCode }}</li>
-          <li class="list-group-item"><strong>job:</strong> {{ entity.job }}</li>
-          <li class="list-group-item"><strong>diplome:</strong> {{ entity.certificat }}</li>
-          <li class="list-group-item"><strong>expertise:</strong> {{ entity.expertise }}</li>
+          <li class="list-group-item"><strong>family name:</strong> {{ user.lastName }}</li>
+          <li class="list-group-item"><strong>first name:</strong>  {{ user.firstName }}</li>
+          <li class="list-group-item"><strong>username :</strong> {{ user.login }}</li>
+              <li class="list-group-item"><strong>email :</strong> <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
+          <li class="list-group-item"><strong>enabled :</strong> {{ user.activated }}</li>
+          <li class="list-group-item"><strong>created : </strong> <span am-time-ago="user.created"></span></li>
+          <li class="list-group-item"><strong>authorities : </strong> {{ user.roles }}</li>
       </ul>
     </div>
   </div> 
-
-   <div class="col-md-4">
-       <div class="box">
-           <header>
-               <h3><span class="fa fa-book"></span> Contact</h3>
-           </header>
-           <ul class="list-group">
-              <li class="list-group-item"><strong>tel :</strong> {{ entity.tel }}</li>
-              <li class="list-group-item"><strong>gsm :</strong> {{ entity.gsm }}</li>
-              <li class="list-group-item"><strong>address :</strong> {{ entity.address }}</li>
-              <li class="list-group-item"><strong>city :</strong> {{ entity.city }}</li>
-              <li class="list-group-item"><strong>contry :</strong> {{ entity.country }}</li>
-              <li class="list-group-item"><strong>description :</strong> {{ entity.description }}</li>
-              <li class="list-group-item"><strong>frequence :</strong> {{ entity.paymentFrequency }}</li>
-              <li class="list-group-item"><strong>montant :</strong> {{ entity.paymentAmount }} DH</li>
-           </ul>
-       </div>
-    </div> 
-    <div class="col-md-8">
-      <div class="box">
-          <header>
-              <h3><span class="glyphicon glyphicon-tag"></span> Career</h3>
-          </header>
-          <div class="scrolldiv">
-          <table class="table table-hover table-bordered">
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>name</th>
-                      <th>city</th>
-                      <th>from</th>
-                      <th>to</th>
-                  </tr>
-              </thead>
-              <tbody>
-
-              </tbody>
-          </table>
-          </div>
-      </div>
-
-      <div class="box">
-          <header>
-              <h3><span class="glyphicon glyphicon-tag"></span> Contributions</h3>
-          </header>
-          <div class="scrolldiv">
-              <table class="table table-hover table-bordered">
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>amount</th>
-                      <th>type</th>
-                      <th>from</th>
-                      <th>to</th>
-                  </tr>
-              </thead>
-              <tbody>
-              </tbody>
-          </table>
-          </div>
-      </div>
-   </div>
-
 </div>

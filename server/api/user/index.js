@@ -9,7 +9,7 @@ var router = express.Router();
 
 
 // activate resource
-router.post('/activate/{activated}', auth.isAuthenticated(), controller.changePassword);
+router.post('/activate/:activated', auth.hasRole('user.update'), controller.activate);
 
 // profile resource
 router.get('/register', controller.register);
@@ -17,10 +17,12 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/change_password', auth.isAuthenticated(), controller.changePassword);
 
 // user resource
-router.get('/', auth.hasRole('admin'), controller.index);
+router.get('/', auth.hasRole('user.show'), controller.index);
 router.get('/:id', auth.isAuthenticated(), controller.show);
-router.post('/', controller.create);
-router.put('/', controller.update);
-router.delete('/:id', auth.hasRole('admin'), controller.destroy);
+router.post('/', auth.hasRole('user.create'), controller.create);
+router.put('/:id', auth.hasRole('user.update'), controller.update);
+router.delete('/:id', auth.hasRole('user.delete'), controller.destroy);
+router.post('/deletemultiple', auth.hasRole('user.delete'), controller.deletemultiple);
+router.post('/authorize', auth.hasRole('user.update'), controller.authorize);
 
 module.exports = router;

@@ -1,12 +1,21 @@
 'use strict';
 
 angular.module('campusApp')
+.directive('isGranted', function (Principal) {
+    return function (scope, element, attr) {
+        attr.$observe('isGranted', function(value) {
+            if(!Principal.isGranted(value)){
+                element.hide();
+            }
+        });
+    };
+})
 .directive('myCodeBar', function () {
-	return function (scope, element, attr) {
-    	attr.$observe('myCodeBar', function(value) {
-      		element.barcode(value, 'codabar');
-    	});
- 	};
+    return function (scope, element, attr) {
+        attr.$observe('myCodeBar', function(value) {
+            element.barcode(value, 'codabar');
+        });
+    };
 })
 .directive('mySelect', function () {
 	return function (scope, element) {

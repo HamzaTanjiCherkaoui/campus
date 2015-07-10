@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('PersonController', function ($scope, $http, Person, Fields) {
+    .controller('PersonController', function ($scope, $http, Person, Fields, $state) {
         $scope.persons = [];
         $scope.pagination = {};
         $scope.searchData = {
@@ -22,6 +22,7 @@ angular.module('campusApp')
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
                 $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
                 $scope.pagination.last = pages;
+                $scope.allChecked = false;
             });
         };
         $scope.loadPage = function(page) {
@@ -29,22 +30,6 @@ angular.module('campusApp')
             $scope.loadAll();
         };
         $scope.loadAll();
-
-        $scope.create = function () {
-            Person.update($scope.person,
-                function () {
-                    $scope.loadAll();
-                    $('#savePersonModal').modal('hide');
-                    $scope.clear();
-                });
-        };
-
-        $scope.update = function (id) {
-            Person.get({id: id}, function(result) {
-                $scope.person = result;
-                $('#savePersonModal').modal('show');
-            });
-        };
 
         $scope.delete = function (id) {
             Person.get({id: id}, function(result) {
@@ -89,7 +74,7 @@ angular.module('campusApp')
             return $scope.persons.filter(function (entity) { return entity.checked;});
         }
         function getCheckedUsersIDs () {
-            return getCheckedUsers().map(function(entity){return entity.id;});
+            return getCheckedUsers().map(function(entity){return entity._id;});
         }
 
         $scope.showMultipleActions = function () {

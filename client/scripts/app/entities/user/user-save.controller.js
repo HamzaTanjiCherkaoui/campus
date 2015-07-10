@@ -19,11 +19,16 @@ angular
 
         $scope.save = function () {
             $scope.entity.password = Math.random().toString(36);
-            User.update($scope.entity,
-                function (data, responseHeaders) {
-                    var userId = ($scope.isUpdate) ? $stateParams.id : responseHeaders('Location').split('/').pop();
-                    $state.go('userDetail', {id: userId});
-                });
+            var cb = function (data) {
+                $state.go('userDetail', {id: data._id});
+            };
+
+            if($scope.isUpdate) {
+                User.update({id: $scope.entity._id}, $scope.entity, cb);
+            }
+            else {
+                User.save($scope.entity, cb);
+            }
         };
 
         $scope.changePassword = function () {
@@ -43,7 +48,7 @@ angular
 
 
         $scope.clear = function () {
-            $scope.entity = {id : null, login : null, email : null, barcode: null, cin: null, birthDay: null, gender: null, address: null, zipCode: null, city: null, country: null, job: null, tel: null, gsm: null, certificat: null, expertise: null, description: null, website: null, facebook: null, google: null, twitter: null, paymentFrequency: null, paymentMethod: null, paymentAmount: null, archived: null, archivedCause: null };
+            $scope.entity = {id : null, login : null, email : null, tel: null, firstName: null, lastName: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
 

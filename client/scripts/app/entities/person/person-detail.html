@@ -9,12 +9,10 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-inverse">
-          <li><a ui-sref="personSave({id:entity._id})"><span class="fa fa-edit"> Edit</a></li>
+          <li is-granted="person.update"><a ui-sref="personSave({id:entity._id})"><span class="fa fa-edit"> Edit</a></li>
           <li><a href="#"><span class="fa fa-credit-card"> print card</a></li>
           <li><a href="#"><span class="fa fa-tag"></span> print tiquet</a></li>
           <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
-          <li class="divider"></li>
-          <li><a href="#" ng-click="delete(entity._id)" ><span class="glyphicon glyphicon-remove-circle"></span> Delete</a></li>
         </ul>
       </div>
     </div>

@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/room',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['room.show'],
                     pageTitle: 'campusApp.room.home.title'
                 },
                 views: {
@@ -28,7 +28,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/room/:id',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['room.show'],
                     pageTitle: 'campusApp.room.detail.title'
                 },
                 views: {

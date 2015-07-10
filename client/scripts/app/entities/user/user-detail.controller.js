@@ -1,15 +1,12 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('UserDetailController', ['$scope', '$stateParams', 'User', function ($scope, $stateParams, User) {
-        $scope.entity = {};
+    .controller('UserDetailController', function ($scope, $stateParams, User) {
+        $scope.user = {};
         $scope.load = function (id) {
             User.get({id: id}, function(result) {
-              	$scope.entity = result;
+              	$scope.user = result;
             });
         };
         $scope.load($stateParams.id);
-        $scope.barecode = function(code, $event){
-        	$event.target.barcode(code, 'codabar');   
-        };
-    }]);
+    });

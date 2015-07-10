@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'site',
                 url: '/',
                 data: {
-                    roles: ['ROLE_USER']
+                    roles: []
                 },
                 views: {
                     'content@': {

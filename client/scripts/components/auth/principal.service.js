@@ -32,6 +32,29 @@ angular.module('campusApp')
 
                 return false;
             },
+            hasAllRoles: function (roles) {
+                if (!_authenticated || !_identity.roles) {
+                    return false;
+                }
+
+                for (var i = 0; i < roles.length; i++) {
+                    if (!this.isInRole(roles[i])) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+            isGranted: function(stateRoles) {   
+                if(stateRoles.constructor !== Array){
+                    stateRoles = [stateRoles];  
+                }
+                if (stateRoles && stateRoles.length > 0) {
+                    if(!this.hasAllRoles(stateRoles))
+                        return false;
+                }
+                return true;
+            },
             authenticate: function (identity) {
                 _identity = identity;
                 _authenticated = identity !== null;

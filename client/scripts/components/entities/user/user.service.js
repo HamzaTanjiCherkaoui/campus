@@ -11,11 +11,12 @@ angular.module('campusApp')
                         return data;
                     }
                 },
-                'update': { method:'PUT' }
+                'update': { method:'PUT' },
+                'save': { method:'POST' }
             });
         })
    .factory('Password', function ($resource) {
-        return $resource('api/users/change_password', {}, {});
+        return $resource('api/users/me/change_password', {}, {});
     })
     .factory('Activate', function ($resource) {
         return $resource('api/users/activate/:activated', {}, {});
@@ -25,4 +26,7 @@ angular.module('campusApp')
     })
     .factory('Register', function ($resource) {
         return $resource('api/users/register', {}, {});
+    })
+    .factory('UserPassword', function ($resource) {
+        return $resource('api/users/change_password', {}, {});
     });

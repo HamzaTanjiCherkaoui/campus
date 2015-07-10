@@ -8,10 +8,11 @@ var mongoose = require('mongoose');
 exports.index = function(req, res) {
   var keyword = {$regex: new RegExp(req.query.keyword,'i')};
   var where = {$or: [{lastName: keyword}, {firstName: keyword}, {code: keyword}, {city: keyword}]};
+  var orderBy = req.query.orderBy;
   Person.find(where)
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
-    .sort({lastName: req.query.orderDir})
+    .sort({orderBy: req.query.orderDir})
     .exec(function(err, persons) {
         Person.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));

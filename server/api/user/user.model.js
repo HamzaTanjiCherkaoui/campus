@@ -9,7 +9,8 @@ var UserSchema = new Schema({
     lastName: String,
     username: { type: String, lowercase: true },
     email: { type: String, lowercase: true },
-    roles: [{type: String, default: 'ROLE_USER'}],
+    roles: [{type: String, default: 'main'}],
+    activated: {type: Boolean, default: false},
     hashedPassword: String,
     provider: String,
     salt: String,
@@ -108,6 +109,7 @@ UserSchema.methods = {
     toJSON: function() {
       var obj = this.toObject();
       obj.fullName = this.firstName + ' ' + this.lastName;
+      obj.created = this._id.getTimestamp();
       return obj
     },
   /**

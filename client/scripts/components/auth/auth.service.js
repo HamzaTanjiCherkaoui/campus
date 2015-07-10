@@ -33,7 +33,7 @@ angular.module('campusApp')
             authorize: function(force) {
                 return Principal.identity(force)
                     .then(function() {
-                        if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !Principal.isInAnyRole($rootScope.toState.data.roles)) {
+                        if(!Principal.isGranted($rootScope.toState.data.roles)){
                             if (Principal.isAuthenticated()) {
                                 // user is signed in but not authorized for desired state
                                 $state.go('accessdenied');

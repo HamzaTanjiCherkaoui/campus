@@ -13,4 +13,10 @@ angular.module('campusApp')
                 : (roles.indexOf('ROLE_MANAGER') !== -1) ? 'manager'
                 : 'user';
     };
+})
+.filter('toDate', function (moment){
+    return function(date){
+        return moment(date).format("DD/MM/YYYY");
+    };
 });
+

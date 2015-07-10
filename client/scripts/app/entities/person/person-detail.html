@@ -4,15 +4,16 @@
     </div>
     <div class="col-xs-6">
       <div class="btn-group pull-right hidden-print">              
-        <button class="btn btn-primary "><span class="fa fa-gear"></span> Select an action</button>
+        <button class="btn btn-primary "><i class="fa fa-gear"></i> Select an action</button>
         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-inverse">
-          <li is-granted="person.update"><a ui-sref="personSave({id:entity._id})"><span class="fa fa-edit"> Edit</a></li>
-          <li><a href="#"><span class="fa fa-credit-card"> print card</a></li>
-          <li><a href="#"><span class="fa fa-tag"></span> print tiquet</a></li>
-          <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
+          <li is-granted="person.update"><a ui-sref="personSave({id:entity._id})"><i class="fa fa-edit"></i> Edit</a></li>
+          <li><a><i class="fa fa-credit-card"></i> Print card</a></li>
+          <li><a><i class="fa fa-tag"></i> Print tiquet</a></li>
+          <li><a ng-click="print()"><i class="fa fa-print"></i> Print this page</a></li>
+          <li is-granted="room.update"><a href="#" ng-click="bookRoom()"><i class="fa fa-print"></i> Book a Room</a></li>
         </ul>
       </div>
     </div>
@@ -24,7 +25,7 @@
   <div class="col-md-4">
     <div class="box">
       <header>
-          <h3><span class="fa fa-user"></span> Profile</h3>
+          <h3><i class="fa fa-user"></i> Profile</h3>
       </header>
       <ul class="list-group">
           <li class="list-group-item"><strong>family name:</strong> {{ entity.lastName }}</li>
@@ -32,34 +33,33 @@
           <li class="list-group-item"><strong>{{ entity.codeType }}:</strong> {{ entity.code }}</li>
           <li class="list-group-item"><strong>gender:</strong> {{ entity.gender | genderConversion }}</li>
           <li class="list-group-item"><strong>birthDay:</strong> {{ entity.birthDay | amDateFormat:'DD-MM-YYYY' }}</li>
+          <li class="list-group-item"><strong>is_archived :</strong> {{ entity.is_archived }}</li>
+          <li class="list-group-item"><strong>is_banned :</strong> {{ entity.is_banned }}</li>
       </ul>
     </div>
   </div> 
 
-   <div class="col-md-4">
-       <div class="box">
-           <header>
-               <h3><span class="fa fa-book"></span> Contact</h3>
-           </header>
-           <ul class="list-group">
-              <li class="list-group-item"><strong>tel :</strong> {{ entity.tel }}</li>
-              <li class="list-group-item"><strong>address :</strong> {{ entity.address }}</li>
-              <li class="list-group-item"><strong>city :</strong> {{ entity.city }}</li>
-              <li class="list-group-item"><strong>country :</strong> {{ entity.country }}</li>
-              <li class="list-group-item"><strong>type :</strong> {{ entity.type }}</li>
-              <li class="list-group-item"><strong>status :</strong> {{ entity.status }}</li>
-              <li class="list-group-item"><strong>is_archived :</strong> {{ entity.is_archived }}</li>
-              <li class="list-group-item"><strong>is_banned :</strong> {{ entity.is_banned }}</li>
-              <li class="list-group-item"><strong>updated:</strong> {{ entity.updated | amDateFormat:'DD-MM-YYYY' }}</li>
-           </ul>
-       </div>
-    </div> 
+  <div class="col-md-4">
+    <div class="box">
+        <header>
+            <h3><i class="fa fa-book"></i> Contact</h3>
+        </header>
+        <ul class="list-group">
+           <li class="list-group-item"><strong>tel :</strong> {{ entity.tel }}</li>
+           <li class="list-group-item"><strong>address :</strong> {{ entity.address }}</li>
+           <li class="list-group-item"><strong>city :</strong> {{ entity.city }}</li>
+           <li class="list-group-item"><strong>country :</strong> {{ entity.country }}</li>
+           <li class="list-group-item"><strong>type :</strong> {{ entity.type }}</li>
+           <li class="list-group-item"><strong>status :</strong> {{ entity.status }}</li>
+        </ul>
+    </div>
+  </div> 
 
 
   <div class="col-md-4">
     <div class="box">
       <header>
-          <h3><span class="fa fa-user"></span> MetaData</h3>
+          <h3><i class="fa fa-user"></i> MetaData</h3>
       </header>
       <ul class="list-group">
           <li class="list-group-item"><strong>Created date:</strong> <span am-time-ago="entity.created"></span></li>

@@ -7,7 +7,16 @@ var mongoose = require('mongoose');
 // Get list of rooms
 exports.index = function(req, res) {
   var keyword = {$regex: new RegExp(req.query.keyword,'i')};
-  Room.find({name: keyword})
+  var where = [{name: keyword}];
+  if(req.query.block){
+    where.push({block: {_id: mongoose.Types.ObjectId(req.query.block)}});
+  }
+  if(req.query.isFree == 1){
+    where.push({free: {$gt : 0}});
+  }else if(req.query.isFree == 2) {
+    where.push({free: {$lte : 0}});
+  }
+  Room.find({$and: where})
     .sort([[req.query.orderBy, req.query.orderDir]])
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('PersonDetailController', function ($scope, $stateParams, Person) {
+    .controller('PersonDetailController', function ($scope, $stateParams, Person, Room, Block) {
         $scope.entity = {};
         $scope.load = function (id) {
             Person.get({id: id}, function(result) {
@@ -9,4 +9,8 @@ angular.module('campusApp')
             });
         };
         $scope.load($stateParams.id);
+
+        $scope.bookRoom = function(){
+
+        }
     });

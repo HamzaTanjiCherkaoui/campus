@@ -8,6 +8,8 @@ angular.module('campusApp')
             page: 1,
             perPage: 4,
             keyword : '',
+            block: '',
+            isFree: 0,
             orderBy : 'name',
             orderDir : 'asc'
         };

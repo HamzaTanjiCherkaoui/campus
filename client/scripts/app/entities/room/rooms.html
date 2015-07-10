@@ -12,20 +12,34 @@
               </div>
           </div>
           <div class="col-md-7 col-xs-6">
-            <div class="btn-group pull-right">             
-              <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
-                Select an action
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-inverse">
-                <li><a data-toggle="modal" data-target="#saveRoomModal" ng-click="clear()"><i class="fa fa-user-plus"></i> add</a></li>
-                <li is-granted="room.create"><a ui-sref="roomSave"><i class="fa fa-user-plus"></i> add multiple</a></li>
-                <li class="divider"></li>
-                <li is-granted="room.update"><a id="js-badge"><i class="fa fa-credit-card"></i> free</a></li>
-                <li class="divider"></li>
-                <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-ticket"></i> custom fields</a></li>
-                <li is-granted="room.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
-              </ul>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                  <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="block" ng-model="searchData.block"  ng-change="loadAll()" ng-options="block._id as block.name for block in blocks">
+                    <option value="" >All blocks</option>
+                  </select>
+                </div>
+                <div class="col-md-4 form-group">
+                  <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="isFree" ng-model="searchData.isFree"  ng-change="loadAll()">
+                    <option value="0" >All rooms</option>
+                    <option value="1" >Available rooms</option>
+                    <option value="2" >Reserved rooms</option>
+                  </select>
+                </div>
+                <div class="btn-group pull-right">             
+                  <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Select an action
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-inverse">
+                    <li><a data-toggle="modal" data-target="#saveRoomModal" ng-click="clear()"><i class="fa fa-user-plus"></i> add</a></li>
+                    <li is-granted="room.create"><a ui-sref="roomSave"><i class="fa fa-user-plus"></i> add multiple</a></li>
+                    <li class="divider"></li>
+                    <li is-granted="room.update"><a id="js-badge"><i class="fa fa-credit-card"></i> free</a></li>
+                    <li class="divider"></li>
+                    <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-ticket"></i> custom fields</a></li>
+                    <li is-granted="room.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
+                  </ul>
+                </div>
             </div>
           </div><!-- /.col-lg-2 -->
         </div><!-- /.row -->

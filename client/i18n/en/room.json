@@ -1,5 +1,5 @@
 {
-    "membershipApp": {
+    "campusApp": {
         "room" : {
             "home": {
                 "title": "Rooms",
@@ -7,7 +7,8 @@
                 "createOrEditLabel": "Create or edit a Room"
             },
             "delete": {
-                "question": "Are you sure you want to delete Room {{ id }}?"
+                "question": "Are you sure you want to delete Room {{ id }}?",
+                "multiplequestion": "Are you sure you want to delete all these  Products ?"
             },
             "detail": {
                 "title": "Room"

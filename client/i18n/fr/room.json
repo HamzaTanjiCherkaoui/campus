@@ -1,22 +1,23 @@
 {
-    "membershipApp": {
+    "campusApp": {
         "room" : {
             "home": {
-                "title": "Rooms",
-                "createLabel": "Créer un nouveau Room",
-                "createOrEditLabel": "Créer ou éditer un Room"
+                "title": "Chambre",
+                "createLabel": "Ajouter une nouvelle chambre",
+                "createOrEditLabel": "Ajouter ou mettre à jour une chambre"
             },
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Room {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la chambre {{ id }} ?",
+                "multiplequestion": "êtes vous sûr de supprimer ces chambres ?"
             },
             "detail": {
-                "title": "Room"
+                "title": "chambre"
             },
-            "name": "Name",
-            "floor": "Floor",
-            "capacity": "Capacity",
-            "free": "Free",
-            "gender": "gender"
+            "name": "Nom",
+            "floor": "Etage",
+            "capacity": "Capacité",
+            "free": "Dispoinble",
+            "gender": "Type"
         }
     }
 }

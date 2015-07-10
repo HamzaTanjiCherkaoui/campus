@@ -17,6 +17,7 @@ angular.module('campusApp')
         $scope.loadAll = function() {
             Person.query($scope.searchData, function(result, headers) {
                 $scope.persons = result;
+                $scope.count = headers('count');
                 var pages = headers('pages');
                 $scope.pagination.first = 1;
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
@@ -64,6 +65,7 @@ angular.module('campusApp')
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
             $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
+            $scope.loadAll();
         };
 
         $scope.clear = function () {

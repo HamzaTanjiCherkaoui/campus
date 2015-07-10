@@ -56,4 +56,13 @@ angular.module('campusApp')
     	$.extend($.datepicker, {_checkOffset:function(inst,offset){return offset;}});
     	element.datepicker('widget').css({'margin-left': -element.prev('.input-group-btn').find('.btn').outerWidth()});
  	};
-});
+})
+.directive('mySortabale', function() {
+    return {
+        link: function(scope, elem, attrs) {
+            elem.on('click', function() {
+                $(this).addClass('sorted').siblings().removeClass('sorted');;
+            });
+        }
+    };
+});;

@@ -227,6 +227,9 @@ p{font-size: inherit;line-height: inherit;}
 .table .checkbox .icons{
   top: -10px;
 }
+.table th .checkbox .icons {
+  top: -17px;
+}
 
 
 /* angular animation */

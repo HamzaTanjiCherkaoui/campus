@@ -8,11 +8,10 @@ var mongoose = require('mongoose');
 exports.index = function(req, res) {
   var keyword = {$regex: new RegExp(req.query.keyword,'i')};
   var where = {$or: [{lastName: keyword}, {firstName: keyword}, {code: keyword}, {city: keyword}]};
-  var orderBy = req.query.orderBy;
   Person.find(where)
+    .sort([[req.query.orderBy, req.query.orderDir]])
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
-    .sort({orderBy: req.query.orderDir})
     .exec(function(err, persons) {
         Person.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
@@ -70,7 +69,6 @@ exports.deletemultiple = function(req, res) {
   var ids = req.body.ids.map(function(id){
     return mongoose.Types.ObjectId(id);
   });
-  console.log(ids);
   Person.remove({ _id: { $in: ids } }, function (err) {
     if(err) { return handleError(res, err); }
     res.send(204);

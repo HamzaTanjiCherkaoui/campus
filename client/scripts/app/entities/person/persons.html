@@ -18,10 +18,10 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-inverse">
-                <li is-granted="person.create"><a ui-sref="personSave"><i class="fa fa-user-plus"></i> Ajouter</a></li>
+                <li is-granted="person.create"><a ui-sref="personSave"><i class="fa fa-user-plus"></i> add</a></li>
                 <li class="divider"></li>
-                <li><a id="js-badge"><i class="fa fa-credit-card"></i> imprimer les cartes</a></li>
-                <li><a id="js-tiquet"><i class="fa fa-ticket"></i> imprimer les tiquets</a></li>
+                <li><a id="js-badge"><i class="fa fa-credit-card"></i> print cards</a></li>
+                <li><a id="js-tiquet"><i class="fa fa-ticket"></i> print tiquets</a></li>
                 <li is-granted="person.update"><a ng-show="showSwitchAction()"><i class="fa fa-exchange"></i> Switch rooms</a></li>
                 <li class="divider"></li>
                 <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-ticket"></i> custom fields</a></li>
@@ -110,19 +110,20 @@
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
                     </th>
-                    <th class="sortable"><a ng-click="changeOrder('firstName')">Name<i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a></th>
-                    <td ng-repeat="field in fields" ng-show="field.visible">{{ field.label }}</td>
+                    <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
+                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)">{{ field.label }} <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
+                        <span ng-if="!field.sortable">{{ field.label }}</span>
+                    </th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="entity in persons | filter:searchData.keyword | orderBy:searchData.orderBy:searchData.orderDir==='asc'">
+                <tr ng-repeat="entity in persons">
                     <td>
                         <label class="checkbox" for="checkbox{{entity._id}}">
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
                         </label>
                     </td>
-                    <td><a ui-sref="personDetail({id:entity._id})">{{entity.fullName}}</a></td>
                     <td ng-repeat="field in fields" ng-show="field.visible">{{ getFieldValue(entity, field)}}</td>
                     <td>
                         <button ui-sref="personDetail({id:entity._id})"
@@ -144,10 +145,9 @@
             </tbody>
         </table>
 
-
-            <div class="caption">
-              <em><strong>Total :</strong> {{ persons.length }}</em>
-            </div>
+        <div class="caption">
+          <em><strong>Total :</strong> {{ count }}</em>
+        </div>
 
         <nav>
             <ul class="pager" >

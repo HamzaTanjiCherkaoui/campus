@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('RoomController', function ($scope, Room, Block) {
+    .controller('RoomController', function ($scope, $http, Room, Block, Fields) {
         $scope.rooms = [];
         $scope.pagination = {};
         $scope.searchData = {
@@ -12,9 +12,13 @@ angular.module('campusApp')
             orderDir : 'asc'
         };
         $scope.blocks = Block.query();
+        $scope.fields = Fields.get('room');
+        $scope.getFieldValue = Fields.getValue;
+
         $scope.loadAll = function() {
             Room.query($scope.searchData, function(result, headers) {
                 $scope.rooms = result;
+                $scope.count = headers('count');
                 var pages = headers('pages');
                 $scope.pagination.first = 1;
                 $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
@@ -31,10 +35,10 @@ angular.module('campusApp')
 
         $scope.create = function () {
             if($scope.room._id) {
-                Room.update({id: $scope.room._id}, $scope.room, $scope.saveCalback);
+                Room.update({id: $scope.room._id}, $scope.room, saveCalback);
             }
             else {
-                Room.save($scope.room, $scope.saveCalback);
+                Room.save($scope.room, saveCalback);
             }
         };
 
@@ -45,17 +49,19 @@ angular.module('campusApp')
             });
         };
 
-        $scope.saveCalback = function () {
-            $scope.loadAll();
-            $('#saveRoomModal').modal('hide');
-            $scope.clear();
-        };
-
         $scope.delete = function (id) {
             Room.get({id: id}, function(result) {
                 $scope.room = result;
                 $('#deleteRoomConfirmation').modal('show');
             });
+        };
+
+        $scope.multipleDelete = function () {
+            $http.post('/api/rooms/deletemultiple', {ids: getCheckedRoomsIDs()})
+                .success(function () {
+                    $('#deleteMultipleConfirmation').modal('hide');
+                    $scope.loadAll();
+                });
         };
 
         $scope.confirmDelete = function (id) {
@@ -70,11 +76,36 @@ angular.module('campusApp')
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
             $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
+            $scope.loadAll();
         };
 
         $scope.clear = function () {
             $scope.room = {_id: null, name: null, floor: null, capacity: null, free: null, block: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
+        };       
+
+        $scope.markAll = function (checked) {
+            $scope.rooms.forEach(function (entity) {
+                entity.checked = checked;
+            });
         };
+
+        $scope.showMultipleActions = function () {
+            return getCheckedRooms().length === 0 ? false : true;
+        };
+
+        function getCheckedRooms () {
+            return $scope.rooms.filter(function (entity) { return entity.checked;});
+        }
+
+        function getCheckedRoomsIDs () {
+            return getCheckedRooms().map(function(entity){return entity._id;});
+        }
+
+        function saveCalback (argument) {
+            $scope.loadAll();
+            $('#saveRoomModal').modal('hide');
+            $scope.clear();
+        }
     });

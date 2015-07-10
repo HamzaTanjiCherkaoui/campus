@@ -8,6 +8,7 @@
 	    "email": "admin@admin.com",
 	    "password": "admin",
 	    "roles":  [
+	    	"main",
 	    	"user.show", "user.create", "user.update", "user.delete",
 	    	"person.show", "person.create", "person.update", "person.delete",
 	    	"room.show", "room.create", "room.update", "room.delete",
@@ -27,6 +28,7 @@
 	    "email": "user@user.com",
 	    "password": "user",
 	    "roles": [
+	    	"main",
 	    	"user.show",
 	    	"person.show",
 	    	"room.show",

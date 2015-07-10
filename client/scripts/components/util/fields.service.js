@@ -30,16 +30,16 @@ angular.module('campusApp')
                     updated: {label: 'updated', visible: false}
                 },
                 room: {
-                    name: {label: 'name', visible: false},
-                    floor: {label: 'floor', visible: false},
-                    capacity: {label: 'capacity', visible: false},
-                    free: {label: 'free', visible: false},
-                    block: {label: 'block', visible: false},
-                    reservations: {label: 'reservations', visible: false}
+                    name: {label: 'name', visible: true, sortable: true},
+                    floor: {label: 'floor', visible: true},
+                    capacity: {label: 'capacity', visible: true, sortable: true},
+                    free: {label: 'free', visible: true, sortable: true},
+                    block: {label: 'block', visible: false, callback: function(a){return a.name;}},
+                    type: {label: 'type', visible: true, callback: function(entity){return $filter('genderConversion')(entity.block.type);}}
                 },
                 product: {
                     type: {label: 'type', visible: true},
-                    category: {label: 'category', visible: true,callback: function(a){return a.name;}},
+                    category: {label: 'category', visible: true, callback: function(a){return a.name;}}
                     
                 },
                 category:{
@@ -53,6 +53,9 @@ angular.module('campusApp')
             },
             getValue: function(entity, field){
                 if(field.callback ){
+                    if(!entity[field.label]){
+                        return field.callback(entity);
+                    }
                     return field.callback(entity[field.label]);
                 }
                 return entity[field.label];

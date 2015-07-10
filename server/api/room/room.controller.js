@@ -2,18 +2,20 @@
 
 var _ = require('lodash');
 var Room = require('./room.model');
+var mongoose = require('mongoose');
 
 // Get list of rooms
 exports.index = function(req, res) {
-  var keyword = new RegExp(req.query.keyword,'i');
-  Room.find({name: {$regex:keyword}})
+  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
+  Room.find({name: keyword})
+    .sort([[req.query.orderBy, req.query.orderDir]])
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
-    .sort({name: req.query.orderDir})
     .populate('block')
     .exec(function(err, rooms) {
         Room.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.setHeader('count', count);
           res.json(200, rooms);
         })
     });
@@ -63,6 +65,17 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
+  });
+};
+
+//delete multiple products from the DB
+exports.deletemultiple = function(req, res) {
+  var ids = req.body.ids.map(function(id){
+    return mongoose.Types.ObjectId(id);
+  });
+  Room.remove({ _id: { $in: ids } }, function (err) {
+    if(err) { return handleError(res, err); }
+    res.send(204);
   });
 };
 

@@ -61,8 +61,17 @@ angular.module('campusApp')
     return {
         link: function(scope, elem, attrs) {
             elem.on('click', function() {
-                $(this).addClass('sorted').siblings().removeClass('sorted');;
+                $(this).addClass('sorted').siblings().removeClass('sorted');
             });
         }
     };
-});;
+})
+.directive('myPrinter', function($window) {
+    return {
+        link: function(scope, elem, attrs) {
+            elem.on('click', function() {
+                $window.print();
+            });
+        }
+    };
+});

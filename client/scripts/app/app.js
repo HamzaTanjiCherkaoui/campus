@@ -50,11 +50,6 @@ angular.module('campusApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
                 $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
             }
         };
-
-        $rootScope.print = function(){
-            return $window.print();
-        };
-
         
         $rootScope.genderArray = [{'label':'Man', 'value':false}, {'label':'Woman', 'value':true}];
     })

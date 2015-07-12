@@ -13,5 +13,6 @@ router.put('/:id', auth.hasRole('room.update'), controller.update);
 router.patch('/:id', auth.hasRole('room.update'), controller.update);
 router.delete('/:id', auth.hasRole('room.delete'), controller.destroy);
 router.post('/deletemultiple', auth.hasRole('room.delete'), controller.deletemultiple);
+router.post('/addmultiple', auth.hasRole('room.create'), controller.addmultiple);
 
 module.exports = router;

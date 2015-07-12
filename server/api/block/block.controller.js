@@ -13,11 +13,13 @@ exports.index = function(req, res) {
 
 // Get a single block
 exports.show = function(req, res) {
-  Block.findById(req.params.id, function (err, block) {
-    if(err) { return handleError(res, err); }
-    if(!block) { return res.send(404); }
-    return res.json(block);
-  });
+  Block.findById(req.params.id)
+    .populate('rooms')
+    .exec(function (err, block) {
+      if(err) { return handleError(res, err); }
+      if(!block) { return res.send(404); }
+      return res.json(block);
+    });
 };
 
 // Creates a new block in the DB.

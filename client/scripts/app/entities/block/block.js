@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/block',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['block.show'],
                     pageTitle: 'campusApp.block.home.title'
                 },
                 views: {
@@ -19,6 +19,7 @@ angular.module('campusApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('block');
+                        $translatePartialLoader.addPart('room');
                         return $translate.refresh();
                     }]
                 }
@@ -27,7 +28,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/block/:id',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['block.show'],
                     pageTitle: 'campusApp.block.detail.title'
                 },
                 views: {
@@ -39,6 +40,7 @@ angular.module('campusApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('block');
+                        $translatePartialLoader.addPart('room');
                         return $translate.refresh();
                     }]
                 }

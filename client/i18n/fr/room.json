@@ -13,6 +13,10 @@
             "detail": {
                 "title": "chambre"
             },
+            "action":{
+                "book": "Réserver",
+                "bookRoom": "Réserver une chambre"
+            },
             "name": "Nom",
             "floor": "Etage",
             "capacity": "Capacité",

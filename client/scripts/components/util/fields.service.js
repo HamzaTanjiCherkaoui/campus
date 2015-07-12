@@ -34,7 +34,7 @@ angular.module('campusApp')
                     floor: {label: 'floor', visible: true},
                     capacity: {label: 'capacity', visible: true, sortable: true},
                     free: {label: 'free', visible: true, sortable: true},
-                    block: {label: 'block', visible: false, callback: function(a){return a.name;}},
+                    block: {label: 'block', visible: true, callback: function(a){return a.name;}},
                     type: {label: 'type', visible: true, callback: function(entity){return $filter('genderConversion')(entity.block.type);}}
                 },
                 product: {

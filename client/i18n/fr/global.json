@@ -83,7 +83,13 @@
             "edit": "Editer",
             "delete": "Supprimer",
             "save": "Sauvegarder",
-            "view": "Voir"
+            "view": "Voir",
+            "print": {
+                "all": "Imprimer",
+                "card": "Imprimer la carte",
+                "page": "Imprimer la page",
+                "ticket": "Imprimer le ticket"
+            }
         },
         "detail": {
             "field": "Champs",
@@ -101,7 +107,14 @@
             "pattern": "Ce champs doit suivre l'expression régluière {{pattern}}.",
             "number": "Ce champs doit être un nombre.",
             "datetimelocal": "Ce champs doit être une date et une heure."
+        },
+        "attr": {
+            "created" : "Date de création",
+            "updated" : "Date de derniere mise à jour"
         }
+    },
+    "action": {
+        "select": "Selectionner une action"
     },
     "footer": "Ceci est votre pied de page"
 }

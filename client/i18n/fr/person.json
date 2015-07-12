@@ -2,34 +2,29 @@
     "campusApp": {
         "person" : {
             "home": {
-                "title": "Persons",
-                "createLabel": "Créer un nouveau Person",
-                "createOrEditLabel": "Créer ou éditer un Person"
+                "title": "Etudiants",
+                "createLabel": "Ajouter un nouveau étudiant",
+                "createOrEditLabel": "Créer ou éditer un étudiant"
             },
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Person {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer le étudiant {{ id }} ?",
+                "multiplequestion": "êtes vous sûr de supprimer ses étudiants ?"
             },
             "detail": {
-                "title": "Person"
+                "title": "Etudiant"
             },
-            "lastname": "Lastname",
-            "firstName": "FirstName",
-            "barcode": "Barcode",
+            "lastname": "Nom",
+            "firstName": "Prénom",
             "cin": "Cin",
-            "birthDay": "BirthDay",
-            "gender": "Gender",
-            "address": "Address",
-            "zipCode": "ZipCode",
-            "city": "City",
-            "country": "Country",
-            "job": "Job",
-            "tel": "Tel",
-            "gsm": "Gsm",
-            "certificat": "Certificat",
-            "expertise": "Expertise",
+            "birthDay": "Date de naissance",
+            "gender": "Sexe",
+            "address": "Adresse",
+            "zipCode": "Code postal",
+            "city": "Ville",
+            "country": "Pays",
+            "tel": "Tél",
             "description": "Description",
-            "archived": "Archived",
-            "archivedCause": "ArchivedCause"
+            "archived": "Archived"
         }
     }
 }

@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 
 var BlockSchema = new Schema({
   name: String,
-  type: Boolean, //	0->man, 1->woman
+  type: Boolean, // 0->man, 1->woman
+  floors: { type: Number, min: 0},
   rooms: [{type: mongoose.Schema.Types.ObjectId, ref: 'Room'}]
 });
 

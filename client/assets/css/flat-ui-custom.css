@@ -17,6 +17,8 @@ p{font-size: inherit;line-height: inherit;}
 .table [class*="fui-"] {top: 0px; }
 .table ul{margin-top: 5px; padding: 0; }
 
+.searchPanel .select{ min-width: 100px;}
+
 /* datepicker */
 .ui-datepicker {
   width: 264px;

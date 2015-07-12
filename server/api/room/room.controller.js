@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Room = require('./room.model');
+var Block = require('./../block/block.model');
 var mongoose = require('mongoose');
 
 // Get list of rooms
@@ -85,6 +86,32 @@ exports.deletemultiple = function(req, res) {
   Room.remove({ _id: { $in: ids } }, function (err) {
     if(err) { return handleError(res, err); }
     res.send(204);
+  });
+};
+
+//delete multiple products from the DB
+exports.addmultiple = function(req, res) {
+  var data = req.body.data;
+  Block.create({
+    name: data.name,
+    type: data.type,
+    floors: data.floors.length
+  }, function(err, block) {
+    if(err) { return handleError(res, err); }
+    data.floors.forEach(function(floor){
+      for (var i = 1; i <= floor.rooms; i++) {
+        var room = new Room({
+          name: block.name + floor.number + i,
+          floor: floor.number,
+          capacity: floor.capacity,
+          free: floor.capacity,
+          block: block._id
+        });
+        room.save();
+      }
+    });
+    return res.json(201, block);
+  
   });
 };
 

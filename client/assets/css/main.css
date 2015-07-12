@@ -247,17 +247,32 @@ label.radio{padding-top: 0px!important;}
 
 /* widget */
 div.box{
-margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
 }
 div.box h3{
-margin: 5px;
-color: white;
-font-weight: normal;
-font-size: 18px;
+	margin: 5px;
+	color: white;
+	font-weight: normal;
+	font-size: 18px;
 }
 .box header{
 	background: rgba(52, 73, 94, 0.77);
 	padding: 4px 10px;
+}
+.box header:after {
+  background-image: -moz-radial-gradient(50% 0, ellipse farthest-side, rgba(0,0,0,0.065) 0%, rgba(0,0,0,0) 100%);
+  background-image: -ms-radial-gradient(50% 0, ellipse farthest-side, rgba(0,0,0,0.065) 0%, rgba(0,0,0,0) 100%);
+  background-image: -o-radial-gradient(50% 0, ellipse farthest-side, rgba(0,0,0,0.065) 0%, rgba(0,0,0,0) 100%);
+  background-image: -webkit-radial-gradient(50% 0, ellipse farthest-side, rgba(0,0,0,0.065) 0%, rgba(0,0,0,0) 100%);
+  background-image: radial-gradient(50% 0, ellipse farthest-side, rgba(0,0,0,0.065) 0%,rgba(0,0,0,0) 100%);
+  content: '';
+  display: block;
+  height: 5px;
+  position: absolute;
+  bottom: -5px;
+  width: 100%;
+  z-index: 0;
 }
 .box .img-circle {
 	border: 4px solid rgba(255, 255, 255, 0.5);
@@ -678,8 +693,15 @@ ul.threadslist {
 div[class*="col-"]{
 	min-height: 0px;
 }
-.room-widget div {
-margin-bottom: 20px;
+.room-widget .well {
+	margin-bottom: 20px;
+	position: relative;
+  	padding-top: 30px;
+}
+.room-widget .label{
+	position: absolute;
+  	top: 0;
+  	left: 0;
 }
 div.page
 {

@@ -24,6 +24,28 @@ angular.module('campusApp')
                     }]
                 }
             })
+            .state('roomMultiple', {
+                parent: 'entity',
+                url: '/room/multiple',
+                data: {
+                    roles: ['room.create'],
+                    pageTitle: 'campusApp.room.detail.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/room/room-multiple.html',
+                        controller: 'RoomMultipleController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('room');
+                        $translatePartialLoader.addPart('block');
+                        $translatePartialLoader.addPart('person');
+                        return $translate.refresh();
+                    }]
+                }
+            })
             .state('roomDetail', {
                 parent: 'entity',
                 url: '/room/:id',

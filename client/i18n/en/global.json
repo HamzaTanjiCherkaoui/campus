@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "membership",
+        "title": "CampusApp",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -12,8 +12,7 @@
                 "product": "Product",
                 "category": "Category",
                 "allocation": "Allocation",
-                "reservation": "Reservation",
-                "additionalEntity": "JHipster will add addtional entities"
+                "reservation": "Reservation"
             },
             "account": {
                 "main": "Account",
@@ -26,12 +25,8 @@
             },
             "admin": {
                 "main": "Administration",
-                "tracker": "User tracker",
-                "metrics": "Metrics",
-                "health": "Health",
                 "configuration": "Configuration",
                 "logs": "Logs",
-                "audits": "Audits",
                 "apidocs": "API",
                 "database": "Database"
             },
@@ -101,7 +96,14 @@
             "pattern": "This field should follow pattern {{pattern}}.",
             "number": "This field should be a number.",
             "datetimelocal": "This field should be a date and time."
+        },
+        "attr": {
+            "created" : "Created date",
+            "updated" : "Updated date"
         }
+    },
+    "action": {
+        "select": "Select an action"
     },
     "footer": "This is your footer"
 }

@@ -28,7 +28,8 @@
                 <li><a  data-toggle="modal" data-target="#saveCategoryModal" ng-click="clear()"><i class="fa fa-user-plus"></i> Ajouter category</a></li>
                 <li class="divider"></li>
 
-                <li><a  data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleProductConfirmation"><i class="fa fa-trash"></i> delete selected products</a></li>
+                <li><a  data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleProductConfirmation"><i class="fa fa-trash"></i> delete selected product(s)</a></li>
+                <li><a   ng-show="showMultipleActions()" ng-click="allocatemodal()"><i class="fa fa-trash"></i> allocate selected product(s)</a></li>
               </ul>
             </div>
           </div><!-- /.col-lg-2 -->
@@ -93,24 +94,7 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- <div class="form-group">
-                            <label translate="campusApp.product.available">Available</label>
-                            <input type="number" class="form-control" name="available"
-                                   ng-model="product.available" min="0">
-
-                            <div ng-show="editForm.available.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.available.$error.min" translate="entity.validation.min" translate-value-min="0">
-                                    This field should be more than 0.
-                                </p>
-                                <p class="help-block"
-                                   ng-show="editForm.available.$error.number" translate="entity.validation.number">
-                                    This field should be a number.
-                                </p>
-                            </div>
-                        </div>
- -->
-                    </div>
+                                </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -210,6 +194,40 @@
             </div>
         </div>
     </div>
+    <!-- multiple delete modal -->
+    <div class="modal fade" id="allocmodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate ng-submit="allocate()" show-validation>
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myCategoryLabel" translate="campusApp.allocation.home.createOrEditLabel">Allocate a product</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+
+                        <div class="form-group">
+                              <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="person" ng-model="person"  ng-options="person._id as person.fullName for person in persons">
+                                <option value="" >Select a Person ( all )</option>
+                              </select>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <!-- temporary styling -->
     <style type="text/css">.label-drp{display: block; padding: 8px;color: white;text-align: center;}</style>
 

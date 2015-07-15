@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/allocation',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['allocation.show'],
                     pageTitle: 'campusApp.allocation.home.title'
                 },
                 views: {
@@ -27,7 +27,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/allocation/:id',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['allocation.show'],
                     pageTitle: 'campusApp.allocation.detail.title'
                 },
                 views: {

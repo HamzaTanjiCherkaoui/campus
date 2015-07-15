@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('ProductController', function ($http,$scope, Product ,Category ,Fields) {
+    .controller('ProductController', function ($http,$scope, Product ,Category ,Allocation,Person,Fields) {
        $scope.products = [];
        $scope.products =[ {
         checked:false
@@ -102,6 +102,51 @@ angular.module('campusApp')
             }); 
             $('#deleteMultipleProductConfirmation').modal('hide');            
             $scope.loadAll();
+         }; 
+
+         $scope.allocatemodal = function () {
+            $scope.persons = [];
+            $scope.pagination = {};
+            $scope.searchData = {
+            page: 1,
+            perPage: 4,
+            keyword : '',
+            orderBy : 'lastName',
+            orderDir : 'asc'
+        };
+          
+                Person.query($scope.searchData, function(result, headers) {
+                $scope.persons = result;
+                 $('#allocmodal').modal('show');
+            });
+               
+            
+        };
+
+
+        $scope.allocate=function  () {
+
+            $scope.products_to_allocate=getCheckedProductsIDs();
+           // get the person Id from the modal 
+            var personId=$scope.person;
+            
+            //loop trought the selected products 
+            $scope.products_to_allocate.forEach(function (product) {
+            var productId=product;
+            
+            var allocation = new Allocation();
+            allocation.type=true;
+            allocation.status=true;
+            allocation.person=personId;
+            allocation.product=productId;
+            console.log(allocation);
+            Allocation.save(allocation);
+            });
+            //save the allocation 
+
+            $scope.clear();            
+            $('#allocmodal').modal('hide');            
+            
          };
 
         

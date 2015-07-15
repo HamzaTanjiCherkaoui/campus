@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .factory('Allocation', function ($resource) {
+    .factory('Allocation', function ($resource ) {
         return $resource('api/allocations/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
@@ -11,6 +11,7 @@ angular.module('campusApp')
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'save': { method:'POST' }
         });
     });

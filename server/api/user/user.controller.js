@@ -127,7 +127,7 @@ exports.authorize = function(req, res, next) {
   User.find({_id : { $in: ids }}, function(err, users){
     if (err) return validationError(res, err);
     users.forEach(function(user){
-      user.roles = _.union(user.roles, req.body.roles);
+      user.roles = req.body.roles;
       user.save();
     });
     return res.json(200);

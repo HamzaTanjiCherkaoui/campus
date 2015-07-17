@@ -36,11 +36,16 @@ exports.show = function(req, res) {
   Room.findById(req.params.id)
     .populate('block')
     .populate('reservations')
-    .populate('person')
     .exec(function (err, room) {
       if(err) { return handleError(res, err); }
       if(!room) { return res.send(404); }
-      return res.json(room);
+      var personPath = {
+        path: 'reservations.person',
+        model: 'Person'
+      };
+      Room.populate(room, personPath, function (err, room) {
+        return res.json(room);
+      });
     });
 };
 

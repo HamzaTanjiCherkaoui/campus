@@ -35,7 +35,15 @@ angular.module('campusApp')
                     capacity: {label: 'capacity', visible: true, sortable: true},
                     free: {label: 'free', visible: true, sortable: true},
                     block: {label: 'block', visible: true, callback: function(a){return a.name;}},
-                    type: {label: 'type', visible: true, callback: function(entity){return $filter('genderConversion')(entity.block.type);}}
+                    type: {label: 'type', visible: true, callback: function (a) {
+                        return $filter('genderConversion')(a.block.type)
+                    }}
+                },
+                block: {
+                    name: {label: 'name', visible: true, sortable: true},
+                    floors: {label: 'floors', visible: true},
+                    count: {label: 'count', visible: true},
+                    type: {label: 'type', visible: true, callback: $filter('genderConversion')}
                 },
                 product: {
                     type: {label: 'type', visible: true},
@@ -43,7 +51,6 @@ angular.module('campusApp')
                     
                 },
                 category:{
-
 
                 }
         };
@@ -53,7 +60,7 @@ angular.module('campusApp')
             },
             getValue: function(entity, field){
                 if(field.callback ){
-                    if(!entity[field.label]){
+                    if(!entity.hasOwnProperty(field.label)){
                         return field.callback(entity);
                     }
                     return field.callback(entity[field.label]);

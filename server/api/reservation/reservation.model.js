@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    relationship = require("mongoose-relationship");
 
 var ReservationSchema = new Schema({
 	datePayement: { type: Date, default: Date.now },
@@ -9,8 +10,10 @@ var ReservationSchema = new Schema({
 	dateTo: Date,
 	status: Boolean,
 	price: Number,
-	person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},
-	room: {type: mongoose.Schema.Types.ObjectId, ref: 'Room'}
+	person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person', childPath:"reservations"},
+	room: {type: mongoose.Schema.Types.ObjectId, ref: 'Room', childPath:"reservations"}
 });
+
+ReservationSchema.plugin(relationship, { relationshipPathName: ['person', 'room'] });
 
 module.exports = mongoose.model('Reservation', ReservationSchema);

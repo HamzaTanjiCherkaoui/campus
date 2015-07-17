@@ -5,10 +5,14 @@ var Block = require('./block.model');
 
 // Get list of blocks
 exports.index = function(req, res) {
-  Block.find(function (err, blocks) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, blocks);
-  });
+  req.query = _.merge({orderBy: 'name', orderDir:'asc'}, req.query);
+  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
+  Block.find({name: keyword})
+    .sort([[req.query.orderBy, req.query.orderDir]])
+    .exec(function(err, blocks) {
+      if(err) { return handleError(res, err); }
+      return res.json(200, blocks);
+    });
 };
 
 // Get a single block
@@ -53,6 +57,17 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
+  });
+};
+
+//delete multiple products from the DB
+exports.deletemultiple = function(req, res) {
+  var ids = req.body.ids.map(function(id){
+    return mongoose.Types.ObjectId(id);
+  });
+  Block.remove({ _id: { $in: ids } }, function (err) {
+    if(err) { return handleError(res, err); }
+    res.send(204);
   });
 };
 

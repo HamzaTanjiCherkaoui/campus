@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Reservation = require('./reservation.model');
+var Room = require('./../room/room.model');
 
 // Get list of reservations
 exports.index = function(req, res) {
@@ -23,8 +24,12 @@ exports.show = function(req, res) {
 // Creates a new reservation in the DB.
 exports.create = function(req, res) {
   Reservation.create(req.body, function(err, reservation) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, reservation);
+    Room.findById(reservation.room, function (err, room) {
+      if(err) { return handleError(res, err); }
+      room.free = room.free - 1; 
+      room.save();
+      return res.json(201, reservation);
+    });
   });
 };
 

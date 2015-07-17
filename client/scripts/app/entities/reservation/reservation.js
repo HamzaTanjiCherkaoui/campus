@@ -42,5 +42,25 @@ angular.module('campusApp')
                         return $translate.refresh();
                     }]
                 }
+            })
+            .state('reservationSave', {
+                parent: 'entity',
+                url: '/reservation/save/:person/:id',
+                data: {
+                    roles: ['reservation.create'],
+                    pageTitle: 'campusApp.reservation.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/reservation/reservation-save.html',
+                        controller: 'ReservationSaveController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('reservation');
+                        return $translate.refresh();
+                    }]
+                }
             });
     });

@@ -23,11 +23,26 @@ exports.index = function(req, res) {
 
 // Get a single person
 exports.show = function(req, res) {
-  Person.findById(req.params.id, function (err, person) {
-    if(err) { return handleError(res, err); }
-    if(!person) { return res.send(404); }
-    return res.json(person);
-  });
+  Person.findById(req.params.id)
+    .populate('reservations')
+    .exec(function (err, person) {
+      if(err) { return handleError(res, err); }
+      if(!person) { return res.send(404); }
+
+      var roomPath = {
+        path: 'reservations.room',
+        model: 'Room'
+      };
+      Person.populate(person, roomPath, function (err, person) {
+        var blockPath = {
+          path: 'room.block',
+          model: 'Block'
+        };
+        Person.populate(person, blockPath, function (err, person) {
+          return res.json(person);
+        });
+      });
+    });
 };
 
 // Creates a new person in the DB.

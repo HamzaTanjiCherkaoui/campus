@@ -94,16 +94,47 @@ angular
             return getCheckedUsers().length === 2 ? true : false;
         };
 
-        $scope.authorize = function () {
-            var table = $scope.authorities.table;
-            var actions = $scope.authorities.action; 
-            var authorities = [];
-            $.each(Object.keys(actions), function(key, value){if(actions[value]) authorities.push(table + '.' + value);});
-
-            $http.post('/api/users/authorize', {ids: getCheckedUsersIDs(), roles: authorities})
-                .success(function () {
-                    $('#authoritiesModal').modal('hide');
-                    $scope.loadAll();
-                });
+        $scope.manageRoles = function (id) {
+            User.get({id: id}, function(result) {
+                $scope.authorities = populateRoleTable(result.roles);
+                $('#authoritiesModal').modal('show');
+            });
         };
+
+        $scope.authorize = function () {
+            var authorities = $scope.authorities;
+            console.log(authorities);
+            var tables = Object.keys(authorities);
+            var actions = ['create', 'show', 'delete', 'update'];
+            var data = [];
+            tables.forEach(function(index){
+                var entity = authorities[index];
+                actions.forEach(function(action){
+                    if(entity[action] === true)
+                        data.push(index+'.'+action);
+                });
+            });
+            // console.log(data);return;
+
+            $http.post('/api/users/authorize', {ids: getCheckedUsersIDs(), roles: data})
+            .success(function () {
+                $('#authoritiesModal').modal('hide');
+                $scope.loadAll();
+            });
+        };
+
+        function populateRoleTable(roles){
+            var authorities = {};
+            roles.forEach(function(role){
+                var table = role.split('.')[0];
+                var action = role.split('.')[1];
+                var data = authorities[table] || {};
+                data[action] = true;
+                authorities[table] = data;
+            });
+            return authorities;
+        }
     });
+
+
+

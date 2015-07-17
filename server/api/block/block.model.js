@@ -10,4 +10,16 @@ var BlockSchema = new Schema({
   rooms: [{type: mongoose.Schema.Types.ObjectId, ref: 'Room'}]
 });
 
+
+BlockSchema.set('toJSON', { getters: true, virtuals: true });
+
+/**
+ * Virtuals
+ */
+BlockSchema
+    .virtual('count')
+    .get( function () {
+        return this.rooms.length;
+    });
+
 module.exports = mongoose.model('Block', BlockSchema);

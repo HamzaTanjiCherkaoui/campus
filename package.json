@@ -1,6 +1,7 @@
 {
   "name": "campus",
   "version": "0.0.0",
+  "node-main": "server/node-main.js",
   "main": "index.html",
     "window": {
         "toolbar": false,

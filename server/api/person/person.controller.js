@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
-var Person = require('./person.model');
+var path = require('path');
+var Person = require(path.resolve('server', 'api/person/person.model'));
 var mongoose = require('mongoose');
 
 // Get list of persons

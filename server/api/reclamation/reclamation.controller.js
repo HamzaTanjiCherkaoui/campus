@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
-var Reclamation = require('./reclamation.model');
+var path = require('path');
+var Reclamation = require(path.resolve('server', 'api/reclamation/reclamation.model'));
 
 // Get list of reclamations
 exports.index = function(req, res) {

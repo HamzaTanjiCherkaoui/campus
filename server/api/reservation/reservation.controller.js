@@ -1,8 +1,9 @@
 'use strict';
 
 var _ = require('lodash');
-var Reservation = require('./reservation.model');
-var Room = require('./../room/room.model');
+var path = require('path');
+var Reservation = require(path.resolve('server', 'api/reservation/reservation.model'));
+var Room = require(path.resolve('server', 'api/room/room.model'));
 
 // Get list of reservations
 exports.index = function(req, res) {

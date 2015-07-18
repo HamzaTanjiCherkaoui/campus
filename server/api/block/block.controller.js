@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
-var Block = require('./block.model');
+var path = require('path');
+var Block = require(path.resolve('server', 'api/block/block.model'));
 
 // Get list of blocks
 exports.index = function(req, res) {

@@ -22,12 +22,21 @@
         <!-- build:css({.tmp,client}) app/app.css -->
         <link href="assets/css/main.css" rel="stylesheet" />
         <link href="assets/css/flat-ui-custom.css" rel="stylesheet" />
+        <link href="assets/css/nw.css" rel="stylesheet" />
           <!-- injector:css -->
           <!-- endinjector -->
         <!-- endbuild -->
 
     </head>
-    <body ng-app="campusApp" ng-class="{'theme1': isAuthenticated() , 'login-screen': !isAuthenticated()}">
+    <body ng-app="campusApp" ng-class="{'theme1 app': isAuthenticated() , 'login-screen': !isAuthenticated()}">
+
+        <header class="window-toolbar">
+            <ul>
+                <li><a href='#' title='Minimize' id='windowControlMinimize'></a></li>
+                <li><a href='#' title='Maximize' id='windowControlMaximize'></a></li>
+                <li><a href='#' title='Close'    id='windowControlClose'   ></a></li>
+            </ul>
+        </header>
         <!--[if lt IE 10]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -82,6 +91,45 @@
                 <div class="slide-right" ui-view="content"></div>
             </div>
         </section>
+
+        <script>
+
+        var nw = require('nw.gui');
+        var win = nw.Window.get();
+        win.isMaximized = false;
+        
+        // Min
+        document.getElementById('windowControlMinimize').onclick = function()
+        {
+          alert('minimize');
+            win.minimize();
+        };
+
+        // Close
+        document.getElementById('windowControlClose').onclick = function()
+        {
+            win.close();
+        };
+
+        // Max
+        document.getElementById('windowControlMaximize').onclick = function()
+        {
+            if (win.isMaximized)
+                win.unmaximize();
+            else
+                win.maximize();
+        };
+
+        win.on('maximize', function(){
+            win.isMaximized = true;
+        });
+
+        win.on('unmaximize', function(){
+            win.isMaximized = false;
+        });
+
+
+    </script>
 
         <!--[if lt IE 9]>
         <script src="bower_components/es5-shim/es5-shim.js"></script>

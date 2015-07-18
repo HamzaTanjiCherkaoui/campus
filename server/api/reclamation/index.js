@@ -1,7 +1,8 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./reclamation.controller');
+var path = require('path');
+var controller = require(path.resolve('server', 'api/reclamation/reclamation.controller'));
 
 var router = express.Router();
 

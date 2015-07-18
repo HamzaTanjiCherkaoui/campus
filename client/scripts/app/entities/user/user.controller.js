@@ -96,6 +96,7 @@ angular
 
         $scope.manageRoles = function (id) {
             User.get({id: id}, function(result) {
+                $scope.user = result;
                 $scope.authorities = populateRoleTable(result.roles);
                 $('#authoritiesModal').modal('show');
             });
@@ -103,7 +104,6 @@ angular
 
         $scope.authorize = function () {
             var authorities = $scope.authorities;
-            console.log(authorities);
             var tables = Object.keys(authorities);
             var actions = ['create', 'show', 'delete', 'update'];
             var data = [];
@@ -114,9 +114,9 @@ angular
                         data.push(index+'.'+action);
                 });
             });
-            // console.log(data);return;
+            console.log(data);
 
-            $http.post('/api/users/authorize', {ids: getCheckedUsersIDs(), roles: data})
+            $http.post('/api/users/authorize', {id: $scope.user._id, roles: data})
             .success(function () {
                 $('#authoritiesModal').modal('hide');
                 $scope.loadAll();

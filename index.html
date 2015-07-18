@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
+        <style>
+.loading{
+  color: white;
+}
+.wrap{
+  background-color: #1abc9c;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-top: 20%;
+  text-align: center;
+}
+        </style>
   </head>
   <body>
-    
-    <div id="cms-loader">
-      <h1>STARTING LOCAL SERVER ...</h1>
-    </div>
+  
+          <div class="wrap">
+            <div class="loading">
+              <h1>Loading...</h1>
+            </div>
+          </div>
+
     <script type="text/javascript" src="server/app.js"></script>
   </body>
 </html>

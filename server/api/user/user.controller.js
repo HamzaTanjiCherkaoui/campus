@@ -1,10 +1,11 @@
 'use strict';
 
 var _ = require('lodash');
-var User = require('./user.model');
+var path = require('path');
+var User = require(path.resolve('server', 'api/user/user.model'));
 var mongoose = require('mongoose');
 var passport = require('passport');
-var config = require('../../config/environment');
+var config = require(path.resolve('server', 'config/environment'));
 var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {
@@ -123,13 +124,7 @@ exports.activate = function(req, res, next) {
  * update user roles
  */
 exports.authorize = function(req, res, next) {
-  var ids = getObjectIds(req.body.ids);
-  User.find({_id : { $in: ids }}, function(err, users){
-    if (err) return validationError(res, err);
-    users.forEach(function(user){
-      user.roles = req.body.roles;
-      user.save();
-    });
+  User.update( {_id : mongoose.Types.ObjectId(req.body.id)}, {roles: req.body.roles} , function(err) { 
     return res.json(200);
   });
 };

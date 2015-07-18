@@ -1,8 +1,9 @@
 'use strict';
 
 var _ = require('lodash');
-var Room = require('./room.model');
-var Block = require('./../block/block.model');
+var path = require('path');
+var Room = require(path.resolve('server', 'api/room/room.model'));
+var Block = require(path.resolve('server', 'api/block/block.model'));
 var mongoose = require('mongoose');
 
 // Get list of rooms

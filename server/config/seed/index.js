@@ -5,15 +5,16 @@
 
 'use strict';
 
-var Allocation = require('../../api/allocation/allocation.model');
-var Block = require('../../api/block/block.model');
-var Category = require('../../api/category/category.model');
-var Config = require('../../api/config/config.model');
-var Person = require('../../api/person/person.model');
-var Product = require('../../api/product/product.model');
-var Reservation = require('../../api/reservation/reservation.model');
-var Room = require('../../api/room/room.model');
-var User = require('../../api/user/user.model');
+var path = require('path');
+var Allocation = require(path.resolve('server', 'api/allocation/allocation.model'));
+var Block = require(path.resolve('server', 'api/block/block.model'));
+var Category = require(path.resolve('server', 'api/category/category.model'));
+var Config = require(path.resolve('server', 'api/config/config.model'));
+var Person = require(path.resolve('server', 'api/person/person.model'));
+var Product = require(path.resolve('server', 'api/product/product.model'));
+var Reservation = require(path.resolve('server', 'api/reservation/reservation.model'));
+var Room = require(path.resolve('server', 'api/room/room.model'));
+var User = require(path.resolve('server', 'api/user/user.model'));
 
 
 var mongoose = require('mongoose'); 
@@ -54,31 +55,31 @@ User.remove().exec()
 
 // Seed
 .then(function() { 
-    return User.seed(require('./users.json'));
+    return User.seed(require(path.resolve('server', 'config/seed/users.json')));
 })
 .then(function() { 
-    return Config.seed(require('./config.json'));
+    return Config.seed(require(path.resolve('server', 'config/seed/config.json')));
 })
 .then(function() { 
-    return Category.seed(require('./categories.json'));
+    return Category.seed(require(path.resolve('server', 'config/seed/categories.json')));
 })
 .then(function() { 
-    return Product.seed(require('./products.json'));
+    return Product.seed(require(path.resolve('server', 'config/seed/products.json')));
 })
 .then(function() { 
-    return Block.seed(require('./blocks.json'));
+    return Block.seed(require(path.resolve('server', 'config/seed/blocks.json')));
 })
 .then(function() { 
-    return Room.seed(require('./rooms.json'));
+    return Room.seed(require(path.resolve('server', 'config/seed/rooms.json')));
 })
 .then(function() { 
-    return Person.seed(require('./persons.json'));
+    return Person.seed(require(path.resolve('server', 'config/seed/persons.json')));
 })
 .then(function() { 
-    return Allocation.seed(require('./allocations.json'));
+    return Allocation.seed(require(path.resolve('server', 'config/seed/allocations.json')));
 })
 .then(function() { 
-    return Reservation.seed(require('./reservations.json'));
+    return Reservation.seed(require(path.resolve('server', 'config/seed/reservations.json')));
 })
 
 // Done!

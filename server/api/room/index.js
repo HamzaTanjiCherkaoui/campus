@@ -1,8 +1,9 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./room.controller');
-var auth = require('../../auth/auth.service');
+var path = require('path');
+var controller = require(path.resolve('server', 'api/room/room.controller'));
+var auth = require(path.resolve('server', 'auth/auth.service'));
 
 var router = express.Router();
 

@@ -32,3 +32,17 @@ var FieldSchema = new Schema({
 	isVisible: String
 });
 
+
+/*==========================
+|		nodewebkit
+==========================*/
+
+hi every one
+I have a node web app that use express an other node modules
+I want to use this web application as a desktop app, so a friend of mine suggest using node webkit
+and yes node webkit make it look like a desktop app, I can customize every thing I want the toolbar, the window, the scroll bar ...
+
+but the problem I encounter here is the fact that every time I want to start this app, I do need to run the web server #npm start and then double click the node-webkit app. 
+
+my question: is there a way to run the server whene double click the node-webkit app.
+

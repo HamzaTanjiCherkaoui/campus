@@ -16,7 +16,8 @@
 	    	"product.show", "product.create", "product.update", "product.delete",
 	    	"reservation.show", "reservation.create", "reservation.update", "reservation.delete",
 	    	"allocation.show", "allocation.create", "allocation.update", "allocation.delete",
-	    	"config.show", "config.create", "config.update", "config.delete"
+	    	"config.show", "config.create", "config.update", "config.delete","category.show","category.create",
+	    	"category.update" , "category.delete"
 	    ],
 	    "activated": true
 	},

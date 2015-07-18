@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/products',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['product.show'],
                     pageTitle: 'campusApp.product.home.title'
                 },
                 views: {
@@ -28,7 +28,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/product/:id',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['product.show'],
                     pageTitle: 'campusApp.product.detail.title'
                 },
                 views: {

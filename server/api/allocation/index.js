@@ -7,7 +7,7 @@ var auth = require(path.resolve('server', 'auth/auth.service'));
 
 var router = express.Router();
 
-router.get('/', auth.hasRole('allocation.show'), controller.index);
+router.get('/', controller.index);
 router.get('/:id', auth.hasRole('allocation.show'), controller.show);
 router.post('/', auth.hasRole('allocation.create'), controller.create);
 router.put('/:id', auth.hasRole('allocation.update'), controller.update);

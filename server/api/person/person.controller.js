@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 
 // Get list of persons
 exports.index = function(req, res) {
+  req.query = _.merge({page: 1, perPage: 20, keyword : '', orderBy: 'lastName', orderDir:'asc'}, req.query);
   var keyword = {$regex: new RegExp(req.query.keyword,'i')};
   var where = {$or: [{lastName: keyword}, {firstName: keyword}, {code: keyword}, {city: keyword}]};
   Person.find(where)

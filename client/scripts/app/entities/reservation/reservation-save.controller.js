@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('ReservationSaveController', function ($scope, $stateParams, Person, Room, Block, Reservation, Fields) {
+    .controller('ReservationSaveController', function ($scope, $state, $stateParams, Person, Room, Block, Reservation, Fields) {
         $scope.person = {};
         $scope.entity = {};
         $scope.searchData = {
@@ -9,6 +9,7 @@ angular.module('campusApp')
             perPage: 4,
             keyword : '',
             isFree: 1,
+            gender: true,
             orderBy : 'name',
             orderDir : 'asc'
         };
@@ -21,6 +22,8 @@ angular.module('campusApp')
             Person.get({id: id}, function(result) {
               $scope.person = result;
               $scope.entity.person = result._id;
+              $scope.searchData.gender = result.gender;
+              $scope.loadRooms();
             });
         };
         $scope.selectRoom = function(id){
@@ -44,7 +47,7 @@ angular.module('campusApp')
         };
         $scope.save = function(){
             Reservation.save($scope.entity, function (result) {
-                console.log(result);
+                $state.go('personDetail', {id: $scope.person._id});
             });
         };
 
@@ -60,5 +63,4 @@ angular.module('campusApp')
         };
 
         $scope.load($stateParams.person);
-        $scope.loadRooms();
     });

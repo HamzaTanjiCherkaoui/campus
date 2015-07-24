@@ -24,6 +24,14 @@ exports.index = function(req, res) {
     .limit(req.query.perPage)
     .populate('block')
     .exec(function(err, rooms) {
+
+        if(req.query.gender == undefined){
+          console.log(req.query);
+          console.log(rooms);
+          rooms = rooms.filter(function (item) {
+            return item.block.type === true;
+          });
+        }
         Room.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
           res.setHeader('count', count);
@@ -52,9 +60,10 @@ exports.show = function(req, res) {
 
 // Creates a new room in the DB.
 exports.create = function(req, res) {
-  Room.create(req.body, function(err, room) {
+  delete req.body._id;
+  Room.create(req.body, function(err, data) {
     if(err) { return handleError(res, err); }
-    return res.json(201, room);
+    return res.json(201, data);
   });
 };
 

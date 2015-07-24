@@ -22,21 +22,12 @@
         <!-- build:css({.tmp,client}) app/app.css -->
         <link href="assets/css/main.css" rel="stylesheet" />
         <link href="assets/css/flat-ui-custom.css" rel="stylesheet" />
-        <link href="assets/css/nw.css" rel="stylesheet" />
           <!-- injector:css -->
           <!-- endinjector -->
         <!-- endbuild -->
 
     </head>
     <body ng-app="campusApp" ng-class="{'theme1 app': isAuthenticated() , 'login-screen': !isAuthenticated()}">
-
-        <header class="window-toolbar">
-            <ul>
-                <li><a href='#' title='Minimize' id='windowControlMinimize'></a></li>
-                <li><a href='#' title='Maximize' id='windowControlMaximize'></a></li>
-                <li><a href='#' title='Close'    id='windowControlClose'   ></a></li>
-            </ul>
-        </header>
         <!--[if lt IE 10]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->

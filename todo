@@ -36,3 +36,10 @@ var FieldSchema = new Schema({
 /*==========================
 |		nodewebkit
 ==========================*/
+
+
+/*==========================
+|		ui & ux
+==========================*/
+- flash messages
+- node-webkit border raduis

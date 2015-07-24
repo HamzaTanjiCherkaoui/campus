@@ -41,7 +41,7 @@ MongoDB - Download and Install [MongoDB](http://www.mongodb.org/downloads) - you
 
 ## Copyright and license
 
-2015-2016 - FlatTurtle
+2015 - FlatCode
 
 Code is licensed under AGPLv3
 

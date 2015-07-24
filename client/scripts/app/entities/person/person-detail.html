@@ -13,7 +13,7 @@
           <li><a><i class="fa fa-credit-card"></i> <span translate="entity.action.print.card">Print card</span></a></li>
           <li><a><i class="fa fa-ticket"></i> <span translate="entity.action.print.ticket">Print ticket</span></a></li>
           <li><a my-printer><i class="fa fa-print"></i> <span translate="entity.action.print.page">Print page</span></a></li>
-          <li is-granted="room.update"><a ui-sref="reservationSave({person:entity._id})"><i class="fa fa-hotel"></i> <span translate="campusApp.room.action.bookRoom">Book a Room</span></a></li>
+          <li is-granted="room.update" ng-show="!entity.reservation || entity.reservation.satus"><a ui-sref="reservationSave({person:entity._id})"><i class="fa fa-hotel"></i> <span translate="campusApp.room.action.bookRoom">Book a Room</span></a></li>
         </ul>
       </div>
     </div>
@@ -71,12 +71,13 @@
             <h3><span class="fa fa-hotel"></span> Informations de logement</h3>
         </header>
         <ul class="list-group">
-          <li class="list-group-item"><strong>Date début :</strong> {{ entity.reservation.dateFrom }}  </li>
-          <li class="list-group-item"><strong>Date fin :</strong> {{ entity.reservation.dateTo }} </li>
+          <li class="list-group-item"><strong>Date début :</strong> {{ entity.reservation.dateFrom | amDateFormat:'DD-MM-YYYY' }}  </li>
+          <li class="list-group-item"><strong>Date fin :</strong> {{ entity.reservation.dateTo | amDateFormat:'DD-MM-YYYY' }} </li>
           <li class="list-group-item"><strong>Numero de chambre :</strong> {{ entity.reservation.room.name }} </li>
           <li class="list-group-item"><strong>Numero de pavé :</strong> {{ entity.reservation.room.block.name }} </li>
-          <li class="list-group-item"><strong>Date de payement :</strong> {{ entity.reservation.datePayement }}  </li>
+          <li class="list-group-item"><strong>Date de payement :</strong> {{ entity.reservation.datePayement | amDateFormat:'DD-MM-YYYY' }}  </li>
           <li class="list-group-item"><strong>Montant :</strong> {{ entity.reservation.price }} DH </li>
+          <li class="list-group-item"><strong>Status :</strong> {{{true: 'valide', false: 'invalide'}[entity.reservation.status ]}} </li>
         </ul>
     </div>
   </div> 

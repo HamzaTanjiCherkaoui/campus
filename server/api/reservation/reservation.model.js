@@ -8,7 +8,7 @@ var ReservationSchema = new Schema({
 	datePayement: { type: Date, default: Date.now },
 	dateFrom: { type: Date, default: Date.now },
 	dateTo: Date,
-	status: Boolean,
+	status: { type: Boolean, default: true },
 	price: Number,
 	person: {type: mongoose.Schema.Types.ObjectId, ref: 'Person', childPath:"reservations"},
 	room: {type: mongoose.Schema.Types.ObjectId, ref: 'Room', childPath:"reservations"}

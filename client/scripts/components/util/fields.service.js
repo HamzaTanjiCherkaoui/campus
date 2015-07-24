@@ -52,6 +52,15 @@ angular.module('campusApp')
                 },
                 category:{
 
+                },
+                reservation:{
+                    person: {label: 'person', visible: true, callback: function(a){return a.fullName;}},
+                    room: {label: 'room', visible: true, callback: function(a){return a.name;}},
+                    datePayement: {label: 'datePayement', visible: true, callback: $filter('toDate')},
+                    dateFrom: {label: 'dateFrom', visible: true, callback: $filter('toDate')},
+                    dateTo: {label: 'dateTo', visible: true, callback: $filter('toDate')},
+                    status: {label: 'status', visible: true},
+                    price: {label: 'price', visible: true}
                 }
         };
         return {

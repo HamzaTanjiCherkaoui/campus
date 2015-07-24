@@ -13,14 +13,14 @@ var http = require('http');
 var path = require('path');
 
 var config = require(path.resolve('server', 'config/environment'));
-
+var mWindow = global.window;
 
 //check if server is already running
 http.get(config.port, config.ip, function(res) {
     console.log('server is running, redirecting to localhost');
-    if (window.location.href.indexOf('localhost') < 0) { 
-        window.location = 'http://localhost:' + config.port;
-    }
+    // if (mWindow && mWindow.location.href.indexOf('localhost') < 0) { 
+    //     mWindow.location = 'http://localhost:' + config.port;
+    // }
 }).on('error', function(e) {
 
     // Connect to database
@@ -40,9 +40,9 @@ http.get(config.port, config.ip, function(res) {
 
     // Start server
     server.listen(config.port, config.ip, function () {
-      console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-      if (window.location.href.indexOf('localhost') < 0) { 
-        window.location = 'http://localhost:' + config.port;
-        }
+        console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+        // if (mWindow && mWindow.location.href.indexOf('localhost') < 0) { 
+        //     mWindow.location = 'http://localhost:' + config.port;
+        // }
     });
 });

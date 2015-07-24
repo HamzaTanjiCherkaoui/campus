@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/reservation',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['reservation.show'],
                     pageTitle: 'campusApp.reservation.home.title'
                 },
                 views: {
@@ -27,7 +27,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/reservation/:id',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['reservation.show'],
                     pageTitle: 'campusApp.reservation.detail.title'
                 },
                 views: {
@@ -39,6 +39,9 @@ angular.module('campusApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('reservation');
+                        $translatePartialLoader.addPart('person');
+                        $translatePartialLoader.addPart('room');
+                        $translatePartialLoader.addPart('block');
                         return $translate.refresh();
                     }]
                 }
@@ -59,6 +62,9 @@ angular.module('campusApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('reservation');
+                        $translatePartialLoader.addPart('person');
+                        $translatePartialLoader.addPart('room');
+                        $translatePartialLoader.addPart('block');
                         return $translate.refresh();
                     }]
                 }

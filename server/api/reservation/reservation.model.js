@@ -2,7 +2,9 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    relationship = require("mongoose-relationship");
+    relationship = require("mongoose-relationship"),
+    path = require('path'),
+    Room = require(path.resolve('server', 'api/room/room.model'));
 
 var ReservationSchema = new Schema({
 	datePayement: { type: Date, default: Date.now },
@@ -15,5 +17,20 @@ var ReservationSchema = new Schema({
 });
 
 ReservationSchema.plugin(relationship, { relationshipPathName: ['person', 'room'] });
+
+/**
+ * hooks
+ */
+ReservationSchema
+  .post('remove', function(entity) {
+    if(entity.status){ 
+        Room.findById(entity.room, function (err, room) {
+            room.free = room.free + 1;  
+            room.save();
+        })
+    }
+  });
+
+
 
 module.exports = mongoose.model('Reservation', ReservationSchema);

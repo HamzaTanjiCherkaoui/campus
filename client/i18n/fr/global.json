@@ -5,14 +5,17 @@
         "menu": {
             "home": "Accueil",
             "entities": {
-                "main": "Entités",
-                "person": "Person",
-                "block": "Block",
-                "room": "Room",
-                "product": "Product",
-                "category": "Category",
-                "allocation": "Allocation",
-                "reservation": "Reservation"
+                "main": "Tableau de bord",
+                "user": "Users",
+                "person": "Etudiants",
+                "block": "Pavillons",
+                "room": "Chambres",
+                "product": "Produits",
+                "category": "Categories",
+                "allocation": "Allocations",
+                "reservation": "Reservations",
+                "collapse": "Réduire le menu",
+                "settings": "Settings"
             },
             "account": {
                 "main": "Compte",
@@ -79,10 +82,16 @@
         "action": {
             "back": "Retour",
             "cancel": "Annuler",
+            "add": "Ajouter",
             "edit": "Editer",
             "delete": "Supprimer",
             "save": "Sauvegarder",
             "view": "Voir",
+            "check": "réserver",
+            "activate": "Activer",
+            "desactivate": "Désactiver",
+            "customFields": "Champs pérsonalisé",
+            "selectRoles": "Séléctionner les droit d'accées",
             "print": {
                 "all": "Imprimer",
                 "card": "Imprimer la carte",

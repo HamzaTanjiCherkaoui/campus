@@ -15,6 +15,7 @@ angular
         };
         $scope.fields = Fields.get('user');
         $scope.getFieldValue = Fields.getValue;
+        $scope.getFieldLabel = Fields.getLabel;
 
         $scope.loadAll = function() {
             User.query($scope.searchData, function(result, headers) {

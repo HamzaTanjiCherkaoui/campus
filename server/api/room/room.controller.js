@@ -8,36 +8,19 @@ var mongoose = require('mongoose');
 
 // Get list of rooms
 exports.index = function(req, res) {
-  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
-  var where = [{name: keyword}];
-  if(req.query.block){
-    where.push({block: {_id: mongoose.Types.ObjectId(req.query.block)}});
-  }
-  if(req.query.isFree == 1){
-    where.push({free: {$gt : 0}});
-  }else if(req.query.isFree == 2) {
-    where.push({free: {$lte : 0}});
-  }
-  Room.find({$and: where})
-    .sort([[req.query.orderBy, req.query.orderDir]])
-    .skip(req.query.perPage * (req.query.page - 1))
-    .limit(req.query.perPage)
-    .populate('block')
-    .exec(function(err, rooms) {
 
-        if(req.query.gender == undefined){
-          console.log(req.query);
-          console.log(rooms);
-          rooms = rooms.filter(function (item) {
-            return item.block.type === true;
-          });
-        }
-        Room.count().exec(function(err, count) {
-          res.setHeader('pages', Math.ceil( count / req.query.perPage ));
-          res.setHeader('count', count);
-          res.json(200, rooms);
-        })
+  if(req.query.gender){
+    Block.find({type: req.query.gender})
+    .select('_id')
+    .exec(function(err, blocks){
+      req.query.blockIds = blocks.map(function(block){
+        return block._id;
+      });
+      searchRooms(req, res);
     });
+  }else{
+    searchRooms(req, res);
+  }
 };
 
 // Get a single room
@@ -130,6 +113,35 @@ exports.addmultiple = function(req, res) {
   });
 };
 
+function searchRooms(req, res) {
+  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
+  var where = [{name: keyword}];
+  if(req.query.block){
+    where.push({block: {_id: mongoose.Types.ObjectId(req.query.block)}});
+  }
+  if(req.query.isFree == 1){
+    where.push({free: {$gt : 0}});
+  }else if(req.query.isFree == 2) {
+    where.push({free: {$lte : 0}});
+  }
+  if(req.query.blockIds){
+    where.push({block: { $in : req.query.blockIds}});
+  }
+  Room.find({$and: where})
+    .sort([[req.query.orderBy, req.query.orderDir]])
+    .skip(req.query.perPage * (req.query.page - 1))
+    .limit(req.query.perPage)
+    .populate('block')
+    .exec(function(err, rooms) {
+        Room.count().exec(function(err, count) {
+          res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.setHeader('count', count);
+          res.json(200, rooms);
+        })
+    });
+}
+
 function handleError(res, err) {
   return res.send(500, err);
 }
+

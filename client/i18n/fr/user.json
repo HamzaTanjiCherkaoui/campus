@@ -1,19 +1,22 @@
 {
     "campusApp": {
-        "profile" : {
+        "user" : {
             "home": {
-                "title": "Profiles",
-                "createLabel": "Créer un nouveau Profile",
-                "createOrEditLabel": "Créer ou éditer un Profile"
+                "title": "List des utilisateurs",
+                "createLabel": "Créer un nouveau utilisateur",
+                "createOrEditLabel": "Créer ou éditer un utilisateur"
             },
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Profile {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer l'utilisateur {{ id }} ?",
+                "multiplequestion": "Etes-vous certain de vouloir supprimer les utilisateurs séléctionnés ?"
             },
             "detail": {
-                "title": "Profile"
+                "title": "Utilisateur"
             },
-            "lastname": "Lastname",
-            "firstName": "FirstName",
+            "username": "Nom d'utilisateur",
+            "email": "Couriel",
+            "lastName": "Nom",
+            "firstName": "Prénom",
             "barcode": "Barcode",
             "cin": "Cin",
             "birthDay": "BirthDay",
@@ -24,17 +27,14 @@
             "country": "Country",
             "job": "Job",
             "tel": "Tel",
-            "gsm": "Gsm",
-            "certificat": "Certificat",
-            "expertise": "Expertise",
             "description": "Description",
             "website": "Website",
             "facebook": "Facebook",
             "google": "Google",
             "twitter": "Twitter",
-            "paymentFrequency": "PaymentFrequency",
-            "paymentMethod": "PaymentMethod",
-            "paymentAmount": "PaymentAmount",
+            "activated": "Activé",
+            "langKey": "Langue",
+            "roles": "Droit d'accées",
             "archived": "Archived",
             "archivedCause": "ArchivedCause"
         }

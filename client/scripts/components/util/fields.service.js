@@ -4,9 +4,9 @@ angular.module('campusApp')
     .factory('Fields', function($filter) {
         var data = {
                 user: {
+                    username: {label: 'username', visible: true, sortable: true},
                     firstName: {label: 'firstName', visible: true},
                     lastName: {label: 'lastName', visible: true},
-                    username: {label: 'username', visible: true},
                     email: {label: 'email', visible: true},
                     roles: {label: 'roles', visible: false, callback: function (roles) {return roles.join(', ')}},
                     activated: {label: 'activated', visible: true, callback: function (activated) {return activated ? 'enabled' : 'disabled'}},
@@ -75,6 +75,9 @@ angular.module('campusApp')
                     return field.callback(entity[field.label]);
                 }
                 return entity[field.label];
+            },
+            getLabel: function(field) {
+                return 'campusApp.user.' + field.label;
             }
         };
     });

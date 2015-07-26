@@ -1,28 +1,38 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('ReservationController', function ($scope, Reservation, ParseLinks) {
+    .controller('ReservationController', function ($scope, $http, Reservation, Fields) {
         $scope.reservations = [];
-        $scope.page = 1;
+        $scope.searchData = {
+            page: 1,
+            perPage: 4,
+            keyword : '',
+            orderBy : 'datePayement',
+            orderDir : 'asc'
+        };
+        $scope.fields = Fields.get('reservation');
+        $scope.getFieldValue = Fields.getValue;
+
         $scope.loadAll = function() {
-            Reservation.query({page: $scope.page, perPage: 20}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
+            Reservation.query($scope.searchData, function(result, headers) {
                 $scope.reservations = result;
             });
         };
         $scope.loadPage = function(page) {
-            $scope.page = page;
+            $scope.searchData.page = page;
             $scope.loadAll();
         };
         $scope.loadAll();
 
         $scope.create = function () {
-            Reservation.update($scope.reservation,
-                function () {
-                    $scope.loadAll();
-                    $('#saveReservationModal').modal('hide');
-                    $scope.clear();
-                });
+            var entity = $scope.reservation;
+            entity.rooms = [];
+            if(entity._id) {
+                Reservation.update({id: entity._id}, entity, saveCalback);
+            }
+            else {
+                Reservation.save(entity, saveCalback);
+            }
         };
 
         $scope.update = function (id) {
@@ -39,6 +49,14 @@ angular.module('campusApp')
             });
         };
 
+        $scope.multipleDelete = function () {
+            $http.post('/api/reservations/deletemultiple', {ids: getCheckedReservationsIDs()})
+                .success(function () {
+                    $('#deleteMultipleConfirmation').modal('hide');
+                    $scope.loadAll();
+                });
+        };
+
         $scope.confirmDelete = function (id) {
             Reservation.delete({id: id},
                 function () {
@@ -48,9 +66,39 @@ angular.module('campusApp')
                 });
         };
 
+        $scope.changeOrder = function (column) {
+            $scope.searchData.orderBy = column;
+            $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
+            $scope.loadAll();
+        };
+
         $scope.clear = function () {
-            $scope.reservation = {datePayement: null, dateFrom: null, dateTo: null, status: null, price: null, id: null};
+            $scope.reservation = {_id: null, name: null, floors: null, type: null};
             $scope.editForm.$setPristine();
             $scope.editForm.$setUntouched();
+        };       
+
+        $scope.markAll = function (checked) {
+            $scope.reservations.forEach(function (entity) {
+                entity.checked = checked;
+            });
         };
+
+        $scope.showMultipleActions = function () {
+            return getCheckedReservations().length === 0 ? false : true;
+        };
+
+        function getCheckedReservations () {
+            return $scope.reservations.filter(function (entity) { return entity.checked;});
+        }
+
+        function getCheckedReservationsIDs () {
+            return getCheckedReservations().map(function(entity){return entity._id;});
+        }
+
+        function saveCalback (argument) {
+            $scope.loadAll();
+            $('#saveReservationModal').modal('hide');
+            $scope.clear();
+        }
     });

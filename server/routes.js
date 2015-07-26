@@ -4,22 +4,23 @@
 
 'use strict';
 
-var errors = require('./components/errors');
+var path = require('path');
+var errors = require(path.resolve('server', 'components/errors'));
 
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/reclamations', require('./api/reclamation'));
-  app.use('/api/config', require('./api/config'));
-  app.use('/api/allocations', require('./api/allocation'));
-  app.use('/api/categories', require('./api/category'));
-  app.use('/api/products', require('./api/product'));
-  app.use('/api/reservations', require('./api/reservation'));
-  app.use('/api/rooms', require('./api/room'));
-  app.use('/api/blocks', require('./api/block'));
-  app.use('/api/persons', require('./api/person'));
-  app.use('/api/users', require('./api/user'));
-  app.use('/auth', require('./auth'));
+  app.use('/api/reclamations', require(path.resolve('server', 'api/reclamation')));
+  app.use('/api/config', require(path.resolve('server', 'api/config')));
+  app.use('/api/allocations', require(path.resolve('server', 'api/allocation')));
+  app.use('/api/categories', require(path.resolve('server', 'api/category')));
+  app.use('/api/products', require(path.resolve('server', 'api/product')));
+  app.use('/api/reservations', require(path.resolve('server', 'api/reservation')));
+  app.use('/api/rooms', require(path.resolve('server', 'api/room')));
+  app.use('/api/blocks', require(path.resolve('server', 'api/block')));
+  app.use('/api/persons', require(path.resolve('server', 'api/person')));
+  app.use('/api/users', require(path.resolve('server', 'api/user')));
+  app.use('/auth', require(path.resolve('server', 'auth')));
   
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

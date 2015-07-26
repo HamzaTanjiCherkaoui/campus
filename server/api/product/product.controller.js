@@ -1,8 +1,9 @@
 'use strict';
 
 var _ = require('lodash');
+var path = require('path');
 var mongoose = require('mongoose');
-var Product = require('./product.model');
+var Product = require(path.resolve('server', 'api/product/product.model'));
 
 // Get list of products
 exports.index = function(req, res) {

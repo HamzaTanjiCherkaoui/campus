@@ -7,7 +7,7 @@
     "free": 0,
     "__v": 0,
     "block": "5590c1f685a2e84c1114e55e",
-    "reservations": []
+    "reservations": ["5590c5c985a2e84c1114e56b", "5590c5f185a2e84c1114e56c"]
   },
   {
     "_id": "5590c2db85a2e84c1114e563",
@@ -57,6 +57,16 @@
     "free": 2,
     "__v": 0,
     "block": "5590c1fa85a2e84c1114e55f",
+    "reservations": []
+  },
+  {
+    "_id": "55aae896b6d259241e7a81a0",
+    "name": "C01",
+    "floor": 0,
+    "capacity": 2,
+    "free": 2,
+    "__v": 0,
+    "block": "5590c20385a2e84c1114e560",
     "reservations": []
   }
 ]

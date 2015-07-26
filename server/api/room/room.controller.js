@@ -1,34 +1,26 @@
 'use strict';
 
 var _ = require('lodash');
-var Room = require('./room.model');
-var Block = require('./../block/block.model');
+var path = require('path');
+var Room = require(path.resolve('server', 'api/room/room.model'));
+var Block = require(path.resolve('server', 'api/block/block.model'));
 var mongoose = require('mongoose');
 
 // Get list of rooms
 exports.index = function(req, res) {
-  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
-  var where = [{name: keyword}];
-  if(req.query.block){
-    where.push({block: {_id: mongoose.Types.ObjectId(req.query.block)}});
-  }
-  if(req.query.isFree == 1){
-    where.push({free: {$gt : 0}});
-  }else if(req.query.isFree == 2) {
-    where.push({free: {$lte : 0}});
-  }
-  Room.find({$and: where})
-    .sort([[req.query.orderBy, req.query.orderDir]])
-    .skip(req.query.perPage * (req.query.page - 1))
-    .limit(req.query.perPage)
-    .populate('block')
-    .exec(function(err, rooms) {
-        Room.count().exec(function(err, count) {
-          res.setHeader('pages', Math.ceil( count / req.query.perPage ));
-          res.setHeader('count', count);
-          res.json(200, rooms);
-        })
+
+  if(req.query.gender){
+    Block.find({type: req.query.gender})
+    .select('_id')
+    .exec(function(err, blocks){
+      req.query.blockIds = blocks.map(function(block){
+        return block._id;
+      });
+      searchRooms(req, res);
     });
+  }else{
+    searchRooms(req, res);
+  }
 };
 
 // Get a single room
@@ -36,19 +28,25 @@ exports.show = function(req, res) {
   Room.findById(req.params.id)
     .populate('block')
     .populate('reservations')
-    .populate('person')
     .exec(function (err, room) {
       if(err) { return handleError(res, err); }
       if(!room) { return res.send(404); }
-      return res.json(room);
+      var personPath = {
+        path: 'reservations.person',
+        model: 'Person'
+      };
+      Room.populate(room, personPath, function (err, room) {
+        return res.json(room);
+      });
     });
 };
 
 // Creates a new room in the DB.
 exports.create = function(req, res) {
-  Room.create(req.body, function(err, room) {
+  delete req.body._id;
+  Room.create(req.body, function(err, data) {
     if(err) { return handleError(res, err); }
-    return res.json(201, room);
+    return res.json(201, data);
   });
 };
 
@@ -115,6 +113,35 @@ exports.addmultiple = function(req, res) {
   });
 };
 
+function searchRooms(req, res) {
+  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
+  var where = [{name: keyword}];
+  if(req.query.block){
+    where.push({block: {_id: mongoose.Types.ObjectId(req.query.block)}});
+  }
+  if(req.query.isFree == 1){
+    where.push({free: {$gt : 0}});
+  }else if(req.query.isFree == 2) {
+    where.push({free: {$lte : 0}});
+  }
+  if(req.query.blockIds){
+    where.push({block: { $in : req.query.blockIds}});
+  }
+  Room.find({$and: where})
+    .sort([[req.query.orderBy, req.query.orderDir]])
+    .skip(req.query.perPage * (req.query.page - 1))
+    .limit(req.query.perPage)
+    .populate('block')
+    .exec(function(err, rooms) {
+        Room.count().exec(function(err, count) {
+          res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.setHeader('count', count);
+          res.json(200, rooms);
+        })
+    });
+}
+
 function handleError(res, err) {
   return res.send(500, err);
 }
+

@@ -1,96 +1,131 @@
-<div>
+<h2><i class="fa fa-building"></i> List of reservations</h2>
+    <form ng-submit="loadPage(pagination.first)" role="from" class="searchPanel">
+        <div class="row hidden-print">
+          <div class="col-md-6 col-xs-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" ng-model="searchData.keyword">
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+                <div class="btn-group pull-right">             
+                  <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Select an action
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-inverse">
+                    <li><a data-toggle="modal" data-target="#saveReservationModal" ng-click="clear()"><i class="fa fa-user-plus"></i> add</a></li>
+                    <li class="divider"></li>
+                    <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-th"></i> custom fields</a></li>
+                    <li is-granted="reservation.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
+                  </ul>
+                </div>
+          </div><!-- /.col-lg-2 -->
+        </div><!-- /.row -->
+    </form>
 
-    <h2 translate="campusApp.reservation.home.title">Reservation</h2>
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <label class="checkbox" for="checkbox0">
+                        <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
+                    </label>
+                </th>
+                <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
+                    <a ng-if="field.sortable" ng-click="changeOrder(field.label)">{{ field.label }} <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
+                    <span ng-if="!field.sortable">{{ field.label }}</span>
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="entity in reservations" ng-class="{'success': entity.isFree}">
+                <td>
+                    <label class="checkbox" for="checkbox{{entity._id}}">
+                        <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
+                    </label>
+                </td>
+                <td ng-repeat="field in fields" ng-show="field.visible">{{ getFieldValue(entity, field)}}</td>
+                <td>
+                    <button ui-sref="reservationDetail({id:entity._id})"
+                            class="btn btn-info  btn-embossed btn-xs">
+                        <i class="fa fa-eye"></i>&nbsp;<span translate="entity.action.view"> View</span>
+                    </button>
+                    <button ng-click="update(entity._id)"
+                            is-granted="reservation.update"
+                            class="btn btn-primary  btn-embossed btn-xs">
+                        <i class="fa fa-edit"></i>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                    </button>
+                    <button ng-click="delete(entity._id)"
+                            is-granted="reservation.delete"
+                            class="btn btn-danger  btn-embossed btn-xs">
+                        <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+        
+    <div class="caption">
+      <em><strong>Total :</strong> {{ reservations.length }}</em>
+    </div>
 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveReservationModal" ng-click="clear()">
-        <span class="glyphicon glyphicon-flash"></span> <span translate="campusApp.reservation.home.createLabel">Create a new Reservation</span>
-    </button>
-    <div class="modal fade" id="saveReservationModal" tabindex="-1" role="dialog" aria-labelledby="myReservationLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- save modal -->
+    <div class="modal fade" id="saveReservationModal">
+        <div class="modal-dialog modal-large">
             <div class="modal-content">
-                <form name="editForm" role="form" novalidate ng-submit="create()" show-validation>
-
+                <form name="editForm" role="form" novalidate ng-submit="create()">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"ng-click="clear()">&times;</button>
                         <h4 class="modal-title" id="myReservationLabel" translate="campusApp.reservation.home.createOrEditLabel">Create or edit a Reservation</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>ID</label>
-                            <input type="text" class="form-control" name="id"
-                                   ng-model="reservation.id" readonly>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="control-label">ID</label>
+                          <div class="form-group">
+                              <input type="text" class="form-control" name="id" ng-model="reservation._id" readonly>
+                          </div>
                         </div>
-
-                        <div class="form-group">
-                            <label translate="campusApp.reservation.datePayement">DatePayement</label>
-                            <input type="datetime-local" class="form-control" name="datePayement"
-                                   ng-model="reservation.datePayement" ng-model-options="{timezone: 'UTC'}" required>
-
-                            <div ng-show="editForm.datePayement.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.datePayement.$error.required" translate="entity.validation.required">
-                                    This field is required.
-                                </p>
-                                <p class="help-block"
-                                   ng-show="editForm.datePayement.$error.datetimelocal" translate="entity.validation.datetimelocal">
-                                    This field should be a date and time.
-                                </p>
-                            </div>
+                        <div class="col-md-6">
+                          <label translate="campusApp.reservation.name">Name</label>
+                          <div class="form-group">
+                              <input type="text" class="form-control" name="name" ng-model="reservation.name">
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="campusApp.reservation.dateFrom">DateFrom</label>
-                            <input type="datetime-local" class="form-control" name="dateFrom"
-                                   ng-model="reservation.dateFrom" ng-model-options="{timezone: 'UTC'}" required>
-
-                            <div ng-show="editForm.dateFrom.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.dateFrom.$error.required" translate="entity.validation.required">
-                                    This field is required.
-                                </p>
-                                <p class="help-block"
-                                   ng-show="editForm.dateFrom.$error.datetimelocal" translate="entity.validation.datetimelocal">
-                                    This field should be a date and time.
-                                </p>
-                            </div>
+                        <div class="col-md-6">
+                          <label translate="campusApp.reservation.floors">Floors</label>
+                          <div class="form-group">
+                              <input type="number" class="form-control" name="floors" ng-model="reservation.floors">
+                              <div ng-show="editForm.floors.$invalid">
+                                    <p class="help-reservation" ng-show="editForm.floors.$error.number" translate="entity.validation.number"> 
+                                        This field should be a number.
+                                    </p>
+                              </div>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="campusApp.reservation.dateTo">DateTo</label>
-                            <input type="datetime-local" class="form-control" name="dateTo"
-                                   ng-model="reservation.dateTo" ng-model-options="{timezone: 'UTC'}">
-
+                        <div class="col-md-6">
+                          <label for="entity.gender">Type</label>
+                          <div class="form-group">
+                              <select class="form-control select select-primary" my-select="primary" name="gender" ng-model="entity.gender" ng-options="item.value as item.label for item in genderArray">
+                                <option value="" ng-if="entity.gender">Select Type</option>
+                              </select>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label translate="campusApp.reservation.status">Status</label>
-                            <input type="checkbox" class="form-control" name="status"
-                                   ng-model="reservation.status">
-
-                        </div>
-                        <div class="form-group">
-                            <label translate="campusApp.reservation.price">Price</label>
-                            <input type="number" class="form-control" name="price"
-                                   ng-model="reservation.price" min="0">
-
-                            <div ng-show="editForm.price.$invalid">
-                                <p class="help-block"
-                                   ng-show="editForm.price.$error.min" translate="entity.validation.min" translate-value-min="0">
-                                    This field should be more than 0.
-                                </p>
-                                <p class="help-block"
-                                   ng-show="editForm.price.$error.number" translate="entity.validation.number">
-                                    This field should be a number.
-                                </p>
-                            </div>
-                        </div>
-
+                        <div class="clearfix"></div>
+                      </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                            <i class="fa fa-ban"></i>&nbsp;<span translate="entity.action.cancel">Cancel</span>
                         </button>
-                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-primary">
+                            <i class="fa fa-save"></i>&nbsp;<span translate="entity.action.save">save</span>
                         </button>
                     </div>
                 </form>
@@ -98,22 +133,44 @@
         </div>
     </div>
 
+
+      <!-- delete confirmation modal -->
     <div class="modal fade" id="deleteReservationConfirmation">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form name="deleteForm" ng-submit="confirmDelete(reservation.id)">
+                <form name="deleteForm" ng-submit="confirmDelete(reservation._id)">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="campusApp.reservation.delete.question" translate-values="{id: '{{reservation.id}}'}">Are you sure you want to delete this Reservation?</p>
+                        <p translate="campusApp.reservation.delete.question" translate-values="{id: '{{reservation._id}}'}">Are you sure you want to delete this reservation?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <i class="fa fa-times-circle"></i>&nbsp;<span translate="entity.action.delete">Delete</span>
                         </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- multiple delete modal -->
+    <div class="modal fade" id="deleteMultipleConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="multipleDelete()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="campusApp.reservation.delete.multiplequestion" >Are you sure you want to delete all these reservations?</p>
+                    </div>
+                    <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
                         </button>
@@ -123,54 +180,25 @@
         </div>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th translate="campusApp.reservation.datePayement">DatePayement</th>
-                    <th translate="campusApp.reservation.dateFrom">DateFrom</th>
-                    <th translate="campusApp.reservation.dateTo">DateTo</th>
-                    <th translate="campusApp.reservation.status">Status</th>
-                    <th translate="campusApp.reservation.price">Price</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="reservation in reservations">
-                    <td><a ui-sref="reservationDetail({id:reservation.id})">{{reservation.id}}</a></td>
-                    <td>{{reservation.datePayement}}</td>
-                    <td>{{reservation.dateFrom}}</td>
-                    <td>{{reservation.dateTo}}</td>
-                    <td>{{reservation.status}}</td>
-                    <td>{{reservation.price}}</td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="reservationDetail({id:reservation.id})"
-                                class="btn btn-info">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="update(reservation.id)"
-                                class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="delete(reservation.id)"
-                                class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <nav>
-            <ul class="pager">
-                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a href="#">&lt;&lt;</a></li>
-                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a href="#">&lt;</a></li>
-                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a href="#">&gt;</a></li>
-                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a href="#">&gt;&gt;</a></li>
-            </ul>
-        </nav>
+    <!-- custom fields modal -->
+    <div class="modal fade" id="customFieldsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">customize fields</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" >
+                                <div class="form-group col-md-6" ng-repeat="field in fields">
+                                    <label class="checkbox" for="checkbox{{field.label}}">
+                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}">{{field.label}}
+                                    </label>
+                                </div>
+                                <div class="clerfix"></div>
+                        </div>
+                    </div>
+            </div>
+        </div>
     </div>
-</div>

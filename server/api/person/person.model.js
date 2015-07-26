@@ -17,10 +17,10 @@ var PersonSchema = new Schema({
 	tel: String,
 	type: String,
 	status: String,
-	is_archived: Boolean,
-	is_banned: Boolean,
+	isArchived: Boolean,
+	isBanned: Boolean,
 	updated: { type: Date, default: Date.now },
-	researvations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Researvation'}],
+	reservations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reservation'}],
 	allocations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Allocation'}]
 });
 

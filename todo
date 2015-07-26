@@ -32,3 +32,14 @@ var FieldSchema = new Schema({
 	isVisible: String
 });
 
+
+/*==========================
+|		nodewebkit
+==========================*/
+
+
+/*==========================
+|		ui & ux
+==========================*/
+- flash messages
+- node-webkit border raduis

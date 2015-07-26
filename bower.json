@@ -44,6 +44,9 @@
         "dist/css/bootstrap.css",
         "less/bootstrap.less"
       ]
+    },
+    "webmodules-jquery-barcode": {
+      "main": ["jquery-barcode"]
     }
   }
 }

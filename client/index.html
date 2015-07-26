@@ -27,7 +27,7 @@
         <!-- endbuild -->
 
     </head>
-    <body ng-app="campusApp" ng-class="{'theme1': isAuthenticated() , 'login-screen': !isAuthenticated()}">
+    <body ng-app="campusApp" ng-class="{'theme1 app': isAuthenticated() , 'login-screen': !isAuthenticated()}">
         <!--[if lt IE 10]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -152,6 +152,7 @@
           <script src="scripts/app/entities/product/product.controller.js"></script>
           <script src="scripts/app/entities/product/product.js"></script>
           <script src="scripts/app/entities/reservation/reservation-detail.controller.js"></script>
+          <script src="scripts/app/entities/reservation/reservation-save.controller.js"></script>
           <script src="scripts/app/entities/reservation/reservation.controller.js"></script>
           <script src="scripts/app/entities/reservation/reservation.js"></script>
           <script src="scripts/app/entities/room/room-detail.controller.js"></script>
@@ -192,7 +193,7 @@
           <script src="scripts/components/util/truncate.filter.js"></script>
           <script src="scripts/components/util/util.directive.js"></script>
           <script src="scripts/components/util/util.filter.js"></script>
-          <script src="scripts/components/util/util.service.js"></script>
+          <script src="scripts/components/util/helpers.js"></script>
           <!-- endinjector -->
 
         <!-- endbuild -->

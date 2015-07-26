@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
-var Config = require('./config.model');
+var path = require('path');
+var Config = require(path.resolve('server', 'api/config/config.model'));
 
 // Get list of configs
 exports.index = function(req, res) {

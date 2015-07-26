@@ -1,5 +1,7 @@
 'use strict';
 
+// 
+
 angular.module('campusApp')
     .controller('PersonController', function ($scope, $http, Person, Fields, $state) {
         $scope.persons = [];

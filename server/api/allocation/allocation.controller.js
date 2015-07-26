@@ -1,8 +1,10 @@
 'use strict';
 
 var _ = require('lodash');
-var Allocation = require('./allocation.model');
+var path = require('path');
+var Allocation = require(path.resolve('server', 'api/allocation/allocation.model'));
 var mongoose = require('mongoose');
+
 // Get list of allocations
 exports.index = function(req, res) {
   Allocation.find().populate('person').populate('product').exec(function (err, allocations) {

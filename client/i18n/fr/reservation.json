@@ -4,7 +4,8 @@
             "home": {
                 "title": "Reservations",
                 "createLabel": "Créer un nouveau Reservation",
-                "createOrEditLabel": "Créer ou éditer un Reservation"
+                "createOrEditLabel": "Créer ou éditer un Reservation",
+                "check": "Réserver une chambre"
             },
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le Reservation {{ id }} ?"

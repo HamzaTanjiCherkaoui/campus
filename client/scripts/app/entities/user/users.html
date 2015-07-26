@@ -1,4 +1,4 @@
-<h2><i class="fa fa-user"></i> List des utilisateurs</h2>
+<h2><i class="fa fa-user"></i> <span translate="compusApp.user.home.title">List des utilisateurs</span></h2>
     <form ng-submit="loadPage(pagination.first)" role="from">
         <div class="row hidden-print">
           <div class="col-md-5 col-xs-6">
@@ -18,13 +18,12 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-inverse">
-                <li><a ui-sref="userSave"><i class="fa fa-user-plus"></i> Ajouter</a></li>
-                <li ng-show="showMultipleActions()"><a ng-click="activate(1)"><span class="fui-check"></span> Activer</a></li>
-                <li ng-show="showMultipleActions()"><a ng-click="activate(0)"><span class="glyphicon glyphicon-ban-circle"></span> Desactiver</a></li>
+                <li><a ui-sref="userSave"><i class="fa fa-user-plus"></i> <span translate="entity.action.add">add</span></a></li>
+                <li ng-show="showMultipleActions()"><a ng-click="activate(1)"><i class="fa fa-check"></i> <span translate="entity.action.activate">activate</span></a></li>
+                <li ng-show="showMultipleActions()"><a ng-click="activate(0)"><i class="fa fa-ban"></i> <span translate="entity.action.desactivate">desactivate</span></a></li>
                 <li class="divider"></li>
-                <li><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#authoritiesModal"><span class="fui-lock"></span> Droits d'accés</a></li>
-                <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-ticket"></i> custom fields</a></li>
-                <li is-granted="user.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
+                <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-th"></i> <span translate="entity.action.customFields">customFields</span></a></li>
+                <li is-granted="user.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> <span translate="entity.action.delete">delete</span></a></li>
               </ul>
             </div>
           </div><!-- /.col-lg-2 -->
@@ -42,7 +41,7 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="campusApp.user.delete.question" translate-values="{id: '{{user._id}}'}">Are you sure you want to delete this Profile?</p>
+                        <p translate="campusApp.user.delete.question" translate-values="{id: '{{user._id}}'}">Are you sure you want to delete this User?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
@@ -65,7 +64,7 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="campusApp.product.delete.multiplequestion" >Are you sure you want to delete all these  users?</p>
+                        <p translate="campusApp.product.delete.multiplequestion" >Are you sure you want to delete all these users?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
@@ -85,7 +84,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" translate="entity.delete.title">customize fields</h4>
+                        <h4 class="modal-title" translate="entity.action.customFields">customFields</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row" >
@@ -103,48 +102,147 @@
 
     <!-- authorities modal -->
     <div class="modal fade" id="authoritiesModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-large">
             <div class="modal-content">
                 <form name="authoritiesForm" class="form-horizontal" role="form" novalidate ng-submit="authorize()" show-validation>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                                 ng-click="clear()">&times;</button>
-                        <h4 class="modal-title">select authorities</h4>
+                        <h4 class="modal-title" translate="entity.action.selectRoles">select authorities</h4>
                     </div>
                     <div class="modal-body">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="entity.gender">Table</label>
-                                <div class="col-md-4">
-                                    <select class="form-control select select-primary" my-select="primary" name="authorities.table" ng-model="authorities.table">
-                                        <option value="">Select table</option>
-                                        <option value="user">user</option>
-                                        <option value="person">person</option>
-                                        <option value="room">room</option>
-                                        <option value="block">block</option>
-                                        <option value="reservation">reservation</option>
-                                        <option value="product">product</option>
-                                        <option value="category">category</option>
-                                        <option value="allocation">allocation</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="entity.gender">Action</label>
-                                <div class="col-md-4">
-                                    <label class="checkbox" for="checkbox_1">
-                                        <input my-checkbox type="checkbox" ng-model="authorities.action.show" id="checkbox_1">show
-                                    </label>
-                                    <label class="checkbox" for="checkbox_2">
-                                        <input my-checkbox type="checkbox" ng-model="authorities.action.create" id="checkbox_2">create
-                                    </label>
-                                    <label class="checkbox" for="checkbox_3">
-                                        <input my-checkbox type="checkbox" ng-model="authorities.action.update" id="checkbox_3">update
-                                    </label>
-                                    <label class="checkbox" for="checkbox_4">
-                                        <input my-checkbox type="checkbox" ng-model="authorities.action.delete" id="checkbox_4">delete
-                                    </label>
-                                </div>
-                            </div>  
+                          <table class="table table-hover table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>table</th>
+                                    <th translate="entity.action.view">show</th>
+                                    <th translate="entity.action.add">create</th>
+                                    <th translate="entity.action.edit">update</th>
+                                    <th translate="entity.action.delete">delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th translate="global.menu.entities.user">user</th>
+                                <td><label class="checkbox" for="checkbox_1">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.user.show" id="checkbox_1">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_2">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.user.create" id="checkbox_2">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_3">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.user.update" id="checkbox_3">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_4">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.user.delete" id="checkbox_4">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.person">person</th>
+                                <td><label class="checkbox" for="checkbox_11">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.person.show" id="checkbox_11">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_12">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.person.create" id="checkbox_12">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_13">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.person.update" id="checkbox_13">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_14">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.person.delete" id="checkbox_14">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.room">room</th>
+                                <td><label class="checkbox" for="checkbox_21">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.room.show" id="checkbox_21">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_22">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.room.create" id="checkbox_22">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_23">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.room.update" id="checkbox_23">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_24">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.room.delete" id="checkbox_24">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.block">block</th>
+                                <td><label class="checkbox" for="checkbox_31">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.block.show" id="checkbox_31">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_32">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.block.create" id="checkbox_32">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_33">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.block.update" id="checkbox_33">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_34">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.block.delete" id="checkbox_34">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.reservation">reservation</th>
+                                <td><label class="checkbox" for="checkbox_41">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.reservation.show" id="checkbox_41">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_42">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.reservation.create" id="checkbox_42">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_43">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.reservation.update" id="checkbox_43">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_44">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.reservation.delete" id="checkbox_44">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.product">product</th>
+                                <td><label class="checkbox" for="checkbox_51">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.product.show" id="checkbox_51">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_52">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.product.create" id="checkbox_52">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_53">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.product.update" id="checkbox_53">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_54">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.product.delete" id="checkbox_54">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.category">category</th>
+                                <td><label class="checkbox" for="checkbox_61">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.category.show" id="checkbox_61">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_62">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.category.create" id="checkbox_62">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_63">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.category.update" id="checkbox_63">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_64">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.category.delete" id="checkbox_64">
+                                </label></td>
+                            </tr>
+                            <tr>
+                                <th translate="global.menu.entities.allocation">allocation</th>
+                                <td><label class="checkbox" for="checkbox_71">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.allocation.show" id="checkbox_71">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_72">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.allocation.create" id="checkbox_72">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_73">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.allocation.update" id="checkbox_73">
+                                </label></td>
+                                <td><label class="checkbox" for="checkbox_74">
+                                    <input my-checkbox type="checkbox" ng-model="authorities.allocation.delete" id="checkbox_74">
+                                </label></td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
@@ -166,8 +264,10 @@
                             <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                         </label>
                     </td>
-                    <th class="sortable"><a ng-click="changeOrder('username')">username<i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a></th>
-                    <td ng-repeat="field in fields" ng-show="field.visible">{{ field.label }}</td>
+                    <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
+                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)"><span translate="{{ getFieldLabel(field) }}">{{ field.label }}</span> <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
+                        <span ng-if="!field.sortable" translate="{{ getFieldLabel(field) }}">label</span>
+                    </th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -178,7 +278,6 @@
                             <input my-checkbox type="checkbox" ng-model="entity.checked" id="checkbox{{entity._id}}">
                         </label>
                     </td>
-                    <td><a ui-sref="userDetail({id:entity._id})">{{entity.username}}</a></td>
                     <td ng-repeat="field in fields" ng-show="field.visible">{{ getFieldValue(entity, field)}}</td>
                     <td>
                         <button ui-sref="userDetail({id:entity._id})"
@@ -188,6 +287,9 @@
                         <button ui-sref="userSave({id:entity._id})"
                                 class="btn btn-primary  btn-embossed btn-xs">
                             <i class="fa fa-edit"></i>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button ng-click="manageRoles(entity._id)" class="btn btn-inverse  btn-embossed btn-xs">
+                            <span class="fui-lock"></span> Droits d'accés
                         </button>
                         <button ng-click="delete(entity._id)"
                                 class="btn btn-danger  btn-embossed btn-xs">

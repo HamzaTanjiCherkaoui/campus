@@ -1,8 +1,9 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./block.controller');
-var auth = require('../../auth/auth.service');
+var path = require('path');
+var controller = require(path.resolve('server', 'api/block/block.controller'));
+var auth = require(path.resolve('server', 'auth/auth.service'));
 
 var router = express.Router();
 

@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('lodash');
-var Category = require('./category.model');
+var path = require('path');
+var Category = require(path.resolve('server', 'api/category/category.model'));
 
 // Get list of categorys
 exports.index = function(req, res) {

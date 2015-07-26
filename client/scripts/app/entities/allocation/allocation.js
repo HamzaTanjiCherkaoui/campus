@@ -5,7 +5,7 @@ angular.module('campusApp')
         $stateProvider
             .state('allocation', {
                 parent: 'entity',
-                url: '/allocation',
+                url: '/allocation/:idproduct',
                 data: {
                     roles: ['allocation.show'],
                     pageTitle: 'campusApp.allocation.home.title'
@@ -17,10 +17,12 @@ angular.module('campusApp')
                     }
                 },
                 resolve: {
+                  
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('allocation');
                         return $translate.refresh();
                     }]
+
                 }
             })
             .state('allocationDetail', {

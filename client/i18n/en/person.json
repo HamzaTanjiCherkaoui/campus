@@ -4,6 +4,7 @@
             "home": {
                 "title": "Persons",
                 "createLabel": "Create a new Person",
+                
                 "createOrEditLabel": "Create or edit a Person"
             },
             "delete": {

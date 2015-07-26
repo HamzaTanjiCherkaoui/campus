@@ -4,6 +4,7 @@
             "home": {
                 "title": "products",
                 "createLabel": "Create a new product",
+                "lib":"product",
                 "createOrEditLabel": "Create or edit a product"
             },
             "delete": {

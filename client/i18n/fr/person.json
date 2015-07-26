@@ -4,6 +4,7 @@
             "home": {
                 "title": "Etudiants",
                 "createLabel": "Ajouter un nouveau étudiant",
+                "lib":"person",
                 "createOrEditLabel": "Créer ou éditer un étudiant"
             },
             "delete": {

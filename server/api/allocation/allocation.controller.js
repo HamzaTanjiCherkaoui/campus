@@ -2,12 +2,23 @@
 
 var _ = require('lodash');
 var Allocation = require('./allocation.model');
-
+var mongoose = require('mongoose');
 // Get list of allocations
 exports.index = function(req, res) {
-  Allocation.find(function (err, allocations) {
+  Allocation.find().populate('person').populate('product').exec(function (err, allocations) {
     if(err) { return handleError(res, err); }
     return res.json(200, allocations);
+  });
+};
+
+//get by the product id
+exports.byproduct = function(req, res) {
+ Allocation.find( {
+      product :{_id:mongoose.Types.ObjectId(req.query.productId)}
+    },function (err, allocation) {
+    if(err) { return handleError(res, err); }
+    if(!allocation) { return res.send(404); }
+    return res.json(allocation);
   });
 };
 

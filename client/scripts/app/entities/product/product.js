@@ -41,7 +41,9 @@ angular.module('campusApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('product');
                         return $translate.refresh();
-                    }]
+                    }],
+                    
+
                 }
                
             });

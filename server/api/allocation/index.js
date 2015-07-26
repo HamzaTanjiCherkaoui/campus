@@ -6,7 +6,9 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
+
 router.get('/', controller.index);
+router.get('/byproduct', auth.hasRole('allocation.show'), controller.byproduct);
 router.get('/:id', auth.hasRole('allocation.show'), controller.show);
 router.post('/', auth.hasRole('allocation.create'), controller.create);
 router.put('/:id', auth.hasRole('allocation.update'), controller.update);

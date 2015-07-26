@@ -4,6 +4,7 @@
             "home": {
                 "title": "liste des articles",
                 "createLabel": "Creé un nouveau article",
+                "lib":"product",
                 "createOrEditLabel": "Creé/modifier a un article"
             },
             "delete": {

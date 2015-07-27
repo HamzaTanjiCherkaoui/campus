@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('ProductController', function ($http,$scope, Product ,Category ,Allocation,Person,Fields) {
+    .controller('ProductController', function ($http,$scope, Product ,Category ,$state,Allocation,Person,Fields) {
        $scope.products = [];
        $scope.products =[ {
         checked:false
@@ -54,7 +54,20 @@ angular.module('campusApp')
                 Product.update({id: $scope.product._id}, $scope.product, $scope.saveCalback);
             }
             else {
-                Product.save($scope.product, $scope.saveCalback);
+                 var product=$scope.product;
+                 var products= [];
+                for(var i=0;i<$scope.product.quantity;i++)
+                {
+                
+                product.name= product.name+" "+i;
+                console.log(product.name);
+                products[i]=product;
+                Product.save(products[i], $scope.saveCalback);
+
+                console.log(products[i].name);
+                
+                }
+
             }
         };
 
@@ -74,7 +87,6 @@ angular.module('campusApp')
 
 
         $scope.createCategory = function () {
-           
             
                 Category.save($scope.category, $scope.saveCalback);
           
@@ -104,54 +116,69 @@ angular.module('campusApp')
             $scope.loadAll();
          }; 
 
-         $scope.allocatemodal = function () {
-            $scope.persons = [];
-            $scope.pagination = {};
-            $scope.searchData = {
-            page: 1,
-            perPage: 4,
-            keyword : '',
-            orderBy : 'lastName',
-            orderDir : 'asc'
-        };
+         $scope.allocatemodal = function (id) {
+        //     $scope.persons = [];
+        //     $scope.pagination = {};
+        //     $scope.searchData = {
+        //     page: 1,
+        //     perPage: 4,
+        //     keyword : '',
+        //     orderBy : 'lastName',
+        //     orderDir : 'asc'
+        // };
           
-                Person.query($scope.searchData, function(result) {
-                $scope.persons = result;
-                 $('#allocmodal').modal('show');
-            });
+        //         Person.query($scope.searchData, function(result, headers) {
+        //         $scope.persons = result;
+        //         Product.get({id: id}, function(result) {
+        //         $scope.product = result;
+        //          $('#allocmodal').modal('show');
+        //     });
+               
+               
+        //     });
+
+     $state.go("allocation", { idproduct: id });
                
             
         };
 
 
-        $scope.allocate=function  () {
 
-            $scope.productsToAllocate = getCheckedProductsIDs();
-           // get the person Id from the modal 
-            var personId=$scope.person;
-            
-            //loop trought the selected products 
-            $scope.productsToAllocate.forEach(function (product) {
-                var productId=product;
-                var allocation = new Allocation();
-                allocation.type=true;
-                allocation.status=true;
-                allocation.person=personId;
-                allocation.product=productId;
-                console.log(allocation);
-                Allocation.save(allocation);
+
+         $scope.free=function  (id) {
+                Product.get({id: id}, function(result) {
+                $scope.product = result;
+                var product=$scope.product;
+                product.isalloced=false;
+                //update the product
+                Product.update({id: product._id},product);   
+                Allocation.getAsArray({product :product._id },function  (result2) {
+                    var allocations= result2;
+                    var allocationid =allocations.filter(function(entity) {return entity.product._id==id;}).map(function(entity){return entity._id;});
+                    console.log(allocationid);
+                     Allocation.delete({id:allocationid},
+                        function () {
+                            $scope.loadAll();
+                            
+                            $scope.clear();
+                        });
+                      
+                    
+                })
+             
             });
-            //save the allocation 
-
-            $scope.clear();            
-            $('#allocmodal').modal('hide');            
             
          };
 
-        
         $scope.markAll = function (checked) {
             $scope.products.forEach(function (entity) {
                 entity.checked = checked;
+            });
+
+        };
+        $scope.uncheckall = function (checked) {
+            $scope.products.forEach(function (entity) {
+                entity.checked = false;
             });
 
         };

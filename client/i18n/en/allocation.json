@@ -1,6 +1,8 @@
 {
     "campusApp": {
         "allocation" : {
+            "person":"person",
+            "product":"product",
             "home": {
                 "title": "Allocations",
                 "createLabel": "Create a new Allocation",

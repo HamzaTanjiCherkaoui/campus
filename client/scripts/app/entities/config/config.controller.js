@@ -13,7 +13,9 @@ angular.module('campusApp')
             ConfigHelper.getArray().forEach(function(item){
                 formData.append(item.key, item.value);
             });
-            formData.append('logo', $scope.file);
+            if($scope.file){
+                formData.append('icon', $scope.file);
+            }
             $http.post('/api/config', formData, {
                transformRequest: angular.identity,
                headers: {'Content-Type': undefined}

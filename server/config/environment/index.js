@@ -21,6 +21,13 @@ var all = {
   // Server port
   port: process.env.PORT || 9000,
 
+  upload: {
+    dir: 'uploads/img/',
+    default: 'logo.png'
+  },
+
+  client: 'client/',
+
   // Should we populate the DB with sample data?
   seedDB: false,
 

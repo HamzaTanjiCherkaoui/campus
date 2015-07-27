@@ -18,8 +18,7 @@ exports.index = function(req, res) {
     .exec(function(err, reservations) {
       if(err) { return handleError(res, err); }
       reservations = reservations.filter(function (entity) {
-        return (entity.person.firstName.indexOf(req.query.keyword) != -1) || (entity.person.lastName.indexOf(req.query.keyword) != -1)
-          || (entity.room.name.indexOf(req.query.keyword) != -1) || (entity.price === Number.parseFloat(req.query.keyword))
+        return (entity.person.firstName.indexOf(req.query.keyword) !== -1) || (entity.person.lastName.indexOf(req.query.keyword) !== -1)  || (entity.room.name.indexOf(req.query.keyword) !== -1) || (entity.price === Number.parseFloat(req.query.keyword))
       });
       Reservation.count().exec(function(err, count) {
         res.setHeader('pages', Math.ceil( count / req.query.perPage ));

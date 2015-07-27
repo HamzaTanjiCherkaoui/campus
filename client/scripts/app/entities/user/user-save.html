@@ -10,7 +10,7 @@
 		<div class="tab-pane active" id="profile-tab">
 			<form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="save()" show-validation>
 				<div class="form-group">
-					<label for="" class="col-sm-4 control-label">Image</label>
+					<label for="" class="col-sm-4 control-label" translate="entity.detail.image">Image</label>
 					<div class="col-sm-4">
 						<img class="myavatar col-md-4" src="assets/images/logo.png" />
 					</div>
@@ -21,19 +21,19 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="entity.lastName">Last Name</label>
+					<label class="col-md-4 control-label" for="entity.lastName" translate="campusApp.user.lastName">Last Name</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control" name="lastName" ng-model="entity.lastName" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="entity.firstName">First Name</label>
+					<label class="col-md-4 control-label" for="entity.firstName" translate="campusApp.user.firstName">First Name</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control" name="firstName" ng-model="entity.firstName" />
 					</div>
 				</div>
 				<div class="form-group"  ng-class="{true: 'has-error'}[editForm.username.$invalid]">
-					<label class="col-md-4 control-label" for="entity.username">username</label>
+					<label class="col-md-4 control-label" for= translate="campusApp.user.entity""entity.username">username</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control" name="username" placeholder="{{'global.form.username.placeholder' | translate}}"
 	                           ng-model="entity.username" ng-minlength="1" ng-maxlength="50" ng-pattern="/^[a-z0-9]*$/" required>
@@ -54,7 +54,7 @@
 	                </div>
 				</div>
 				<div class="form-group"  ng-class="{true: 'has-error'}[editForm.email.$invalid]">
-					<label class="col-md-4 control-label" for="entity.email">email</label>
+					<label class="col-md-4 control-label" for="entity.email" translate="campusApp.user.email">email</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control" name="email" ng-model="entity.email" ng-minlength="5" ng-maxlength="100" required/>
 					</div>
@@ -98,7 +98,7 @@
 
 				<h4>Change password</h4>
 				<div class="form-group"  ng-class="{true: 'has-error'}[changePasswordForm.password.$invalid]">
-					<label class="col-md-4 control-label" for="password">password</label>
+					<label class="col-md-4 control-label" for="password" translate="global.form.newpassword">password</label>
 					<div class="col-md-4">
 						<input type="password" class="form-control" name="password" placeholder="{{'global.form.newpassword.placeholder' | translate}}"
 	                           ng-model="password" ng-minlength="5" ng-maxlength="50" required>
@@ -117,7 +117,7 @@
 	                </div>
 				</div>
 				<div class="form-group"  ng-class="{true: 'has-error'}[changePasswordForm.confirmationPassword.$invalid]">
-					<label class="col-md-4 control-label" for="confirmPassword">password confirmation</label>
+					<label class="col-md-4 control-label" for="confirmPassword" translate="global.form.confirmpassword">password confirmation</label>
 					<div class="col-md-4">
 						<input type="password" class="form-control" name="confirmPassword" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}"
 	                           ng-model="confirmPassword" ng-minlength="5" ng-maxlength="50" required>

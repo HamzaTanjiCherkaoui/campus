@@ -1,4 +1,4 @@
-<h2><i class="fa fa-hotel"></i> List of rooms</h2>
+<h2><i class="fa fa-hotel"></i> <span translate="campusApp.room.home.title">Rooms</span></h2>
     <form ng-submit="loadPage(pagination.first)" role="from" class="searchPanel">
         <div class="row hidden-print">
           <div class="col-md-5 col-xs-6">
@@ -18,26 +18,26 @@
           </div>
           <div class="col-md-2 form-group">
             <select class="form-control select select-primary select2-offscreen" my-select="primary" class="form-control" name="isFree" ng-model="searchData.isFree"  ng-change="loadAll()">
-              <option value="0" >All rooms</option>
-              <option value="1" >Available rooms</option>
-              <option value="2" >Reserved rooms</option>
+              <option value="0" translate="campusApp.room.label.all">All rooms</option>
+              <option value="1" translate="campusApp.room.label.available">Available rooms</option>
+              <option value="2" translate="campusApp.room.label.reserved">Reserved rooms</option>
             </select>
           </div>
           <div class="col-md-3">
                 <div class="btn-group pull-right">             
                   <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
-                    Select an action
+                    <span translate="entity.action.choose">Select an action</span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-inverse">
-                    <li><a data-toggle="modal" data-target="#saveRoomModal" ng-click="clear()"><i class="fa fa-user-plus"></i> add</a></li>
-                    <li is-granted="room.create"><a ui-sref="roomMultiple"><i class="fa fa-user-plus"></i> add multiple</a></li>
+                    <li><a data-toggle="modal" data-target="#saveRoomModal" ng-click="clear()"><i class="fa fa-user-plus"></i> <span translate="entity.action.add">add</span></a></li>
+                    <li is-granted="room.create"><a ui-sref="roomMultiple"><i class="fa fa-user-plus"></i>  <span translate="campusApp.room.action.addMultiple">add multiple</span></a></li>
                     <li class="divider"></li>
-                    <li is-granted="room.update"><a id="js-badge"><i class="fa fa-credit-card"></i> free</a></li>
-                    <li><a ui-sref="block"><i class="fa fa-building"></i> <span>List of blocks</span></a></li>
+                    <li is-granted="room.update"><a id="js-badge"><i class="fa fa-credit-card"></i> <span translate="campusApp.room.action.free">free</span></a></li>
+                    <li><a ui-sref="block"><i class="fa fa-building"></i> <span translate="campusApp.block.home.title">List of blocks</span></a></li>
                     <li class="divider"></li>
-                    <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-th"></i> custom fields</a></li>
-                    <li is-granted="room.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
+                    <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-th"></i> <span translate="entity.action.customFields">customFields</span></a></li>
+                    <li is-granted="room.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> <span translate="entity.action.delete">delete</span></a></li>
                   </ul>
                 </div>
           </div><!-- /.col-lg-2 -->
@@ -53,8 +53,8 @@
                         </label>
                     </th>
                     <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
-                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)">{{ field.label }} <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
-                        <span ng-if="!field.sortable">{{ field.label }}</span>
+                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)"><span translate="{{ getFieldLabel('room', field) }}">label</span> <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
+                        <span ng-if="!field.sortable" translate="{{ getFieldLabel('room', field) }}">label</span>
                     </th>
                     <th>Action</th>
                 </tr>
@@ -235,20 +235,20 @@
         </div>
     </div>
 
+
     <!-- custom fields modal -->
     <div class="modal fade" id="customFieldsModal">
         <div class="modal-dialog">
             <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" translate="entity.delete.title">customize fields</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.action.customFields">customFields</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row" >
                                 <div class="form-group col-md-6" ng-repeat="field in fields">
                                     <label class="checkbox" for="checkbox{{field.label}}">
-                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}">{{field.label}}
+                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}"><span translate="{{ getFieldLabel('room', field) }}">label</span>
                                     </label>
                                 </div>
                                 <div class="clerfix"></div>

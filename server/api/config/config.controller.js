@@ -4,57 +4,24 @@ var _ = require('lodash');
 var path = require('path');
 var Config = require(path.resolve('server', 'api/config/config.model'));
 
-// Get list of configs
+// Get list of config
 exports.index = function(req, res) {
-  Config.find(function (err, configs) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, configs);
-  });
-};
-
-// Get a single config
-exports.show = function(req, res) {
-  Config.findById(req.params.id, function (err, config) {
-    if(err) { return handleError(res, err); }
-    if(!config) { return res.send(404); }
-    return res.json(config);
-  });
-};
-
-// Creates a new config in the DB.
-exports.create = function(req, res) {
-  Config.create(req.body, function(err, config) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, config);
+  Config.find(function (err, config) {
+    if(err) { return res.send(500, err); }
+    return res.json(200, config);
   });
 };
 
 // Updates an existing config in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Config.findById(req.params.id, function (err, config) {
-    if (err) { return handleError(res, err); }
-    if(!config) { return res.send(404); }
-    var updated = _.merge(config, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, config);
+  if(req.file){
+    req.body.logo = 'uploads/' + req.file.filename;
+  }
+  Object.keys(req.body).forEach(function(item){
+    Config.findOne({key: item}, function (err, entity) {
+      entity.value = req.body[item];
+      entity.save();
     });
   });
+  return res.send(204);  
 };
-
-// Deletes a config from the DB.
-exports.destroy = function(req, res) {
-  Config.findById(req.params.id, function (err, config) {
-    if(err) { return handleError(res, err); }
-    if(!config) { return res.send(404); }
-    config.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
-  });
-};
-
-function handleError(res, err) {
-  return res.send(500, err);
-}

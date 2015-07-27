@@ -15,7 +15,7 @@
                 "allocation": "Allocations",
                 "reservation": "Reservations",
                 "collapse": "Réduire le menu",
-                "settings": "Settings"
+                "settings": "Réglages"
             },
             "account": {
                 "main": "Compte",
@@ -92,6 +92,9 @@
             "desactivate": "Désactiver",
             "customFields": "Champs pérsonalisé",
             "selectRoles": "Séléctionner les droit d'accées",
+            "switch": "Echanger les chambres",
+            "choose": "Séléctionner une action",
+            "select": "Séléctionner",
             "print": {
                 "all": "Imprimer",
                 "card": "Imprimer la carte",
@@ -101,6 +104,7 @@
         },
         "detail": {
             "field": "Champs",
+            "image": "image",
             "value": "Valeur"
         },
         "delete": {
@@ -119,6 +123,12 @@
         "attr": {
             "created" : "Date de création",
             "updated" : "Date de derniere mise à jour"
+        },
+        "roles": {
+            "show" : "Voir",
+            "create" : "Ajouter",
+            "update" : "Modifier",
+            "delete" : "Supprimer"
         }
     },
     "action": {

@@ -3,7 +3,7 @@
 // 
 
 angular.module('campusApp')
-    .controller('PersonController', function ($scope, $http, Person, Fields, $state) {
+    .controller('PersonController', function ($scope, $http, Person, Fields) {
         $scope.persons = [];
         $scope.pagination = {};
         $scope.searchData = {
@@ -15,6 +15,7 @@ angular.module('campusApp')
         };
         $scope.fields = Fields.get('person');
         $scope.getFieldValue = Fields.getValue;
+        $scope.getFieldLabel = Fields.getLabel;
         
         $scope.loadAll = function() {
             Person.query($scope.searchData, function(result, headers) {

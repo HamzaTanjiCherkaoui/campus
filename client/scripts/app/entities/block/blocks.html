@@ -1,4 +1,4 @@
-<h2><i class="fa fa-building"></i> List of blocks</h2>
+<h2><i class="fa fa-building"></i> <span translate="campusApp.block.home.title">blocks</span></h2>
     <form ng-submit="loadPage(pagination.first)" role="from" class="searchPanel">
         <div class="row hidden-print">
           <div class="col-md-6 col-xs-6">
@@ -14,15 +14,15 @@
           <div class="col-md-6">
                 <div class="btn-group pull-right">             
                   <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
-                    Select an action
+                    <span translate="entity.action.choose">Select an action</span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-inverse">
-                    <li><a data-toggle="modal" data-target="#saveBlockModal" ng-click="clear()"><i class="fa fa-user-plus"></i> add</a></li>
-                    <li is-granted="block.create"><a ui-sref="roomMultiple"><i class="fa fa-user-plus"></i> add multiple</a></li>
+                    <li><a data-toggle="modal" data-target="#saveBlockModal" ng-click="clear()"><i class="fa fa-user-plus"></i> <span translate="entity.action.add">add</span></a></li>
+                    <li is-granted="room.create"><a ui-sref="roomMultiple"><i class="fa fa-user-plus"></i>  <span translate="campusApp.room.action.addMultiple">add multiple</span></a></li>
                     <li class="divider"></li>
-                    <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-th"></i> custom fields</a></li>
-                    <li is-granted="block.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> delete</a></li>
+                    <li><a data-toggle="modal" data-target="#customFieldsModal"><i class="fa fa-th"></i> <span translate="entity.action.customFields">customFields</span></a></li>
+                    <li is-granted="block.delete"><a data-toggle="modal" ng-show="showMultipleActions()" data-target="#deleteMultipleConfirmation"><i class="fa fa-times-circle"></i> <span translate="entity.action.delete">delete</span></a></li>
                   </ul>
                 </div>
           </div><!-- /.col-lg-2 -->
@@ -37,10 +37,10 @@
                         <input my-checkbox type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)" id="checkbox0" />
                     </label>
                 </th>
-                <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
-                    <a ng-if="field.sortable" ng-click="changeOrder(field.label)">{{ field.label }} <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
-                    <span ng-if="!field.sortable">{{ field.label }}</span>
-                </th>
+                    <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
+                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)"><span translate="{{ getFieldLabel('block', field) }}">label</span> <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
+                        <span ng-if="!field.sortable" translate="{{ getFieldLabel('block', field) }}">label</span>
+                    </th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -186,15 +186,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" translate="entity.delete.title">customize fields</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.action.customFields">customFields</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row" >
                                 <div class="form-group col-md-6" ng-repeat="field in fields">
                                     <label class="checkbox" for="checkbox{{field.label}}">
-                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}">{{field.label}}
+                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}"><span translate="{{ getFieldLabel('block', field) }}">label</span>
                                     </label>
                                 </div>
                                 <div class="clerfix"></div>

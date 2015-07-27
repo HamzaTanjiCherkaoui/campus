@@ -82,6 +82,7 @@
         },
         "detail": {
             "field": "Field",
+            "image": "image",
             "value": "Value"
         },
         "delete": {

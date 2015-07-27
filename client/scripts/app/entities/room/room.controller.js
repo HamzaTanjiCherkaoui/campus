@@ -16,6 +16,7 @@ angular.module('campusApp')
         $scope.blocks = Block.query();
         $scope.fields = Fields.get('room');
         $scope.getFieldValue = Fields.getValue;
+        $scope.getFieldLabel = Fields.getLabel;
 
         $scope.loadAll = function() {
             Room.query($scope.searchData, function(result, headers) {
@@ -105,7 +106,7 @@ angular.module('campusApp')
             return getCheckedRooms().map(function(entity){return entity._id;});
         }
 
-        function saveCalback (argument) {
+        function saveCalback () {
             $scope.loadAll();
             $('#saveRoomModal').modal('hide');
             $scope.clear();

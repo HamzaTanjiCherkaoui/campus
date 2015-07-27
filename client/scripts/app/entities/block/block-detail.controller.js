@@ -9,7 +9,7 @@ angular.module('campusApp')
               $scope.block.count = $scope.block.rooms.length;
               $scope.block.floors = countFloors($scope.block.rooms);
               
-              $scope.dataRooms = Array.apply(null, Array($scope.block.floors)).map(function () {return {number:0, rooms: []};});
+              $scope.dataRooms = Array.apply(null, new Array($scope.block.floors)).map(function () {return {number:0, rooms: []};});
               $scope.block.rooms.forEach(function(room){
                 if($scope.dataRooms[room.floor]){
                   $scope.dataRooms[room.floor].rooms.push(room);
@@ -23,7 +23,11 @@ angular.module('campusApp')
 
         function countFloors(rooms){
           var floors = [];
-          rooms.forEach(function(item){if(floors.indexOf(item.floor) == -1) floors.push(item.floor);});
+          rooms.forEach(function(item){
+            if(floors.indexOf(item.floor) === -1) {
+              floors.push(item.floor);
+            }
+          });
           return Math.max.apply(Math, floors) + 1;
         }
     });

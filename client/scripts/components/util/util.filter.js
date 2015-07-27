@@ -16,7 +16,7 @@ angular.module('campusApp')
 })
 .filter('toDate', function (moment){
     return function(date){
-        return moment(date).format("DD/MM/YYYY");
+        return moment(date).format('DD/MM/YYYY');
     };
 });
 

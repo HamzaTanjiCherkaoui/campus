@@ -1,18 +1,56 @@
 [
   {
+    "_id": "5590bf7a85a2e84c1114e550",
+    "__v": 0,
+    "key": "appName",
+    "value": "webCurious"
+  },
+  {
+    "_id": "5590bf7a85a2e84c1114e551",
+    "__v": 0,
+    "key": "logo",
+    "value": "assets/images/logo.png"
+  },
+  {
+    "_id": "5590bf7a85a2e84c1114e552",
+    "__v": 0,
+    "key": "address",
+    "value": "avenue de france 11056 rabat"
+  },
+  {
     "_id": "5590bf7a85a2e84c1114e553",
-    "__v": 0
+    "__v": 0,
+    "key": "city",
+    "value": "Rabat"
   },
   {
-    "_id": "5590bf9a85a2e84c1114e554",
-    "key": "app_name",
-    "value": "webcurious",
-    "__v": 0
+    "_id": "5590bf7a85a2e84c1114e554",
+    "__v": 0,
+    "key": "tel",
+    "value": "0645215222"
   },
   {
-    "_id": "5590bfa685a2e84c1114e555",
+    "_id": "5590bf7a85a2e84c1114e555",
+    "__v": 0,
+    "key": "gsm",
+    "value": "0645215222"
+  },
+  {
+    "_id": "5590bf7a85a2e84c1114e556",
+    "__v": 0,
+    "key": "perPage",
+    "value": "10"
+  },
+  {
+    "_id": "5590bfa685a2e84c1114e557",
+    "__v": 0,
     "key": "theme",
-    "value": "theme_blue",
-    "__v": 0
+    "value": "theme_blue"
+  },
+  {
+    "_id": "5590bf9a85a2e84c1114e558",
+    "__v": 0,
+    "key": "css",
+    "value": "this is css"
   }
 ]

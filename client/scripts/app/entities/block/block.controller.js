@@ -12,9 +12,10 @@ angular.module('campusApp')
         };
         $scope.fields = Fields.get('block');
         $scope.getFieldValue = Fields.getValue;
+        $scope.getFieldLabel = Fields.getLabel;
 
         $scope.loadAll = function() {
-            Block.query($scope.searchData, function(result, headers) {
+            Block.query($scope.searchData, function(result) {
                 $scope.blocks = result;
             });
         };
@@ -96,7 +97,7 @@ angular.module('campusApp')
             return getCheckedBlocks().map(function(entity){return entity._id;});
         }
 
-        function saveCalback (argument) {
+        function saveCalback () {
             $scope.loadAll();
             $('#saveBlockModal').modal('hide');
             $scope.clear();

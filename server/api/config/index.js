@@ -4,14 +4,21 @@ var express = require('express');
 var path = require('path');
 var controller = require(path.resolve('server', 'api/config/config.controller'));
 var auth = require(path.resolve('server', 'auth/auth.service'));
-
 var router = express.Router();
+var multer  = require('multer');
 
-router.get('/', auth.hasRole('config.show'), controller.index);
-router.get('/:id', auth.hasRole('config.show'), controller.show);
-router.post('/', auth.hasRole('config.create'), controller.create);
-router.put('/:id', auth.hasRole('config.update'), controller.update);
-router.patch('/:id', auth.hasRole('config.update'), controller.update);
-router.delete('/:id', auth.hasRole('config.delete'), controller.destroy);
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'client/uploads/')
+  },
+  filename: function (req, file, cb) {
+    var ext = file.originalname.substr(file.originalname.indexOf('.'));
+    cb(null, file.fieldname + '-' + Date.now() + ext);
+  }
+});
+var upload = multer({ storage: storage, limits: { fileSize: 10 * 1024 * 1024}});
+
+router.get('/', controller.index);
+router.post('/', upload.single('logo'), controller.update);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-<h2><i class="fa fa-user"></i> <span translate="compusApp.user.home.title">List des utilisateurs</span></h2>
+<h2><i class="fa fa-user"></i> <span translate="campusApp.user.home.title">List des utilisateurs</span></h2>
     <form ng-submit="loadPage(pagination.first)" role="from">
         <div class="row hidden-print">
           <div class="col-md-5 col-xs-6">
@@ -14,7 +14,7 @@
           <div class="col-md-7 col-xs-6">
             <div class="btn-group pull-right">             
               <button type="button" class="btn  btn-primary dropdown-toggle" data-toggle="dropdown">
-                Select an action
+                <span translate="entity.action.choose">Select an action</span>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-inverse">
@@ -64,7 +64,7 @@
                         <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
                     </div>
                     <div class="modal-body">
-                        <p translate="campusApp.product.delete.multiplequestion" >Are you sure you want to delete all these users?</p>
+                        <p translate="campusApp.user.delete.multiplequestion" >Are you sure you want to delete all these users?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
@@ -82,15 +82,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clear()">&times;</button>
                         <h4 class="modal-title" translate="entity.action.customFields">customFields</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row" >
                                 <div class="form-group col-md-6" ng-repeat="field in fields">
                                     <label class="checkbox" for="checkbox{{field.label}}">
-                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}">{{field.label}}
+                                        <input my-checkbox type="checkbox" ng-model="field.visible" id="checkbox{{field.label}}"><span translate="{{ getFieldLabel('user', field) }}">label</span>
                                     </label>
                                 </div>
                                 <div class="clerfix"></div>
@@ -265,8 +264,8 @@
                         </label>
                     </td>
                     <th ng-repeat="field in fields" ng-class="{'sortable': field.sortable}" ng-show="field.visible" my-sortabale>
-                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)"><span translate="{{ getFieldLabel(field) }}">{{ field.label }}</span> <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
-                        <span ng-if="!field.sortable" translate="{{ getFieldLabel(field) }}">label</span>
+                        <a ng-if="field.sortable" ng-click="changeOrder(field.label)"><span translate="{{ getFieldLabel('user', field) }}">label</span> <i class="fa pull-right" ng-class="{'fa-sort-amount-desc': searchData.orderDir === 'desc', 'fa-sort-amount-asc': searchData.orderDir === 'asc'}"></i></a>
+                        <span ng-if="!field.sortable" translate="{{ getFieldLabel('user', field) }}">label</span>
                     </th>
                     <th>Action</th>
                 </tr>

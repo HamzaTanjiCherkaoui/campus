@@ -1,9 +1,9 @@
-<h2 ng-show="!isUpdate"><span class="fui-user"></span>  Ajout d'un nouveau étudiant</h2>
-<h2 ng-show="isUpdate"><span class="fui-user"></span>  Mise à jour d'un étudiant</h2>
+<h2 ng-show="!isUpdate"><span class="fui-user"></span> <span translate="campusApp.person.home.createLabel">add entity</span></h2>
+<h2 ng-show="isUpdate"><span class="fui-user"></span> <span translate="campusApp.person.home.editLabel">update entity</span></h2>
 <form name="personFrom" role="form" class="form-horizontal" novalidate ng-submit="save()" show-validation>
 	<input type="hidden" name="id" ng-model="entity._id" />
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.lastName">Last Name</label>
+		<label class="col-md-4 control-label" for="entity.lastName" translate="campusApp.person.lastName">Last Name</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="lastName" ng-model="entity.lastName" />
 		</div>					
@@ -14,19 +14,19 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.firstName">First Name</label>
+		<label class="col-md-4 control-label" for="entity.firstName" translate="campusApp.person.firstName">First Name</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="firstName" ng-model="entity.firstName" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.codeType">codeType</label>
+		<label class="col-md-4 control-label" for="entity.codeType" translate="campusApp.person.codeType">codeType</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="codeType" ng-model="entity.codeType" />
 		</div>
 	</div>
 	<div class="form-group" ng-class="{true: 'has-error'}[personFrom.code.$invalid]">
-		<label class="col-md-4 control-label" for="entity.code">Cin</label>
+		<label class="col-md-4 control-label" for="entity.code" translate="campusApp.person.code">code</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="code" ng-model="entity.code" />
 		</div>
@@ -35,46 +35,46 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.gender">gender</label>
+		<label class="col-md-4 control-label" for="entity.gender" translate="campusApp.person.gender">gender</label>
 		<div class="col-md-4">
 		    <select class="form-control select select-primary" my-select="primary" name="gender" ng-model="entity.gender" ng-options="item.value as item.label for item in genderArray">
-		    	<option value="" ng-if="entity.gender">Select gender</option>
+		    	<option value="" ng-if="entity.gender"><span translate="entity.action.select">select</span></option>
 		    </select>
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.birthDay">BirthDay</label>
+		<label class="col-md-4 control-label" for="entity.birthDay" translate="campusApp.person.birthDay">birthDay</label>
 		<div class="col-md-4">
 			<input type="text" my-date-picker="primary" class="form-control" name="birthDay" ng-model="entity.birthDay" />
 		</div>
 	</div>
 	<!-- Contact -->
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.address">address</label>
+		<label class="col-md-4 control-label" for="entity.address" translate="campusApp.person.address">address</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="address" ng-model="entity.address" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.city">city</label>
+		<label class="col-md-4 control-label" for="entity.city" translate="campusApp.person.city">city</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="city" ng-model="entity.city" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.country">country</label>
+		<label class="col-md-4 control-label" for="entity.country" translate="campusApp.person.country">country</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="country" ng-model="entity.country" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.tel">tel</label>
+		<label class="col-md-4 control-label" for="entity.tel" translate="campusApp.person.tel">tel</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="tel" ng-model="entity.tel" />
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="entity.description">description</label>
+		<label class="col-md-4 control-label" for="entity.description" translate="campusApp.person.description">description</label>
 		<div class="col-md-4">
 			<input type="text" class="form-control" name="description" ng-model="entity.description" />
 		</div>

@@ -21,6 +21,6 @@ angular
             $scope.block.floors.push({
                 number: $scope.block.floors.length
             });
-        }
+        };
         
     });

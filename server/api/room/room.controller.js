@@ -119,9 +119,9 @@ function searchRooms(req, res) {
   if(req.query.block){
     where.push({block: {_id: mongoose.Types.ObjectId(req.query.block)}});
   }
-  if(req.query.isFree == 1){
+  if(req.query.isFree === 1){
     where.push({free: {$gt : 0}});
-  }else if(req.query.isFree == 2) {
+  }else if(req.query.isFree === 2) {
     where.push({free: {$lte : 0}});
   }
   if(req.query.blockIds){

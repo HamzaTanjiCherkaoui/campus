@@ -1,114 +1,94 @@
-<div>
+<form class="form-horizontal" method="POST" ng-submit="save()">
+<h2><i class="fa fa-gears"></i> <span translate="global.menu.entities.settings">Settings</span></h2>
 
-    <h2 translate="campusApp.config.home.title">Config</h2>
-
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveConfigModal" ng-click="clear()">
-        <span class="glyphicon glyphicon-flash"></span> <span translate="campusApp.config.home.createLabel">Create a new Config</span>
-    </button>
-    <div class="modal fade" id="saveConfigModal" tabindex="-1" role="dialog" aria-labelledby="myConfigLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form name="editForm" role="form" novalidate ng-submit="create()">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" id="myConfigLabel" translate="campusApp.config.home.createOrEditLabel">Create or edit a Config</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>ID</label>
-                            <input type="text" class="form-control" name="id"
-                                   ng-model="config.id" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label translate="campusApp.config.key">Key</label>
-                            <input type="text" class="form-control" name="key"
-                                   ng-model="config.key">
-
-                        </div>
-                        <div class="form-group">
-                            <label translate="campusApp.config.value">Value</label>
-                            <input type="text" class="form-control" name="value"
-                                   ng-model="config.value">
-
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-                        </button>
-                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
-                        </button>
-                    </div>
-                </form>
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-target="#tab1" data-toggle="tab"><i class="fa fa-tab"></i> General</a></li>
+        <li><a data-target="#tab2" data-toggle="tab"><i class="fa fa-tab"></i> Settings</a></li>
+        <li><a data-target="#tab3" data-toggle="tab"><i class="fa fa-tab"></i> Theme</a></li>
+    </ul>
+    <!-- /tabs -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">Logo</label>
+                <div class="col-sm-4">
+                    <img class="myavatar col-md-4" ng-src="{{ entity.logo }}">
+                </div>
+            </div>  
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <input type="file" name="logo" onchange="angular.element(this).scope().setFile(this)"  accept="image/png,image/jpg,image/jpeg">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">Application name</label>
+                <div class="col-sm-4">
+                    <input type="text" name="appName" ng-model="entity.appName" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">address</label>
+                <div class="col-sm-4">
+                    <input type="text" name="address" ng-model="entity.address" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">city</label>
+                <div class="col-sm-4">
+                    <input type="text" name="city" ng-model="entity.city" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">tel</label>
+                <div class="col-sm-4">
+                    <input type="text" name="tel" ng-model="entity.tel" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">gsm</label>
+                <div class="col-sm-4">
+                    <input type="text" name="gsm" ng-model="entity.gsm" class="form-control">
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="modal fade" id="deleteConfigConfirmation">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form name="deleteForm" ng-submit="confirmDelete(config.id)">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="clear()">&times;</button>
-                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p translate="campusApp.config.delete.question" translate-values="{id: '{{config.id}}'}">Are you sure you want to delete this Config?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-                        </button>
-                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </form>
+        <!-- /tab1 -->
+        <div class="tab-pane" id="tab2">
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">perpage</label>
+                <div class="col-sm-4">
+                    <input type="text" name="perPage" ng-model="entity.perPage" class="form-control">
+                </div>
             </div>
         </div>
+        <!-- /tab1 -->
+        <div class="tab-pane" id="tab3">
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">Theme</label>
+                <div class="col-sm-4">
+                    <select class="form-control select select-primary" my-select="primary" name="theme" ng-model="entity.theme">
+                        <option value="theme1">theme 1</option>
+                        <option value="theme1">theme 2</option>
+                        <option value="theme1">theme 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-4 control-label">css</label>
+                <div class="col-sm-6">
+                  <textarea name="appCss" ng-model="entity.css" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- /tab1 -->
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th translate="campusApp.config.key">Key</th>
-                    <th translate="campusApp.config.value">Value</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="config in configs">
-                    <td><a ui-sref="configDetail({id:config.id})">{{config.id}}</a></td>
-                    <td>{{config.key}}</td>
-                    <td>{{config.value}}</td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="configDetail({id:config.id})"
-                                class="btn btn-info">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="update(config.id)"
-                                class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ng-click="delete(config.id)"
-                                class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button type="submit" name="subvalider" ng-disabled="personFrom.$invalid" class="btn btn-primary btn-embossed">
+                <i class="fa fa-save"></i>&nbsp;<span translate="entity.action.save">Save</span>
+            </button>
+        </div>
     </div>
 </div>
+</form>

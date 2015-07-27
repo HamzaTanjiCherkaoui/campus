@@ -2,9 +2,11 @@
     "campusApp": {
         "person" : {
             "home": {
-                "title": "Etudiants",
+                "title": " Liste des etudiants",
                 "createLabel": "Ajouter un nouveau étudiant",
-                "createOrEditLabel": "Créer ou éditer un étudiant"
+                "createOrEditLabel": "Créer ou éditer un étudiant",
+                "editLabel": "Mise à jour d'un étudiant",
+                "createLabel": "Ajout d'un nouvel étudiant"
             },
             "delete": {
                 "question": "Etes-vous certain de vouloir supprimer le étudiant {{ id }} ?",
@@ -13,9 +15,11 @@
             "detail": {
                 "title": "Etudiant"
             },
-            "lastname": "Nom",
+            "lastName": "Nom",
             "firstName": "Prénom",
             "cin": "Cin",
+            "code": "code",
+            "codeType": "codeType",
             "birthDay": "Date de naissance",
             "gender": "Sexe",
             "address": "Adresse",
@@ -23,9 +27,12 @@
             "city": "Ville",
             "country": "Pays",
             "tel": "Tél",
+            "type": "type",
+            "status": "Status",
+            "banned": "Désactivé",
+            "updated": "Date de derniere mise à jour",
             "description": "Description",
             "archived": "Archived"
         }
     }
 }
-

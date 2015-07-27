@@ -115,7 +115,7 @@ angular.module('campusApp')
             orderDir : 'asc'
         };
           
-                Person.query($scope.searchData, function(result, headers) {
+                Person.query($scope.searchData, function(result) {
                 $scope.persons = result;
                  $('#allocmodal').modal('show');
             });
@@ -126,21 +126,20 @@ angular.module('campusApp')
 
         $scope.allocate=function  () {
 
-            $scope.products_to_allocate=getCheckedProductsIDs();
+            $scope.productsToAllocate = getCheckedProductsIDs();
            // get the person Id from the modal 
             var personId=$scope.person;
             
             //loop trought the selected products 
-            $scope.products_to_allocate.forEach(function (product) {
-            var productId=product;
-            
-            var allocation = new Allocation();
-            allocation.type=true;
-            allocation.status=true;
-            allocation.person=personId;
-            allocation.product=productId;
-            console.log(allocation);
-            Allocation.save(allocation);
+            $scope.productsToAllocate.forEach(function (product) {
+                var productId=product;
+                var allocation = new Allocation();
+                allocation.type=true;
+                allocation.status=true;
+                allocation.person=personId;
+                allocation.product=productId;
+                console.log(allocation);
+                Allocation.save(allocation);
             });
             //save the allocation 
 

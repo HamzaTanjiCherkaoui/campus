@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('campusApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
-    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'angularMoment', 'ngAnimate', 'angular-loading-bar'])
+    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ngCacheBuster', 'angularMoment', 'ngAnimate'])
 
-    .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
+    .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION, ConfigHelper) {
         $rootScope.ENV = ENV;
         $rootScope.VERSION = VERSION;
         $rootScope.account = {};
@@ -12,6 +12,8 @@ angular.module('campusApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
         Principal.identity().then(function(account) {
             $rootScope.account = account;
         });
+
+        $rootScope.appConfig = ConfigHelper.getAll();
         
         $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
             $rootScope.toState = toState;
@@ -54,9 +56,9 @@ angular.module('campusApp',  ['LocalStorageModule', 'tmh.dynamicLocale',
         $rootScope.genderArray = [{'label':'Man', 'value':false}, {'label':'Woman', 'value':true}];
     })
 
-    .config(function (cfpLoadingBarProvider) {
-        cfpLoadingBarProvider.latencyThreshold = 5000;
-    })
+    // .config(function (cfpLoadingBarProvider) {
+    //     cfpLoadingBarProvider.latencyThreshold = 5000;
+    // })
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
 

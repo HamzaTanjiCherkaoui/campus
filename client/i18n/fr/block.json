@@ -2,19 +2,24 @@
     "campusApp": {
         "block" : {
             "home": {
-                "title": "Blocks",
-                "createLabel": "Créer un nouveau Block",
-                "createOrEditLabel": "Créer ou éditer un Block"
+                "title": "Liste des pavillons",
+                "createLabel": "Ajouter un nouvel pavillon",
+                "createOrEditLabel": "ajouter ou mettre à jour pavillon"
             },
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Block {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer le pavillon {{ id }} ?",
+                "multiplequestion": "êtes vous sûr de supprimer ces chambres ?"
             },
             "detail": {
-                "title": "Block"
+                "title": "Pavillon"
             },
-            "name": "Name",
+            "label":{
+                "all": "Toutes les pavillons"
+            },
+            "name": "Nom",
             "type": "Type",
-            "floors": "Floors"
+            "count": "Nombre de chambres",
+            "floors": "Nombre d'étage"
         }
     }
 }

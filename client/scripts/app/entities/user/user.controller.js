@@ -111,8 +111,9 @@ angular
             tables.forEach(function(index){
                 var entity = authorities[index];
                 actions.forEach(function(action){
-                    if(entity[action] === true)
+                    if(entity[action] === true){
                         data.push(index+'.'+action);
+                    }
                 });
             });
             console.log(data);

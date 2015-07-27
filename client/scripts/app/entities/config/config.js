@@ -7,7 +7,7 @@ angular.module('campusApp')
                 parent: 'entity',
                 url: '/config',
                 data: {
-                    roles: ['ROLE_USER'],
+                    roles: ['config.update'],
                     pageTitle: 'campusApp.config.home.title'
                 },
                 views: {

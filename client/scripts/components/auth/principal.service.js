@@ -50,8 +50,9 @@ angular.module('campusApp')
                     stateRoles = [stateRoles];  
                 }
                 if (stateRoles && stateRoles.length > 0) {
-                    if(!this.hasAllRoles(stateRoles))
+                    if(!this.hasAllRoles(stateRoles)){
                         return false;
+                    }
                 }
                 return true;
             },

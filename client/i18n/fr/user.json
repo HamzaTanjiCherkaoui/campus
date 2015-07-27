@@ -13,30 +13,18 @@
             "detail": {
                 "title": "Utilisateur"
             },
+            "label": {
+                "profile": "Profile",
+                "fiche": "Fiche d'utilisateur"
+            },
             "username": "Nom d'utilisateur",
             "email": "Couriel",
             "lastName": "Nom",
             "firstName": "Prénom",
-            "barcode": "Barcode",
-            "cin": "Cin",
-            "birthDay": "BirthDay",
-            "gender": "Gender",
-            "address": "Address",
-            "zipCode": "ZipCode",
-            "city": "City",
-            "country": "Country",
-            "job": "Job",
             "tel": "Tel",
-            "description": "Description",
-            "website": "Website",
-            "facebook": "Facebook",
-            "google": "Google",
-            "twitter": "Twitter",
             "activated": "Activé",
             "langKey": "Langue",
-            "roles": "Droit d'accées",
-            "archived": "Archived",
-            "archivedCause": "ArchivedCause"
+            "roles": "Droit d'accées"
         }
     }
 }

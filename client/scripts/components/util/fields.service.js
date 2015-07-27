@@ -8,8 +8,8 @@ angular.module('campusApp')
                     firstName: {label: 'firstName', visible: true},
                     lastName: {label: 'lastName', visible: true},
                     email: {label: 'email', visible: true},
-                    roles: {label: 'roles', visible: false, callback: function (roles) {return roles.join(', ')}},
-                    activated: {label: 'activated', visible: true, callback: function (activated) {return activated ? 'enabled' : 'disabled'}},
+                    roles: {label: 'roles', visible: false, callback: function (roles) {return roles.join(', ');}},
+                    activated: {label: 'activated', visible: true, callback: function (activated) {return activated ? 'enabled' : 'disabled';}},
                     langKey: {label: 'langKey', visible: true}
                 },
                 person: {
@@ -36,7 +36,7 @@ angular.module('campusApp')
                     free: {label: 'free', visible: true, sortable: true},
                     block: {label: 'block', visible: true, callback: function(a){return a.name;}},
                     type: {label: 'type', visible: true, callback: function (a) {
-                        return $filter('genderConversion')(a.block.type)
+                        return $filter('genderConversion')(a.block.type);
                     }}
                 },
                 block: {
@@ -48,7 +48,6 @@ angular.module('campusApp')
                 product: {
                     type: {label: 'type', visible: true},
                     category: {label: 'category', visible: true, callback: function(a){return a.name;}}
-                    
                 },
                 category:{
 
@@ -76,8 +75,8 @@ angular.module('campusApp')
                 }
                 return entity[field.label];
             },
-            getLabel: function(field) {
-                return 'campusApp.user.' + field.label;
+            getLabel: function(entity, field) {
+                return 'campusApp.'+ entity + '.' + field.label;
             }
         };
     });

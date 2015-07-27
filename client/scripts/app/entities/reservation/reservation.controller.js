@@ -14,7 +14,7 @@ angular.module('campusApp')
         $scope.getFieldValue = Fields.getValue;
 
         $scope.loadAll = function() {
-            Reservation.query($scope.searchData, function(result, headers) {
+            Reservation.query($scope.searchData, function(result) {
                 $scope.reservations = result;
             });
         };
@@ -96,7 +96,7 @@ angular.module('campusApp')
             return getCheckedReservations().map(function(entity){return entity._id;});
         }
 
-        function saveCalback (argument) {
+        function saveCalback () {
             $scope.loadAll();
             $('#saveReservationModal').modal('hide');
             $scope.clear();

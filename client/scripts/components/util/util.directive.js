@@ -59,7 +59,7 @@ angular.module('campusApp')
 })
 .directive('mySortabale', function() {
     return {
-        link: function(scope, elem, attrs) {
+        link: function(scope, elem) {
             elem.on('click', function() {
                 $(this).addClass('sorted').siblings().removeClass('sorted');
             });
@@ -68,7 +68,7 @@ angular.module('campusApp')
 })
 .directive('myPrinter', function($window) {
     return {
-        link: function(scope, elem, attrs) {
+        link: function(scope, elem) {
             elem.on('click', function() {
                 $window.print();
             });

@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var path = require('path');
 var Block = require(path.resolve('server', 'api/block/block.model'));
+var mongoose = require('mongoose');
 
 // Get list of blocks
 exports.index = function(req, res) {

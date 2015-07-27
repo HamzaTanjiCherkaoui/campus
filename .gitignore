@@ -7,6 +7,10 @@ dist
 /server/config/local.env.js
 *.log
 
+client/upload/img/*
+client/upload/img/logo.png
+
 
 *.sublime-project
 *.sublime-workspace
+

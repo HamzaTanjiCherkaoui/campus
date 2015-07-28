@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('PersonDetailController', function ($scope, $stateParams, Person, Block) {
+    .controller('PersonDetailController', function ($scope, $stateParams, Person, Block, Allocation) {
         $scope.entity = {};
+
         $scope.load = function (id) {
             Person.get({id: id}, function(person) {
                 $scope.entity = person;

@@ -2,14 +2,14 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    relationship = require("mongoose-relationship");
+    relationship = require('mongoose-relationship');
 
 var RoomSchema = new Schema({
   name: String,
   floor: { type: Number, min: 0},
   capacity: { type: Number, min: 0},
   free: { type: Number, min: 0},
-  block: {type: mongoose.Schema.Types.ObjectId, ref: 'Block', childPath:"rooms"},
+  block: {type: mongoose.Schema.Types.ObjectId, ref: 'Block', childPath: 'rooms'},
   reservations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reservation'}]
 });
 

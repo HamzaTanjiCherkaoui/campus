@@ -7,38 +7,43 @@ var Product = require(path.resolve('server', 'api/product/product.model'));
 
 // Get list of products
 exports.index = function(req, res) {
-  var catQuery = {};  
-  if(req.query.category!=='')
-  {
-    catQuery = {
-      category :{_id:mongoose.Types.ObjectId(req.query.category)}
-    };
+  var keyword = {$regex: new RegExp(req.query.keyword,'i')};
+  var where = [{name: keyword}];
+  if(req.query.category){
+    where.push({category: {_id: mongoose.Types.ObjectId(req.query.category)}});
   }
-  var order=req.query.orderBy;
-  Product.find(catQuery)
+
+  Product.find({$and: where})
+    .sort([[req.query.orderBy, req.query.orderDir]])
     .skip(req.query.perPage * (req.query.page - 1))
     .limit(req.query.perPage)
-    .sort({
-      order : req.query.orderDir
-    })
     .populate('category')
     .exec(function(err, products) {
         Product.count().exec(function(err, count) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
+          res.setHeader('count', count);
           res.json(200, products);
-
-        })
+        });
     });
 };
 
 
 // Get a single product
 exports.show = function(req, res) {
-  Product.findById(req.params.id, function (err, product) {
-    if(err) { return handleError(res, err); }
-    if(!product) { return res.send(404); }
-    return res.json(product);
-  });
+  Product.findById(req.params.id)
+    .populate('category')
+    .populate('allocations')
+    .exec(function (err, product) {
+      if(err) { return handleError(res, err); }
+      if(!product) { return res.send(404); }
+      var personPath = {
+        path: 'allocations.person',
+        model: 'Person'
+      };
+      Product.populate(product, personPath, function (err, product) {
+        return res.json(product);
+      });
+    });
 };
 
 // Creates a new product in the DB.
@@ -76,19 +81,21 @@ exports.destroy = function(req, res) {
 };
 
 //delete multiple products from the DB
-
 exports.deletemultiple = function(req, res) {
-  req.body.forEach(function(item) 
-  {
-     Product.findById(mongoose.Types.ObjectId(item), function (err, product) 
-     {
-    product.remove() 
-      
-      });
-
+  var ids = req.body.ids.map(function(id){
+    return mongoose.Types.ObjectId(id);
   });
- res.send(200, "products deleted !"); 
+  Product.remove({ _id: { $in: ids } }, function (err) {
+    if(err) { return handleError(res, err); }
+    res.send(204);
+  });
 };
+
+// Creates multiple products in the DB.
+exports.createmultiple = function(req, res) {
+  res.send(201);
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

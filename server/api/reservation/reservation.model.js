@@ -22,15 +22,14 @@ ReservationSchema.plugin(relationship, { relationshipPathName: ['person', 'room'
  * hooks
  */
 ReservationSchema
+  .post('save', function(entity) {
+    Room.update({_id: entity.room}, { $inc: { free: -1 } }).exec();
+  })
   .post('remove', function(entity) {
     if(entity.status){ 
-        Room.findById(entity.room, function (err, room) {
-            room.free = room.free + 1;  
-            room.save();
-        })
+      Room.update({_id: entity.room}, { $inc: { free: 1 } }).exec();
     }
   });
-
 
 
 module.exports = mongoose.model('Reservation', ReservationSchema);

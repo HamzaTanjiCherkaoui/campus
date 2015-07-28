@@ -1,25 +1,102 @@
 'use strict';
 
 angular.module('campusApp')
-    .controller('AllocationController', function ($scope, Allocation, ParseLinks ,$stateParams,Product,Person) {
+    .controller('AllocationController', function ($scope, Allocation, Fields) {
         $scope.allocations = [];
-        $scope.allocation={};
-        $scope.allocation.product={};
-        $scope.productnotfilled=true;
-        $scope.done=false;
-         $scope.products = [];
-        $scope.page = 1;
-         $scope.persons = [];
-            $scope.pagination = {};
-            $scope.searchData = {
+        $scope.pagination = {};
+        $scope.searchData = {
             page: 1,
             perPage: 4,
-            keyword : '',
-            orderBy : 'lastName',
-            orderDir : 'asc'
+            keyword : ''
         };
-          
-          
+        $scope.fields = Fields.get('allocation');
+        $scope.getFieldValue = Fields.getValue;
+        $scope.getFieldLabel = Fields.getLabel;
+
+        $scope.loadAll = function() {
+            Allocation.query($scope.searchData, function(result, headers) {
+                $scope.allocations = result;
+                $scope.count = headers('count');
+                var pages = headers('pages');
+                $scope.pagination.first = 1;
+                $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
+                $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
+                $scope.pagination.last = pages;
+                $scope.allChecked = false;
+            });
+        };
+        
+        $scope.loadPage = function(page) {
+            $scope.searchData.page = page;
+            $scope.loadAll();
+        };
+
+        $scope.loadAll();
+
+        $scope.delete = function (id) {
+            Allocation.get({id: id}, function(result) {
+                $scope.allocation = result;
+                $('#deleteAllocationConfirmation').modal('show');
+            });
+        };
+
+        $scope.multipleDelete = function () {
+            $http.post('/api/allocations/deletemultiple', {ids: getCheckedRowsIDs()})
+                .success(function () {
+                    $('#deleteMultipleConfirmation').modal('hide');
+                    $scope.loadAll();
+                });
+        };
+
+        $scope.confirmDelete = function (id) {
+            Allocation.delete({id: id},
+                function () {
+                    $scope.loadAll();
+                    $('#deleteAllocationConfirmation').modal('hide');
+                    $scope.clear();
+                });
+        };
+
+        $scope.changeOrder = function (column) {
+            $scope.searchData.orderBy = column;
+            $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
+            $scope.loadAll();
+        };    
+
+        $scope.markAll = function (checked) {
+            $scope.allocations.forEach(function (entity) {
+                entity.checked = checked;
+            });
+        };
+
+        $scope.showMultipleActions = function () {
+            return getCheckedRows().length === 0 ? false : true;
+        };
+
+        function getCheckedRows () {
+            return $scope.allocations.filter(function (entity) { return entity.checked;});
+        }
+
+        function getCheckedRowsIDs () {
+            return getCheckedRows().map(function(entity){return entity._id;});
+        }
+
+        function saveCalback () {
+            $scope.loadAll();
+            $('#saveAllocationModal').modal('hide');
+            $scope.clear();
+        }
+
+/*
+
+        $scope.allocation = {};
+        $scope.allocation.product = {};
+        $scope.productnotfilled = true;
+        $scope.done = false;
+        $scope.products = [];
+        $scope.page = 1;
+        $scope.persons = [];
+        
         $scope.searchData2 = {
             page: 1,
             perPage: 4,
@@ -158,7 +235,7 @@ angular.module('campusApp')
         // });
         // };
        
-        
+        */
 
     });
 

@@ -1,7 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    path = require('path'),
+    Room = require(path.resolve('server', 'api/room/room.model'));
 
 var BlockSchema = new Schema({
   name: String,
@@ -21,5 +23,14 @@ BlockSchema
     .get( function () {
         return this.rooms.length;
     });
+
+/**
+ * hooks
+ */
+BlockSchema
+    .post('remove', function(entity) {
+        Room.remove({ _id: { $in: entity.rooms } }).exec();
+    });
+
 
 module.exports = mongoose.model('Block', BlockSchema);

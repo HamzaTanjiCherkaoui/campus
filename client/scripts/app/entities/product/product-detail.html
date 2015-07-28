@@ -1,39 +1,35 @@
+<h2><i class="fa fa-dropbox"></i> <span translate="campusApp.product.detail.title">Product</span> {{product.name}}</h2>
 <div class="row">
-    <div class="col-xs-6 hidden-print">
-        <h2><span ></span> {{ entity.name }} </h2>
+    <div class="col-md-9">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td><span translate="campusApp.product.name">name</span></td>
+                    <td>{{product.name}}</td>
+                </tr>
+                <tr>
+                    <td><span translate="campusApp.product.type">type</span></td>
+                    <td>{{product.type}}</td>
+                </tr>
+                <tr>
+                    <td><span translate="campusApp.product.category">category</span></td>
+                    <td>{{product.category.name}}</td>
+                </tr>
+                <tr ng-show="product.allocation">
+                    <td><span translate="campusApp.allocation.status">status</span></td>
+                    <td>Réservé</td>
+                </tr>
+                <tr ng-show="product.allocation">
+                    <td><span translate="campusApp.allocation.person">allocation</span></td>
+                    <td><a ui-sref="personDetail({id:product.allocation.person._id})"> {{product.allocation.person.fullName}}</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="col-xs-6">
-      <div class="btn-group pull-right hidden-print">              
-        <button class="btn btn-primary "><span class="fa fa-gear"></span> Select an action</button>
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          <span class="caret"></span>
+    <div class="col-md-3">
+        <button type="button" ui-sref="product" class="btn btn-info btn-block">
+            <span class="fa fa-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Revenir vers la liste</span>
         </button>
-        <ul class="dropdown-menu dropdown-menu-inverse">
-          <li><a ui-sref="productSave({id:entity._id})"><span class="fa fa-edit"> Edit</a></li>
-          <li><a href="#" ng-click="print()"><span class="glyphicon glyphicon-print"></span> print this page</a></li>
-          <li class="divider"></li>
-          <li><a href="#" ng-click="delete(entity._id)" ><span class="glyphicon glyphicon-remove-circle"></span> Delete</a></li>
-        </ul>
-      </div>
+        <button my-printer type="button" class="btn btn-primary btn-block"><span class="fa fa-print"></span> Imprimer</button>
     </div>
-</div>
-  <h2 class="visible-print text-center">Product's detail</h2>
-
-
-<div class="row">
-  <div class="col-md-4">
-    <div class="box">
-      <header>
-          <h3><span class="fa fa-user"></span> Product</h3>
-      </header>
-      <ul class="list-group">
-          <li class="list-group-item"><strong>name:</strong> {{ entity.name }}</li>
-          <li class="list-group-item"><strong>type:</strong>  {{ entity.type }}</li>
-          
-      </ul>
-    </div>
-  </div> 
-
-   
-
 </div>

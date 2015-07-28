@@ -16,7 +16,7 @@
     "isBanned": false,
     "__v": 0,
     "reservations": ["5590c5f185a2e84c1114e56c"],
-    "allocations": [],
+    "allocations": ["5590c4cf85a2e84c1114e568", "5590c4d585a2e84c1114e569"],
     "updated": "2015-06-29T03:40:37.137Z"
   },
   {
@@ -36,7 +36,7 @@
     "isBanned": false,
     "__v": 0,
     "reservations": ["5590c5c985a2e84c1114e56b"],
-    "allocations": [],
+    "allocations": ["5590c4d585a2e84c1114e56a"],
     "updated": "2015-06-29T03:41:33.289Z"
   },
   {

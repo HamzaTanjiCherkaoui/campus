@@ -9,8 +9,7 @@
             },
             "delete": {
                 "question": "êtes vous sûr de supprimer l'article '{{ name}}' ?",
-                "multiplequestion": "êtes vous sûr de supprimer ses articles ?"
-                
+                "multiplequestion": "êtes vous sûr de supprimer ses articles ?"                
             },
             "detail": {
                 "title": "Article"

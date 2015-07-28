@@ -14,4 +14,5 @@ router.put('/:id', auth.hasRole('product.update'), controller.update);
 router.patch('/:id', auth.hasRole('product.update'), controller.update);
 router.delete('/:id', auth.hasRole('product.delete'), controller.destroy);
 router.post('/deletemultiple', auth.hasRole('product.delete'), controller.deletemultiple);
+router.post('/createmultiple', auth.hasRole('product.delete'), controller.createmultiple);
 module.exports = router;

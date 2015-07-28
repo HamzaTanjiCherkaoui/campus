@@ -1,7 +1,10 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    path = require('path'),
+    Allocation = require(path.resolve('server', 'api/allocation/allocation.model')),
+    Reservation = require(path.resolve('server', 'api/reservation/reservation.model'));
 
 var PersonSchema = new Schema({
 	code: {type:String,visible:true},
@@ -41,5 +44,14 @@ PersonSchema
 	.get( function () {
 		return this.firstName + ' ' + this.lastName;
 	});
+
+/**
+ * hooks
+ */
+PersonSchema
+  	.post('remove', function(entity) {
+        Allocation.remove({ _id: { $in: entity.allocations } }).exec();
+        Reservation.remove({ _id: { $in: entity.reservations } }).exec();
+  	});
 
 module.exports = mongoose.model('Person', PersonSchema);

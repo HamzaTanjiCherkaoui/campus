@@ -41,6 +41,29 @@ angular.module('campusApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('allocation');
+                        $translatePartialLoader.addPart('product');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+            .state('allocationSave', {
+                parent: 'entity',
+                url: '/allocation/save/:person/:id',
+                data: {
+                    roles: ['allocation.create'],
+                    pageTitle: 'campusApp.allocation.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/allocation/allocation-save.html',
+                        controller: 'AllocationSaveController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('allocation');
+                        $translatePartialLoader.addPart('person');
+                        $translatePartialLoader.addPart('product');
                         return $translate.refresh();
                     }]
                 }

@@ -4,7 +4,7 @@
     "name": "tv",
     "type": "type A",
     "category": "5590c04e85a2e84c1114e556",
-    "isalloced":false,
+    "isValide":true,
     "__v": 0
   },
   {
@@ -12,7 +12,7 @@
     "name": "lamp",
     "type": "type B",
     "category": "5590c04e85a2e84c1114e556",
-    "isalloced":false,
+    "isValide":true,
     "__v": 0
   },
   {
@@ -20,7 +20,7 @@
     "name": "sofa",
     "type": "type C",
     "category": "5590c04e85a2e84c1114e556",
-    "isalloced":false,
+    "isValide":true,
     "__v": 0
   },
   {
@@ -28,7 +28,7 @@
     "name": "chair",
     "type": "type C",
     "category": "5590c05285a2e84c1114e557",
-    "isalloced":false,
+    "isValide":false,
     "__v": 0
   },
   {
@@ -36,7 +36,7 @@
     "name": "desk",
     "type": "type C",
     "category": "5590c05285a2e84c1114e557",
-    "isalloced":false,
+    "isValide":false,
     "__v": 0
   }
 ]

@@ -137,7 +137,7 @@ function searchRooms(req, res) {
           res.setHeader('pages', Math.ceil( count / req.query.perPage ));
           res.setHeader('count', count);
           res.json(200, rooms);
-        })
+        });
     });
 }
 

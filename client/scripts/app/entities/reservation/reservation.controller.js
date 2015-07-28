@@ -3,19 +3,28 @@
 angular.module('campusApp')
     .controller('ReservationController', function ($scope, $http, Reservation, Fields) {
         $scope.reservations = [];
+        $scope.pagination = {};
         $scope.searchData = {
             page: 1,
-            perPage: 4,
+            perPage: 2,
             keyword : '',
             orderBy : 'datePayement',
             orderDir : 'asc'
         };
         $scope.fields = Fields.get('reservation');
         $scope.getFieldValue = Fields.getValue;
+        $scope.getFieldLabel = Fields.getLabel;
 
         $scope.loadAll = function() {
-            Reservation.query($scope.searchData, function(result) {
+            Reservation.query($scope.searchData, function(result, headers) {
                 $scope.reservations = result;
+                $scope.count = headers('count');
+                var pages = headers('pages');
+                $scope.pagination.first = 1;
+                $scope.pagination.prev = ($scope.searchData.page > 1 ) ? $scope.searchData.page - 1 : 0;
+                $scope.pagination.next = ($scope.searchData.page + 1 <= pages ) ? $scope.searchData.page + 1 : 0;
+                $scope.pagination.last = pages;
+                $scope.allChecked = false;
             });
         };
         $scope.loadPage = function(page) {
@@ -23,24 +32,6 @@ angular.module('campusApp')
             $scope.loadAll();
         };
         $scope.loadAll();
-
-        $scope.create = function () {
-            var entity = $scope.reservation;
-            entity.rooms = [];
-            if(entity._id) {
-                Reservation.update({id: entity._id}, entity, saveCalback);
-            }
-            else {
-                Reservation.save(entity, saveCalback);
-            }
-        };
-
-        $scope.update = function (id) {
-            Reservation.get({id: id}, function(result) {
-                $scope.reservation = result;
-                $('#saveReservationModal').modal('show');
-            });
-        };
 
         $scope.delete = function (id) {
             Reservation.get({id: id}, function(result) {
@@ -70,13 +61,7 @@ angular.module('campusApp')
             $scope.searchData.orderBy = column;
             $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';
             $scope.loadAll();
-        };
-
-        $scope.clear = function () {
-            $scope.reservation = {_id: null, name: null, floors: null, type: null};
-            $scope.editForm.$setPristine();
-            $scope.editForm.$setUntouched();
-        };       
+        };     
 
         $scope.markAll = function (checked) {
             $scope.reservations.forEach(function (entity) {

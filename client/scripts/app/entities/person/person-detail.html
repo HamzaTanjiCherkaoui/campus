@@ -13,7 +13,8 @@
           <li><a><i class="fa fa-credit-card"></i> <span translate="entity.action.print.card">Print card</span></a></li>
           <li><a><i class="fa fa-ticket"></i> <span translate="entity.action.print.ticket">Print ticket</span></a></li>
           <li><a my-printer><i class="fa fa-print"></i> <span translate="entity.action.print.page">Print page</span></a></li>
-          <li is-granted="room.update" ng-show="!entity.reservation || entity.reservation.satus"><a ui-sref="reservationSave({person:entity._id})"><i class="fa fa-hotel"></i> <span translate="campusApp.room.action.bookRoom">Book a Room</span></a></li>
+          <li is-granted="reservation.create" ng-show="!entity.reservation || entity.reservation.satus"><a ui-sref="reservationSave({person:entity._id})"><i class="fa fa-hotel"></i> <span translate="campusApp.room.action.bookRoom">Book a Room</span></a></li>
+          <li is-granted="allocation.create"><a ui-sref="allocationSave({person:entity._id})"><i class="fa fa-archive"></i> <span translate="entity.action.allocate">allocate a product</span></a></li>
         </ul>
       </div>
     </div>
@@ -52,10 +53,6 @@
            <li class="list-group-item"><strong translate="campusApp.person.status">status :</strong> {{ entity.status }}</li>
         </ul>
     </div>
-  </div> 
-
-
-  <div class="col-md-4">
     <div class="box">
       <header>
           <h3><i class="fa fa-tag"></i> MetaData</h3>
@@ -65,7 +62,9 @@
           <li class="list-group-item"><strong translate="entity.attr.updated">Updated date:</strong>  <span am-time-ago="entity.updated"></span></li>
       </ul>
     </div>
+  </div> 
 
+  <div class="col-md-4">
     <div class="box" ng-show="entity.reservation">
         <header>
             <h3><span class="fa fa-hotel"></span> Informations de logement</h3>
@@ -80,7 +79,17 @@
           <li class="list-group-item"><strong>Status :</strong> {{{true: 'valide', false: 'invalide'}[entity.reservation.status ]}} </li>
         </ul>
     </div>
-  </div> 
 
+    <div class="box">
+      <header>
+          <h3><i class="fa fa-tag"></i> Produits</h3>
+      </header>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a ng-repeat="allocation in entity.allocations" ui-sref="productDetail({id:allocation.product._id})"> {{ allocation.product.name }} </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 

@@ -95,6 +95,8 @@
             "switch": "Echanger les chambres",
             "choose": "Séléctionner une action",
             "select": "Séléctionner",
+            "free": "Libérer",
+            "allocate": "Réserver",
             "print": {
                 "all": "Imprimer",
                 "card": "Imprimer la carte",

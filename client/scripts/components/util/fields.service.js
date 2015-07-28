@@ -34,9 +34,9 @@ angular.module('campusApp')
                     floor: {label: 'floor', visible: true},
                     capacity: {label: 'capacity', visible: true, sortable: true},
                     free: {label: 'free', visible: true, sortable: true},
-                    block: {label: 'block', visible: true, callback: function(a){return a.name;}},
+                    block: {label: 'block', visible: true, callback: function(a){return (a) ? a.name : '' ;}},
                     type: {label: 'type', visible: true, callback: function (a) {
-                        return $filter('genderConversion')(a.block.type);
+                        return (a.block) ? $filter('genderConversion')(a.block.type) : '' ;
                     }}
                 },
                 block: {
@@ -46,15 +46,21 @@ angular.module('campusApp')
                     type: {label: 'type', visible: true, callback: $filter('genderConversion')}
                 },
                 product: {
+                    name: {label: 'name', visible: true, sortable: true},
                     type: {label: 'type', visible: true},
-                    category: {label: 'category', visible: true, callback: function(a){return a.name;}}
+                    category: {label: 'category', visible: true, callback: function(a){return (a) ? a.name : '' ;}}
                 },
                 category:{
 
                 },
+                allocation:{
+                    person: {label: 'person', visible: true, callback: function(a){return (a) ? a.fullName : '' ;}},
+                    product: {label: 'product', visible: true, callback: function(a){return (a) ? a.name : '' ;}},
+                    status: {label: 'status', visible: true, callback: function (a) { return (a) ? 'valide' : 'non valide';}}
+                },
                 reservation:{
-                    person: {label: 'person', visible: true, callback: function(a){return a.fullName;}},
-                    room: {label: 'room', visible: true, callback: function(a){return a.name;}},
+                    person: {label: 'person', visible: true, callback: function(a){return (a) ? a.fullName : '' ;}},
+                    room: {label: 'room', visible: true, callback: function(a){return (a) ? a.name : '' ;}},
                     datePayement: {label: 'datePayement', visible: true, callback: $filter('toDate')},
                     dateFrom: {label: 'dateFrom', visible: true, callback: $filter('toDate')},
                     dateTo: {label: 'dateTo', visible: true, callback: $filter('toDate')},

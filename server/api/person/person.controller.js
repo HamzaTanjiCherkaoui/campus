@@ -27,20 +27,12 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Person.findById(req.params.id)
     .populate('reservations')
+    .populate('allocations')
     .exec(function (err, person) {
       if(err) { return handleError(res, err); }
       if(!person) { return res.send(404); }
-
-      var roomPath = {
-        path: 'reservations.room',
-        model: 'Room'
-      };
-      Person.populate(person, roomPath, function (err, person) {
-        var blockPath = {
-          path: 'room.block',
-          model: 'Block'
-        };
-        Person.populate(person, blockPath, function (err, person) {
+      Person.populate(person, {path: 'reservations.room', model: 'Room'}, function (err, person) {
+        Person.populate(person, { path: 'allocations.product', model: 'Product'}, function (err, person) {    
           return res.json(person);
         });
       });
@@ -83,7 +75,7 @@ exports.destroy = function(req, res) {
   });
 };
 
-//delete multiple products from the DB
+//delete multiple entities from the DB
 exports.deletemultiple = function(req, res) {
   var ids = req.body.ids.map(function(id){
     return mongoose.Types.ObjectId(id);

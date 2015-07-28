@@ -2,22 +2,25 @@
     "campusApp": {
         "reservation" : {
             "home": {
-                "title": "Reservations",
-                "createLabel": "Créer un nouveau Reservation",
-                "createOrEditLabel": "Créer ou éditer un Reservation",
+                "title": "Réservations",
+                "createLabel": "Ajouter une nouvelle réservation",
+                "createOrEditLabel": "Ajouter ou modifier une réservation",
                 "check": "Réserver une chambre"
             },
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Reservation {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer la réservation {{ id }} ?",
+                "multiplequestion": "êtes vous sûr de supprimer ses réservations ?" 
             },
             "detail": {
-                "title": "Reservation"
+                "title": "Réservation"
             },
-            "datePayement": "DatePayement",
-            "dateFrom": "DateFrom",
-            "dateTo": "DateTo",
-            "status": "Status",
-            "price": "Price"
+            "person": "Etudiant",
+            "room": "Chambre",
+            "datePayement": "Date de paiement",
+            "dateFrom": "Date début",
+            "dateTo": "Date fin",
+            "status": "Etat",
+            "price": "Montant"
         }
     }
 }

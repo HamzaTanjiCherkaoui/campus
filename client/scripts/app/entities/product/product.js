@@ -40,6 +40,7 @@ angular.module('campusApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('product');
+                        $translatePartialLoader.addPart('allocation');
                         return $translate.refresh();
                     }],
                     

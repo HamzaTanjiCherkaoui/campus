@@ -2,37 +2,37 @@
 
 <form name="reservationFrom" role="form" class="form-horizontal" novalidate ng-submit="save()" show-validation>
   <div class="form-group">
-    <label class="col-md-4 control-label" for="person">person</label>
+    <label class="col-md-4 control-label" for="person" translate="campusApp.reservation.person">person</label>
     <div class="col-md-4">
       <input type="text" class="form-control disabled" name="person" ng-model="person.fullName" disabled/>
     </div>
   </div> 
   <div class="form-group">
-    <label class="col-md-4 control-label" for="entity.dateFrom">dateFrom</label>
+    <label class="col-md-4 control-label" for="entity.dateFrom" translate="campusApp.reservation.dateFrom">dateFrom</label>
     <div class="col-md-4">
       <input type="text" my-date-picker="primary" class="form-control" name="dateFrom" ng-model="entity.dateFrom" />
     </div>
   </div>
   <div class="form-group">
-    <label class="col-md-4 control-label" for="entity.dateTo">dateTo</label>
+    <label class="col-md-4 control-label" for="entity.dateTo" translate="campusApp.reservation.dateTo">dateTo</label>
     <div class="col-md-4">
       <input type="text" my-date-picker="primary" class="form-control" name="dateTo" ng-model="entity.dateTo" />
     </div>
   </div>
   <div class="form-group">
-    <label class="col-md-4 control-label" for="entity.price">price</label>
+    <label class="col-md-4 control-label" for="entity.price" translate="campusApp.reservation.price">price</label>
     <div class="col-md-4">
       <input type="text" class="form-control" name="price" ng-model="entity.price" />
     </div>
   </div>      
   <div class="form-group ">
-        <label class="col-md-4 control-label">Block</label>
+        <label class="col-md-4 control-label" translate="campusApp.room.block">block</label>
         <div class="col-md-4">
             <input class="form-control disabled" disabled type="text" ng-model="room.block.name">
         </div>
     </div>
   <div class="form-group">
-    <label class="col-md-4 control-label" for="room">room</label>
+    <label class="col-md-4 control-label" for="room" translate="campusApp.reservation.room">room</label>
     <div class="col-md-4">
       <input type="text" class="form-control disabled" disabled name="room" ng-model="room.name" />
     </div>
@@ -46,9 +46,6 @@
       </div>
     </div>
 </form>
-
-
-
 
     <!-- save modal -->
     <div class="modal fade" id="roomModal">

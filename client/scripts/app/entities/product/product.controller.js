@@ -101,26 +101,6 @@ angular.module('campusApp')
             });
         };
 
-        /*$scope.free = function  (id) {
-            Product.get({id: id}, function(result) {
-                $scope.product = result;
-                var product = $scope.product;
-                product.isalloced = false;
-                //update the product
-                Product.update({id: product._id},product);   
-                Allocation.getAsArray({product :product._id },function  (result2) {
-                    var allocations = result2;
-                    var allocationid = allocations.filter(function(entity) {return entity.product._id === id;}).map(function(entity){return entity._id;});
-                    console.log(allocationid);
-                     Allocation.delete({id:allocationid},
-                        function () {
-                            $scope.loadAll();
-                            $scope.clear();
-                        });                    
-                });
-            });
-        };*/
-
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;
             $scope.searchData.orderDir = ($scope.searchData.orderDir === 'asc') ? 'desc' : 'asc';

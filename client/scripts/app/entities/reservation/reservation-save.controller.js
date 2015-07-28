@@ -46,8 +46,8 @@ angular.module('campusApp')
             });
         };
         $scope.save = function(){
-            Reservation.save($scope.entity, function () {
-                $state.go('personDetail', {id: $scope.person._id});
+            Reservation.save($scope.entity, function (result) {
+                $state.go('reservationDetail', {id: result._id});
             });
         };
 

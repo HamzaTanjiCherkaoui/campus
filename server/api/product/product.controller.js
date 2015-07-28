@@ -36,11 +36,7 @@ exports.show = function(req, res) {
     .exec(function (err, product) {
       if(err) { return handleError(res, err); }
       if(!product) { return res.send(404); }
-      var personPath = {
-        path: 'allocation.person',
-        model: 'Person'
-      };
-      Product.populate(product, personPath, function (err, product) {
+      Product.populate(product, {path: 'allocation.person', model: 'Person'}, function (err, product) {
         return res.json(product);
       });
     });

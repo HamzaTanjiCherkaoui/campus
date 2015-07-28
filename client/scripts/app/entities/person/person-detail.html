@@ -3,9 +3,9 @@
         <h2><span class="fa fa-user"></span> {{ entity.firstName }} {{ entity.lastName }} </h2>
     </div>
     <div class="col-xs-6">
-      <div class="btn-group pull-right hidden-print">              
-        <button class="btn btn-primary "><i class="fa fa-gear"></i> <span translate="action.select">Select an action</span></button>
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <div class="btn-group pull-right hidden-print">         
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">     
+        <span translate="action.select">Select an action</span>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-inverse">
@@ -65,11 +65,11 @@
   </div> 
 
   <div class="col-md-4">
-    <div class="box" ng-show="entity.reservation">
+    <div class="box">
         <header>
             <h3><span class="fa fa-hotel"></span> Informations de logement</h3>
         </header>
-        <ul class="list-group">
+        <ul class="list-group" ng-show="entity.reservation">
           <li class="list-group-item"><strong>Date début :</strong> {{ entity.reservation.dateFrom | amDateFormat:'DD-MM-YYYY' }}  </li>
           <li class="list-group-item"><strong>Date fin :</strong> {{ entity.reservation.dateTo | amDateFormat:'DD-MM-YYYY' }} </li>
           <li class="list-group-item"><strong>Numero de chambre :</strong> {{ entity.reservation.room.name }} </li>
@@ -78,16 +78,24 @@
           <li class="list-group-item"><strong>Montant :</strong> {{ entity.reservation.price }} DH </li>
           <li class="list-group-item"><strong>Status :</strong> {{{true: 'valide', false: 'invalide'}[entity.reservation.status ]}} </li>
         </ul>
+
+        <ul class="list-group" ng-hide="entity.reservation">
+          <li class="list-group-item">Pas de réservation !</li>
+        </ul>
     </div>
 
     <div class="box">
       <header>
-          <h3><i class="fa fa-tag"></i> Produits</h3>
+          <h3><i class="fa fa-dropbox"></i> Liste des produits résérvées</h3>
       </header>
       <ul class="list-group">
-        <li class="list-group-item">
-          <a ng-repeat="allocation in entity.allocations" ui-sref="productDetail({id:allocation.product._id})"> {{ allocation.product.name }} </a>
+        <li class="list-group-item" ng-show="entity.allocations.length">
+          <a ng-repeat="allocation in entity.allocations" ui-sref="productDetail({id:allocation.product._id})"> 
+          {{ allocation.product.name }} </a>
         </li>
+      </ul>
+      <ul class="list-group" ng-hide="entity.allocations.length">
+          <li class="list-group-item">Pas de produits</li>
       </ul>
     </div>
   </div>

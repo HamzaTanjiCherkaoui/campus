@@ -754,6 +754,13 @@ th.sortable:hover i, th.sorted i{
 	#adminbar #logo-header{width:600px;height: 90px;display: block!important;float: none; }
 	#adminbar{position: static;height: inherit;}
 	a[href]:after {content: none !important;}
+	*{transition:none!important}
+	.wrap{
+		position: inherit!important;
+	    padding: 20px!important;
+	    margin: 10px!important;
+	    overflow: inherit!important;
+    }
 }
 
 @media (max-width: 400px) {

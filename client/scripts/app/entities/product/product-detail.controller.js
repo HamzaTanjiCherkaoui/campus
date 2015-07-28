@@ -6,9 +6,6 @@ angular.module('campusApp')
         $scope.load = function (id) {
             Product.get({id: id}, function(result) {
                 $scope.product = result;
-                Allocation.get({id: result.allocation}, function(result) {
-                    $scope.product.allocation = result;
-                });
             });
         };
         $scope.load($stateParams.id);

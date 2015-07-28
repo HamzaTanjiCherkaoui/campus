@@ -29,7 +29,12 @@ BlockSchema
  */
 BlockSchema
     .post('remove', function(entity) {
-        Room.remove({ _id: { $in: entity.rooms } }).exec();
+        console.log('BlockSchema.postRemove');
+        Room.find({ _id: { $in: entity.rooms } }, function (err, result) {
+            result.forEach(function (item) {
+                item.remove();
+            });
+        });
     });
 
 

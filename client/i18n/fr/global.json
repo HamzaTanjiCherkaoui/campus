@@ -6,7 +6,7 @@
             "home": "Accueil",
             "entities": {
                 "main": "Tableau de bord",
-                "user": "Users",
+                "user": "Utilisateurs",
                 "person": "Etudiants",
                 "block": "Pavillons",
                 "room": "Chambres",

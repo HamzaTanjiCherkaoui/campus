@@ -32,12 +32,12 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Product.findById(req.params.id)
     .populate('category')
-    .populate('allocations')
+    .populate('allocation')
     .exec(function (err, product) {
       if(err) { return handleError(res, err); }
       if(!product) { return res.send(404); }
       var personPath = {
-        path: 'allocations.person',
+        path: 'allocation.person',
         model: 'Person'
       };
       Product.populate(product, personPath, function (err, product) {
@@ -85,8 +85,11 @@ exports.deletemultiple = function(req, res) {
   var ids = req.body.ids.map(function(id){
     return mongoose.Types.ObjectId(id);
   });
-  Product.remove({ _id: { $in: ids } }, function (err) {
+  Product.find({ _id: { $in: ids } }, function (err, result) {
     if(err) { return handleError(res, err); }
+    result.forEach(function (item) {
+      item.remove();
+    });
     res.send(204);
   });
 };

@@ -50,8 +50,17 @@ PersonSchema
  */
 PersonSchema
   	.post('remove', function(entity) {
-        Allocation.remove({ _id: { $in: entity.allocations } }).exec();
-        Reservation.remove({ _id: { $in: entity.reservations } }).exec();
+        console.log('PersonSchema.postRemove');
+        Allocation.find({ _id: { $in: entity.allocations } }, function (err, result) {
+            result.forEach(function (item) {
+                item.remove();
+            });
+        });
+        Reservation.find({ _id: { $in: entity.reservations } }, function (err, result) {
+            result.forEach(function (item) {
+                item.remove();
+            });
+        });
   	});
 
 module.exports = mongoose.model('Person', PersonSchema);

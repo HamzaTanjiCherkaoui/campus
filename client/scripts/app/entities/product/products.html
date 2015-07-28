@@ -263,11 +263,7 @@
                                 class="btn btn-primary  btn-embossed btn-xs">
                             <span class="fa fa-edit"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
                         </button>
-                        <button ng-show="!entity.isalloced" ng-click="allocatemodal(entity._id)"
-                                class="btn btn-warning  btn-embossed btn-xs">
-                            <span class="fa fa-check"></span>&nbsp;<span translate="entity.action.allocate"> allocate</span>
-                        </button>
-                        <button ng-show="entity.isalloced" ng-click="free(entity._id)"
+                        <button ng-show="entity.allocation" ng-click="free(entity.allocation)"
                                 class="btn btn-default  btn-embossed btn-xs">
                             <span class="fa fa-check"></span>&nbsp;<span translate="entity.action.free"> free</span>
                         </button>

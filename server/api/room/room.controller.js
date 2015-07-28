@@ -81,8 +81,11 @@ exports.deletemultiple = function(req, res) {
   var ids = req.body.ids.map(function(id){
     return mongoose.Types.ObjectId(id);
   });
-  Room.remove({ _id: { $in: ids } }, function (err) {
+  Room.find({ _id: { $in: ids } }, function (err, result) {
     if(err) { return handleError(res, err); }
+    result.forEach(function (item) {
+      item.remove();
+    });
     res.send(204);
   });
 };

@@ -51,6 +51,6 @@
     "_id": "5590bf9a85a2e84c1114e558",
     "__v": 0,
     "key": "css",
-    "value": "this is css"
+    "value": "/* this is css */ "
   }
 ]

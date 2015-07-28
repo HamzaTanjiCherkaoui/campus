@@ -95,7 +95,13 @@ angular.module('campusApp')
             $state.go("allocation", { idproduct: id });
         };
 
-        $scope.free = function  (id) {
+        $scope.free = function (id) {
+            Allocation.delete({id: id}, function () {
+                $scope.loadAll();
+            });
+        };
+
+        /*$scope.free = function  (id) {
             Product.get({id: id}, function(result) {
                 $scope.product = result;
                 var product = $scope.product;
@@ -113,7 +119,7 @@ angular.module('campusApp')
                         });                    
                 });
             });
-        };
+        };*/
 
         $scope.changeOrder = function (column) {
             $scope.searchData.orderBy = column;

@@ -12,7 +12,8 @@
                 "product": "Product",
                 "category": "Category",
                 "allocation": "Allocation",
-                "reservation": "Reservation"
+                "reservation": "Reservation",
+                "user": "Users"
             },
             "account": {
                 "main": "Account",

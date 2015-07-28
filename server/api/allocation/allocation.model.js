@@ -22,6 +22,7 @@ AllocationSchema.plugin(relationship, { relationshipPathName: ['person', 'produc
  */
 AllocationSchema
   .post('remove', function(entity) {
+    console.log('AllocationSchema.postRemove')
     if(entity.status){ 
         Product.update({_id: entity.product}, {isValide: true}).exec();
     }

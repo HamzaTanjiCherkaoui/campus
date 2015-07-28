@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = mongoose.Schema.ObjectId,
     relationship = require("mongoose-relationship"),
-    path = require('path');
+    path = require('path'),
+    Allocation = undefined;
 
 var ProductSchema = new Schema({
     name: String,
@@ -23,9 +24,15 @@ ProductSchema.plugin(relationship, { relationshipPathName: 'category' });
 ProductSchema
     .post('remove', function(entity) {
         if(entity.allocation){
-            var Allocation = require(path.resolve('server', 'api/allocation/allocation.model'));
-            Allocation.remove({ _id: entity.allocation }).exec();
+            getAllocationModel().remove({ _id: entity.allocation }).exec();
         }
     });
+
+function getAllocationModel() {
+  if(!Allocation) {
+    Allocation = require(path.resolve('server', 'api/allocation/allocation.model'));
+  }
+  return Allocation;
+}
 
 module.exports = mongoose.model('Product', ProductSchema);

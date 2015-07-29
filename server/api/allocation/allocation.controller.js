@@ -17,7 +17,7 @@ exports.index = function(req, res) {
     .exec(function(err, persons){
       req.query.personIds = persons.map(function(entity){
         return entity._id;
-      });
+      }); 
       Product.find({name: keyword})
       .select('_id')
       .exec(function(err, products){

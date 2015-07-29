@@ -1,5 +1,5 @@
-<h2 ng-show="!isUpdate"><span class="fui-user"></span> <span translate="campusApp.person.home.createLabel">add entity</span></h2>
-<h2 ng-show="isUpdate"><span class="fui-user"></span> <span translate="campusApp.person.home.editLabel">update entity</span></h2>
+<div class="title" ng-show="!isUpdate"><span class="fui-user"></span> <span translate="campusApp.person.home.createLabel">add entity</span></div>
+<div class="title" ng-show="isUpdate"><span class="fui-user"></span> <span translate="campusApp.person.home.editLabel">update entity</span></div>
 <form name="personFrom" role="form" class="form-horizontal" novalidate ng-submit="save()" show-validation>
 	<input type="hidden" name="id" ng-model="entity._id" />
 	<div class="form-group">

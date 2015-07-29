@@ -4,12 +4,12 @@
   "node-main": "server/node-main.js",
   "main": "index.html",
   "window": {
-    "toolbar": false,
+    "toolbar":false,
     "frame": false,
-    "width": 1200,
-    "height": 600,
-    "min_width": 600,
-    "min_height": 400,
+    "height":600,
+        "width":1250,
+        "min_width":1250,
+        "min_height":600,
     "position": "center",
     "icon": "client/assets/images/logo.png"
   },

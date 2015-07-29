@@ -1,49 +1,10 @@
-<nav class="menu hidden-print" role="navigation" ng-style="style()" resize-menu>
-    <ul>
-        <li ui-sref-active="current">
-            <a ui-sref="home" data-original-title="Dashboard">
-                <i class="fa fa-dashboard block"></i> <span translate="global.menu.entities.main">Dashboard</span>
-            </a>
-        </li>
-        <li ui-sref-active="current">
-            <a ui-sref="person" data-original-title="Persons"> 
-                <i class="fa fa-user block"></i> <span translate="global.menu.entities.person">Persons</span> 
-            </a>
-        </li>
-        <li ui-sref-active="current">
-            <a ui-sref="room" data-original-title="Rooms">
-                <i class="fa fa-hotel block"></i> <span translate="global.menu.entities.room">Rooms</span>
-            </a>
-        </li>
-        <li ui-sref-active="current">
-            <a ui-sref="product" data-original-title="Products">
-                <i class="fa fa-dropbox block"></i> <span translate="global.menu.entities.product">Products</span>
-            </a>
-        </li>
-        <li ui-sref-active="current">
-            <a ui-sref="allocation" data-original-title="Allocation">
-                <i class="fa fa-archive block"></i> <span translate="global.menu.entities.allocation">Allocation</span>
-            </a>
-        </li>
-        <li ui-sref-active="current">
-            <a ui-sref="reservation" data-original-title="Reservations">
-                <i class="fa fa-usd block"></i> <span translate="global.menu.entities.reservation">Reservations</span>
-            </a>
-        </li> 
-        <li ui-sref-active="current">
-            <a ui-sref="user" data-original-title="Users">
-                <i class="fa fa-users block"></i> <span translate="global.menu.entities.user">Users</span>
-            </a>
-        </li>     
-        <li ui-sref-active="current">
-            <a ui-sref="config" data-original-title="Préférences">
-                <i class="fa fa-gears block"></i> <span translate="global.menu.entities.settings">Settings</span>
-            </a>
-        </li>
-        <li ui-sref-active="current">
-            <a my-shelf my-tooltip data-toggle="tooltip" data-tooltip-style="light" data-placement="right" data-original-title="Collapse menu">
-                <i class="fa fa-arrow-left block"></i> <span translate="global.menu.entities.collapse"> Réduire le menu</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+            <div class="list-group">
+ <a ui-sref="home" data-original-title="Dashboard" class="list-group-item  ui-sref-active="active""> <span class="ti-dashboard"></span> Tableau de bord  </a>
+  <a ui-sref="person" data-original-title="Persons" class="list-group-item"  ui-sref-active="active"> <span class="ti-user "></span> Gestion des Résidents  </a>
+  <a ui-sref="product" data-original-title="Products" class="list-group-item" ui-sref-active="active"> <span class="ti-ruler-pencil "></span> Gestion des équipements </a>
+  <a ui-sref="room" data-original-title="Rooms" class="list-group-item" ui-sref-active="active"><span class="ti-home "></span> Gestion du local </a>  
+  <a ui-sref="reservation" class="list-group-item" ui-sref-active="active"><span class="ti-layout-grid3  "></span> Gestion des Réservation </a>
+  <a ui-sref="config" data-original-title="Reservations" class="list-group-item" ui-sref-active="active"><span class="ti-panel "></span>  Configuration et préférences</a>
+  <a href="#" class="list-group-item" ui-sref-active="active"><span class="ti-server "></span> Sauvegarde et restauration</a>
+  <a href="#" class="list-group-item" ui-sref-active="active"><span class="ti-help-alt "></span> Support / À propos</a>
+</div>

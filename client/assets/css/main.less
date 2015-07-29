@@ -1,0 +1,516 @@
+@import "bootstrap/variables.less"; 
+@import "custom_variables .less"; 
+@import "bootstrap/mixins.less";
+
+// Reset and dependencies
+@import "bootstrap/normalize.less";
+@import "bootstrap/print.less";
+@import "bootstrap/glyphicons.less";
+
+// Core CSS
+@import "bootstrap/scaffolding.less";
+@import "bootstrap/type.less";
+@import "bootstrap/code.less";
+@import "bootstrap/grid.less";
+@import "bootstrap/tables.less";
+@import "bootstrap/forms.less";
+@import "bootstrap/buttons.less";
+
+// Components
+@import "bootstrap/component-animations.less";
+@import "bootstrap/dropdowns.less";
+@import "bootstrap/button-groups.less";
+@import "bootstrap/input-groups.less";
+@import "bootstrap/navs.less";
+@import "bootstrap/navbar.less";
+@import "bootstrap/breadcrumbs.less";
+@import "bootstrap/pagination.less";
+@import "bootstrap/pager.less"; 
+@import "bootstrap/labels.less";
+@import "bootstrap/badges.less";
+@import "bootstrap/jumbotron.less";
+@import "bootstrap/thumbnails.less";
+@import "bootstrap/alerts.less";
+@import "bootstrap/progress-bars.less";
+@import "bootstrap/media.less";
+@import "bootstrap/list-group.less";
+@import "bootstrap/panels.less";
+@import "bootstrap/responsive-embed.less";
+@import "bootstrap/wells.less";
+@import "bootstrap/close.less";
+
+// Components w/ JavaScript
+@import "bootstrap/modals.less";
+@import "bootstrap/tooltip.less";
+@import "bootstrap/popovers.less"; 
+ @import "bootstrap/carousel.less"; 
+
+// Utility classes
+@import "bootstrap/utilities.less";
+@import "bootstrap/responsive-utilities.less";
+
+// theme
+
+@import "theme.less"; 
+
+// custom colors
+//red
+//@brand-primary:#B66565;
+////green
+//@brand-primary:#65B69E;
+//black  
+//@brand-primary:#3C3C3C;
+//gold 
+//@brand-primary:#C5B862;
+//facebook color
+// @brand-primary:#6d84b4;
+//live green
+// @brand-primary:#60d043;
+//violet
+// @brand-primary:#673bb7;
+//problue
+// @brand-primary:#3b90c6;
+//skype blue
+//@brand-primary:#00aff0;
+
+@color:#ffffff; 
+@fontfamily:Lato, Sans-serif;
+.navbar{
+	border-bottom: 1px solid #000000;
+}
+
+  
+@import "reset.less"; 
+.navbar{
+  border-bottom: 1px solid #000000;
+}
+.container
+{
+  background-color: #ffffff;
+  width: 100%;
+} 
+ 
+
+html {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+
+body{
+    
+ margin: 0px;
+  padding: 0px;
+ font-family: Lato;   
+ 
+ height: 99.7%;
+ background-color: #ffffff !important;
+  }
+header{
+    width:  20%;
+    height: 45px;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+    margin: 5px;
+    padding-right: 5px;
+    float: right;
+    }
+
+/*Window Controls*/
+.menu-left
+{
+  width: 70%;
+   float:        left;
+    text-align:   left;
+    line-height:  0;
+    
+}
+.title
+{
+  color:  darken(@brand-primary, 8%); 
+  display: inline-block;
+  margin-left: 10px;
+      position: fixed;
+    top: 10px;
+    left: 200px;
+    z-index: 1000;
+    padding-top: 0;
+    display: block; 
+}
+header>ul{
+    float:        right;
+    text-align:   right;
+    line-height:  0;
+    padding-left: 6px;
+    }
+header>ul>li,
+header>ul>li>a{
+    display: inline-block;
+    }
+header>ul{
+    float: right;
+    }
+header>ul>li>a{
+    width:              22px;
+    height:             22px;
+    margin:              6px 6px 6px 0;
+    -webkit-transition: -webkit-transform 200ms;
+    -webkit-app-region: no-drag;
+    }
+header>ul>li>a:hover,
+header>ul>li>a:focus{
+    -webkit-transform:  scale(1.22,1.22);
+    outline: none;
+    }
+a#windowControlClose,a#windowControlMaximize,a#windowControlMinimize{
+    
+    color:lighten(@brand-primary, 20%);
+    text-decoration: none;
+    font-size: 15px;
+
+    }
+  a#windowControlClose:hover,a#windowControlMaximize:hover,a#windowControlMinimize:hover{
+     
+    color: lighten(@brand-primary, 30%);
+    }  
+     
+    .content
+    {
+      height:85%;
+      border-left: 1px solid lighten(@brand-primary, 20%);
+      width: 74%;
+      padding-left: 2%;
+      padding-right: 2%;
+      float: left;
+      margin: 0 auto;
+        overflow-y: scroll;
+    }
+    ::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.1); 
+    
+    
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    
+    background: @brand-primary; 
+    
+}
+::-webkit-scrollbar-thumb:window-inactive { 
+  background: @brand-primary; 
+}
+    .fixe
+    {
+      padding-right: 0;
+      margin: 5px;
+    }
+  a.list-group-item {
+  color: #515151;
+  font-weight: 300;
+}
+.big-text
+{
+  font-size: 20px;
+  color: @brand-primary;
+
+}
+.active .big-text 
+{
+color: #fff;  
+}
+/*
+
+
+CARDS 
+
+
+*/
+
+.card(@card1-color,@header-hight:40%)
+{
+  padding:1.5%;
+  width: 30.3333%;
+  float: left;
+  position: relative;
+  height: 400px;
+
+  
+    .card-content
+    { background-color:@card1-color;
+      width: 100%;
+      // height: 100%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      .content-header
+      { position: relative;
+        width: 100%;
+        margin-bottom:0px;
+        padding-bottom: 0px;
+        img{
+          width: 100%;
+          height:@header-hight;
+
+          } 
+        .img-title
+        {
+          position: absolute;
+          bottom: 10px;
+          padding: 10px;
+          color: @color;
+          font-family: @fontfamily;
+          font-size: 23px;  
+          font-weight: 100;
+          color:lighten(@card1-color, 80%);
+        }
+      
+      }
+      .content-body
+      { position: relative;
+        margin-top:0px;
+        padding-top:0px;
+        height:100%-@header-hight;
+        
+      p{
+        width: 90%;
+        margin: 0 auto;
+        color:lighten(@card1-color, 60%);
+        font-family: @fontfamily;
+        font-weight: 100;
+        text-align: center;
+        font-size:13px; 
+
+      }
+      .hr{
+        height: 1px;
+        width: 100%;
+        margin-left: 0 !important;
+        border-bottom: 1px solid lighten(@card1-color, 10%);
+      }
+      }
+    }
+
+   
+   
+} 
+
+.card-with-links(@card1-color,@header-height:40%)
+{ .card(@card1-color,@header-height) ;
+    .content .content-header .links 
+        {
+          position: absolute;
+          top:10px;
+          right: 10px;
+          a 
+          {
+          margin-left: 5px;
+          text-decoration: none;
+          color:lighten(@card1-color,90%);
+          font-family: @fontfamily;
+          font-size: 12px;
+        
+          }
+        }
+}
+
+.card1
+  {   
+    .card(@brand-primary,45%) ;
+    .content-body
+    {
+    background-color: darken(@brand-primary, 8%); 
+    p{
+      padding-top: 5px;
+      text-align: left !important;
+      color: lighten(@brand-primary, 25%) !important; 
+    
+    }
+    .value
+    {
+      font-size: 25px !important;
+      color: lighten(@brand-primary, 60%) !important; 
+    }  
+    }           
+    .chart
+    {
+      
+      height: 45%;
+      width: 90% !important;
+      margin: 0 auto;
+ 
+    
+    } 
+
+    
+  } 
+
+.card2
+  {   
+    .card(lighten(@brand-primary, 5%),45%) ;
+    .content-body
+    {
+    background-color: darken(lighten(@brand-primary, 20%), 8%); 
+    p{ 
+      padding-top: 5px;
+      text-align: left !important;
+      color: lighten(lighten(@brand-primary, 20%), 25%) !important; 
+    
+    }
+    .value
+    {
+      font-size: 25px !important;
+      color: lighten(lighten(@brand-primary, 20%), 60%) !important; 
+    }  
+    }           
+    .chart
+    {
+      
+      height: 45%;
+      width: 90% !important;
+      margin: 0 auto;
+ 
+    
+    } 
+
+    
+  } 
+.card3
+  {   
+    .card(lighten(@brand-primary, 15%),45%) ;
+    .content-body
+    {
+    background-color: darken(lighten(@brand-primary, 30%), 8%); 
+    p{ 
+      padding-top: 5px;
+      text-align: left !important;
+      color: lighten(lighten(@brand-primary, 30%), 25%) !important; 
+    
+    }
+    .value
+    {
+      font-size: 25px !important;
+      color: lighten(lighten(@brand-primary, 30%), 60%) !important; 
+    }  
+    }           
+    .chart
+    {
+      
+      height: 45%;
+      width: 90% !important;
+      margin: 0 auto;
+ 
+    
+    } 
+
+    
+  } 
+//pager
+
+.pager li > a, .pager li > span {
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #DFDFDF;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+//checkbox
+.table .checkbox{
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+.table td:first-child .checkbox .icons{
+  top: -10px;
+}
+.table th .checkbox .icons {
+  top: -17px;
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 10px;
+    margin: 5;
+}
+// table
+
+table a, .table a {
+    color: @brand-primary;
+    text-decoration: underline;
+}
+//mainmenu
+
+.main-menu
+{ display: none;
+  position: absolute;
+    z-index: 1000;
+    top: 40px;
+    height: 1000px;
+    /* max-height: 100%; */
+    margin-left: 0;
+    padding-left: 0;
+    background-color: #fff;
+}
+
+//dropdown menu
+.dropdown-menu {
+    
+    border: 1px solid #dadada !important;
+    a
+    {
+    font-size: 13px !important;  
+    }
+}
+//hr
+
+hr
+{
+      margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+// inputs 
+ textarea:focus, select:focus, button:focus , input:focus {
+
+border: 1px solid @brand-primary !important;
+
+}
+
+//custom cards
+.card-content {
+    background-color: #446c8e;
+    width: 80%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    height: 85%;
+    } 
+//wraper
+
+.wraper
+{
+    overflow-y: scroll;
+    position: fixed;
+    top: 40px;
+    bottom: 0px;
+}
+
+//inputs enhancing 
+.form-control
+{
+     padding-top: 1px;
+    padding-bottom: 1px;
+    height: 25px;
+  
+}
+ 
+//modal fix
+
+.modal-backdrop {
+ display: none;
+}

@@ -1,3 +1,15 @@
+<style type="text/css"> body{
+background-image: url(assets/images/bg.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+  }
+.login-form {
+    background-color: rgba(26, 188, 156, 0.13) !important;
+  }
+  </style>
 <div class="col-sm-6">
 <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
     <strong>Authentication failed!</strong> Please check your credentials and try again.
@@ -23,7 +35,6 @@
 
             <button type="submit" class="btn btn-primary btn-block" ng-click="login()" translate="login.form.button">Authenticate</button>
             <a class="login-link" href=\"#/register\">Register a new account</a>
-        </div>
-    </div>
+        </div>    </div>
 </form>
 </div>

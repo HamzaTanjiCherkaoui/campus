@@ -43,10 +43,10 @@
   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{ account.fullName }} <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu">
-    <li><a ui-sref="settings" class="btn btn-default btn-sm" translate="global.menu.entities.settings">settings</a>
+  <ul class="dropdown-menu" style="z-index:10">
+    <li><a ui-sref="settings"  translate="global.menu.entities.settings">settings</a>
     <li role="separator" class="divider"></li>
-    <li><a ui-sref="logout" class="btn btn-default btn-sm pull-right" translate="global.menu.account.logout">logout</a></li>
+    <li><a ui-sref="logout"  translate="global.menu.account.logout">logout</a></li>
   </ul>
 </div>
   </div>
